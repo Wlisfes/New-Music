@@ -33,7 +33,7 @@ module.exports = {
         open: true,
         proxy: {
             '/api': {
-                target: 'http://le.jiandaopay.com:88',
+                target: 'http://m.lisfes.cn',
                 ws: false,
                 changeOrigin: true,
                 pathRewrite: {

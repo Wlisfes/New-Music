@@ -27,6 +27,14 @@ module.exports = {
             config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
         }
     },
+    css: {
+        loaderOptions: {
+            less: {
+                javascriptEnabled: true
+            }
+        },
+        requireModuleExtension: true
+    },
     lintOnSave: false,
     devServer: {
         port: 5900,

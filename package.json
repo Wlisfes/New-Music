@@ -20,6 +20,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
+    "babel-plugin-import": "^1.12.2",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "postcss-pxtorem": "^4.0.1",
@@ -28,19 +29,12 @@
   "postcss": {
     "plugins": {
       "autoprefixer": {
-        "browsers": [
-          "Android >= 4.0",
-          "iOS >= 7"
-        ]
+        "browsers": ["Android >= 4.0", "iOS >= 7"]
       },
       "postcss-pxtorem": {
         "rootValue": 75,
-        "propList": [
-          "*"
-        ],
-        "selectorBlackList": [
-          "van"
-        ]
+        "propList": ["*"],
+        "selectorBlackList": ["van"]
       }
     }
   },

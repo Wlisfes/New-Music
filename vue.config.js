@@ -11,6 +11,7 @@ module.exports = {
             .set('@', resolve('src'))
             .set('@ass', resolve('src/assets'))
             .set('@views', resolve('src/views'))
+            .set('less', resolve('src/less'))
 
         config.plugins.delete('preload');          //删除预加载
         config.plugins.delete("prefetch");         //移除 preload 插件
@@ -30,7 +31,7 @@ module.exports = {
     css: {
         loaderOptions: {
             less: {
-                javascriptEnabled: true
+                javascriptEnabled: true,
             }
         },
         requireModuleExtension: true

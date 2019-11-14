@@ -6,11 +6,9 @@ body {
     min-height: 100vh;
     margin: 0 auto;
     background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
 }
 #app {
-    flex: 1;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }

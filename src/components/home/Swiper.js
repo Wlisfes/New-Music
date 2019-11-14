@@ -1,6 +1,6 @@
 
 import { Swipe, SwipeItem } from 'vant';
-import style from '../../less/Swiper.module.less';
+import style from '@less/home/Swiper.module.less';
 export default {
     name: 'Swiper',
     data () {
@@ -10,15 +10,12 @@ export default {
     },
     created () {
         this.banner()
-        console.log(style)
     },
     methods: {
         async banner() {
             const [err, res] = await this.api.banner({
                 type: 2
             })
-
-            console.log(res)
             if(!err) {
                 this.banners = res.banners
             }

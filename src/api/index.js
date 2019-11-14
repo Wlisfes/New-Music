@@ -15,8 +15,18 @@ export const login = params => {
 export const banner = params => {
     return http({
         url: `/banner`,
-        method: 'POST',
-        data: params
+        method: 'GET',
+        params
+    })
+}
+
+
+//推荐歌单
+export const personalized = params => {
+    return http({
+        url: `/personalized`,
+        method: 'GET',
+        params
     })
 }
 

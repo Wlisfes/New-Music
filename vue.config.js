@@ -9,9 +9,9 @@ module.exports = {
     chainWebpack: (config) => {
         config.resolve.alias         //配置别名
             .set('@', resolve('src'))
-            .set('@ass', resolve('src/assets'))
+            .set('@assets', resolve('src/assets'))
             .set('@views', resolve('src/views'))
-            .set('less', resolve('src/less'))
+            .set('@less', resolve('src/less'))
 
         config.plugins.delete('preload');          //删除预加载
         config.plugins.delete("prefetch");         //移除 preload 插件

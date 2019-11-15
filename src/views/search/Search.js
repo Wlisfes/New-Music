@@ -4,9 +4,9 @@ export default {
     name: 'Search',
     render() {
         return (
-            <transition name="search-open">
-                <div class={style.Search}>
-
+            <transition name="search-open" appear>
+                <div class={style.Search} onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
+                    
                     
 
                 </div>

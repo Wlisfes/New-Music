@@ -12,6 +12,12 @@ const routes = [
                 name: 'Search',
                 meta: {},
                 component: () => import('@views/search/Search')
+            },
+            {
+                path: "/playDetails",
+                name: 'PlayDetails',
+                meta: {},
+                component: () => import('@views/playDetails/PlayDetails')
             }
         ]
     }

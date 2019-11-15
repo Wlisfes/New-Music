@@ -31,5 +31,22 @@ export const personalized = params => {
 }
 
 
+//每日推荐（需登陆）
+export const recommend = params => {
+    return http({
+        url: `/recommend/resource`,
+        method: 'GET',
+        params
+    })
+}
 
+
+//歌单详情
+export const playlistdetail = params => {
+    return http({
+        url: `/playlist/detail`,
+        method: 'GET',
+        params
+    })
+}
 

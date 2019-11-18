@@ -20,7 +20,7 @@ export default {
                     {
                         this.banner.map(k => {
                             return (
-                                <SwipeItem key={k.id}>
+                                <SwipeItem>
                                     <img class={style.banner} src={this.utils.replaceHttps(k.picUrl)} />
                                 </SwipeItem>
                             )

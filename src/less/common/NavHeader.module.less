@@ -1,28 +1,41 @@
-.Header {
+.NavHeader {
     display: flex;
     align-items: center;
     padding: 0 12PX;
+    overflow: hidden;
+    position: relative;
+    transition: all 500ms;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transition: all 500ms;
+        background-color: rgba(0,0,0,.3);
+        filter: blur(20px);
+    }
     :global {
-        .van-icon-search {
-            font-size: 20px;
-            color: #9e9e9e;
-        }
-        .van-icon-user-circle-o {
-            font-size: 26px;
-            color: #9e9e9e;
+        .van-icon-arrow-left {
+            font-size: 28px;
+            color: #ffffff;
         }
     }
-    .user {
+    .back {
         width: 50PX;
         height: 50PX;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-left: -8PX;
-        margin-right: 5px;
         padding-top: 10px;
+        padding-right: 10px;
         box-sizing: border-box;
         cursor: pointer;
+        z-index: 2;
     }
     .play {
         width: 38PX;
@@ -35,32 +48,24 @@
         padding-top: 10px;
         box-sizing: border-box;
         cursor: pointer;
+        z-index: 2;
         :global {
             .van-icon {
                 font-size: 24px;
             }
         }
     }
-    .search {
+    .title {
         flex: 1;
         height: 32PX;
-        background-color: #EFEBEB;
-        border-radius: 16PX;
         position: relative;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 0 12PX;
-        margin: 12PX 0 6PX;
-        cursor: pointer;
-        .placeholder {
-            font-size: 12PX;
-            margin-left: 12px;
-            color: #555555;
-        }
+        line-height: 30PX;
+        text-align: center;
+        margin: 12PX 42px 6PX;
+        font-size: 16PX;
+        font-weight: 500;
+        color: #ffffff;
+        z-index: 2;
     }
-
 }
-
-

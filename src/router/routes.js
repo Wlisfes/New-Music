@@ -4,19 +4,26 @@ const routes = [
     {
         path: "/",
         name: 'Home',
-        meta: {},
+        meta: {
+            
+        },
         component: Home,
         children: [
             {
                 path: "/search",
                 name: 'Search',
-                meta: {},
+                meta: {
+                    transitionName: 'search-open'
+                },
                 component: () => import('@views/search/Search')
             },
             {
                 path: "/playDetails",
                 name: 'PlayDetails',
-                meta: {},
+                meta: {
+                    transitionName: 'right-open'
+                },
+                props: (route) => ({ query: route.query }),
                 component: () => import('@views/playDetails/PlayDetails')
             }
         ]

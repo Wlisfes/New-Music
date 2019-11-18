@@ -8,10 +8,28 @@
     }
 }
 .PlayDetails {
-    position: fixed;
+    position: absolute;
     width: 750px;
     height: 100%;
     top: 0;
     overflow: hidden;
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-position: 25%;
+    background-size: cover;
+    .Scroll {
+        flex: 1;
+        overflow: hidden;
+        .Container {
+            min-height: 100%;
+            overflow: hidden;
+        }
+    }
+    .Card {
+        height: 300px;
+        background-color: red;
+        margin-top: 10PX;
+    }
 }

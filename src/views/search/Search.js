@@ -4,13 +4,10 @@ export default {
     name: 'Search',
     render() {
         return (
-            <transition name="search-open" appear>
-                <div class={style.Search} onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
-                    
-                    
-
-                </div>
-            </transition>
+            <div class={style.Search} onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
+                
+            
+            </div>
         )
     }
 }

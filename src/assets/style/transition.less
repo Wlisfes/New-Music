@@ -1,0 +1,27 @@
+#app {
+    //右测打开
+    .right-open-enter-active, .right-open-leave-active {
+        transition: all 300ms;
+    }
+    .right-open-enter, .right-open-leave-to {
+        transform: translate3d(50%, 0, 0);
+        opacity: 0;
+    }
+
+    //左测打开
+    .left-open-enter-active, .left-open-leave-active {
+        transition: all 300ms;
+    }
+    .left-open-enter, .left-open-leave-to {
+        transform: translate3d(50%, 0, 0);
+        opacity: 0;
+    }
+
+    //透明度渐隐
+    .search-open-enter-active, .search-open-leave-active {
+        transition: all 300ms;
+    }
+    .search-open-enter, .search-open-leave-to {
+        opacity: 0;
+    }
+}

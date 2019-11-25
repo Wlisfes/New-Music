@@ -1,4 +1,3 @@
-
 import "@babel/polyfill";
 import "lib-flexible/flexible";
 
@@ -7,6 +6,7 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import "@/core/use";
+import "@assets/style/common.css";
 
 new Vue({
   router,

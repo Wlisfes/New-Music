@@ -57,6 +57,11 @@ export default {
         bounce: {
             type: Boolean,
             default: true
+        },
+        //动画回弹时间
+        bounceTime: {
+            type: Number,
+            default: 300
         }
     },
     mounted() {
@@ -76,7 +81,8 @@ export default {
                 click: this.click,
                 scrollX: this.scrollX,
                 mouseWheel: this.mouseWheel,
-                bounce: this.bounce
+                bounce: this.bounce,
+                bounceTime: this.bounceTime
             });
     
             //是否派发滚动事件

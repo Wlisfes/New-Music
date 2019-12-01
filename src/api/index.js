@@ -51,5 +51,13 @@ export const playlistdetail = params => {
 }
 
 
+//歌手
+export const playsinger = params => {
+    return http({
+        url: `/toplist/artist`,
+        method: 'GET',
+        params
+    })
+}
 
 

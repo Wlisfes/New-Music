@@ -1,7 +1,14 @@
 <script>
+import { mapState } from 'vuex';
 import { Root } from '@/components/common';
+import { Avatar,Userplay } from '@/components/user';
 export default {
     name: 'User',
+    computed: {
+        ...mapState({
+            User: state => state.app.userInfo
+        })  
+    },
     created () {
         // this.login()
         console.log(this.$store.state.app.userInfo)
@@ -32,8 +39,8 @@ export default {
             <div class="User">
                 <Root.Scroll ref="wrapper" class="wrapper" data={[]}>
                     <Root.Container>
-
-
+                        <Avatar {...{props: this.User}}></Avatar>
+                        <Userplay></Userplay>
 
 
                     </Root.Container>

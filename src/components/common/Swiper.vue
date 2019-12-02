@@ -12,9 +12,9 @@ export default {
         return (
             <div class="Swiper">
                 <Swipe autoplay={5000} indicator-color="white" stop-propagation={false}>
-                    {this.data.map(k => {
+                    {this.data.map((k, index) => {
                         return (
-                            <SwipeItem key={k.id}>
+                            <SwipeItem key={index}>
                                 <div style="padding: 0 10px;">
                                     <img class="picUrl" src={k.picUrl} />
                                 </div>

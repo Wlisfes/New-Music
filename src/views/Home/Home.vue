@@ -16,6 +16,7 @@ export default {
         }
     },
     render() {
+        const { keepAlive } = this.$route.meta.keepAlive || false
         return (
             <Root class="Home">
                 <Header
@@ -31,7 +32,10 @@ export default {
                     {this.active === 2 && <Singer></Singer>}
                 </keep-alive>
                 
-                <router-view />
+                <keep-alive>
+                    {keepAlive && <router-view />}
+                </keep-alive>
+                {!keepAlive && <router-view />}
             </Root>
         )
     }

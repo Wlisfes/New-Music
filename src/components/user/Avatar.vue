@@ -19,6 +19,12 @@ export default {
                 onClose() {}
             });
         },
+        //open登录界面
+        handelLogin() {
+            this.$router.push({
+                path: '/login'
+            })
+        }
     },
     render() {
         return (
@@ -73,6 +79,7 @@ export default {
                         color="#ee0a24"
                         plain={true}
                         size="normal"
+                        onClick={this.handelLogin}
                     >登录</Button>}
                 </div>
             </div>
@@ -85,7 +92,7 @@ export default {
 .Avatar {
     .Container {
         overflow: hidden;
-        background-color: #FAFAFA;
+        background-color: #ffffff;
     }
     .Avatar-Container {
         display: flex;

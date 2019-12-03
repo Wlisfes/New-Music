@@ -1,17 +1,17 @@
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
-import { Avatar,Userplay } from '@/components/user';
+import { Avatar,Group,Userplay,Signout } from '@/components/user';
 export default {
     name: 'User',
     computed: {
         ...mapState({
-            User: state => state.app.userInfo
+            User: state => state.app.User
         })  
     },
     created () {
         // this.login()
-        console.log(this.$store.state.app.userInfo)
+        console.log(this.$store.state.app.User)
     },
     methods: {
         //登录
@@ -30,8 +30,29 @@ export default {
                     followeds: res.profile.followeds,
                     gender: res.profile.gender
                 }
-                this.$ls.set('UserInfo', info, (24 * 60 * 60 * 1000))
+                this.$ls.set('UserAccessToken', info, (24 * 60 * 60 * 1000))
             }
+        },
+        //用户歌单
+        async Userplaylist() {
+
+            console.log(1)
+            return
+            const [err, res] = await this.api.Userplaylist({
+                uid: this.User.userId
+            })
+
+            if(!err && res.code === 200) {
+                console.log(res)
+            }
+        }
+    },
+    watch: {
+        User: {
+            handler() {
+                this.User && this.Userplaylist()
+            },
+            immediate: true
         }
     },
     render() {
@@ -40,9 +61,11 @@ export default {
                 <Root.Scroll ref="wrapper" class="wrapper" data={[]}>
                     <Root.Container>
                         <Avatar {...{props: this.User}}></Avatar>
-                        <Userplay></Userplay>
-
-
+                        {this.User && <div class="UserWrapper">
+                            <Group></Group>
+                            <Userplay></Userplay>
+                        </div>}
+                        {this.User && <Signout></Signout>}
                     </Root.Container>
                 </Root.Scroll>
             </div>
@@ -60,6 +83,17 @@ export default {
     .wrapper {
         flex: 1;
         overflow: hidden;
+    }
+    .Container {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background-color: #FAFAFA;
+    }
+    .UserWrapper {
+        flex: 1;
+        margin-top: 24px;
     }
 }
 </style>

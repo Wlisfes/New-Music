@@ -3,7 +3,7 @@ import Vue from 'vue';
 const state = {
     active: 0,               //默认页码
     player: false,           //播放器默认关闭
-    userInfo: null,          //用户信息
+    User: null,          //用户信息
 
 }
 
@@ -14,8 +14,8 @@ const mutations = {
     setPlayer: (state, player) => {
         state.player = player
     },
-    setUserInfo: (state, userInfo) => {
-        state.userInfo = userInfo
+    setUser: (state, User) => {
+        state.User = User
     }
 }
 

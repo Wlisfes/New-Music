@@ -61,3 +61,12 @@ export const playsinger = params => {
 }
 
 
+//用户歌单
+export const Userplaylist = params => {
+    return http({
+        url: `/user/playlist`,
+        method: 'POST',
+        data: params
+    })
+}
+

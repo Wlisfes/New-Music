@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:02:20 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:02:20 
+ * @Description: 首页
+ */
+
 <script>
 import { mapState } from 'vuex';
 import { Root,Header } from '@/components/common';

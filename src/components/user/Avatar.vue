@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:05:10 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:05:10 
+ * @Description: 头像信息组件
+ */
+
 <script>
 import { Image,Row,Col,Button,Icon,ImagePreview } from 'vant';
 export default {

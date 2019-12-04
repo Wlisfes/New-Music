@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:06:30 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:06:30 
+ * @Description: user歌单组件
+ */
+
 <script>
 import { Collapse,CollapseItem,Icon,Image } from 'vant';
 import play from '@assets/icon/play.gif';
@@ -71,7 +79,7 @@ export default {
                         </div>
                     </CollapseItem>
                     <CollapseItem title="我收藏的歌单" name={2} size="large" value={this.starplay.length}>
-                        <Icon slot="icon" color="#ee0a24" size={24} name="hot-o" style={IconStyle}></Icon>
+                        <Icon slot="icon" color="#ee0a24" size={24} name="like-o" style={IconStyle}></Icon>
                         <div class="UserContainer">
                             {this.starplay.length > 0 ? <div class="Createplay">
                                 {

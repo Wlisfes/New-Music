@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:04:39 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:04:39 
+ * @Description: 首页轮播组件
+ */
+
 <script>
 import { Swipe,SwipeItem } from 'vant';
 export default {
@@ -16,7 +24,7 @@ export default {
                         return (
                             <SwipeItem key={index}>
                                 <div style="padding: 0 10px;">
-                                    <img class="picUrl" src={k.picUrl} />
+                                    <img class="picUrl" src={this.utils.https(k.picUrl)} />
                                 </div>
                             </SwipeItem>
                         )

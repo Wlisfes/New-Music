@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:01:28 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:01:28 
+ * @Description: 推荐
+ */
+
 <script>
 import { Root,Swiper,LayoutCard,PlayCard } from '@/components/common';
 export default {
@@ -51,13 +59,16 @@ export default {
             <div class="Recommend">
                 <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                     <Root.Container>
-                        {this.banners.length && <Swiper data={this.banners} />}
-                        <LayoutCard />
-                        <PlayCard
+                        {this.banners.length > 0 && <Swiper data={this.banners} />}
+                        {
+                            (this.banners.length > 0 || this.recommend.length > 0) ?
+                            <LayoutCard /> : <Loading margin="24px"></Loading>
+                        }
+                        {this.recommend.length > 0 && <PlayCard
                             title="推荐歌单"
                             subtitle="歌单广场"
                             data={this.recommend}
-                        />
+                        />}
 
                         
                     </Root.Container>

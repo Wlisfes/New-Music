@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:02:04 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:02:04 
+ * @Description: 我的
+ */
+
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
@@ -49,16 +57,18 @@ export default {
             userplay: this.userplay,
             starplay: this.starplay,
             playid: 648468371,
-            play: true
+            play: false
         }
         return (
             <div class="User">
                 <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                     <Root.Container>
                         <Avatar {...{props: this.User}}></Avatar>
-                        {this.User && <div class="UserWrapper">
-                            <Group></Group>
-                            <Userplay {...{props: UserplayProps}}></Userplay>
+                        {this.User && <div style={{flex: 1, overflow: 'hidden'}}>
+                            <div class="UserWrapper">
+                                <Group></Group>
+                                <Userplay {...{props: UserplayProps}}></Userplay>
+                            </div>
                         </div>}
                         {this.User && <Signout></Signout>}
                     </Root.Container>
@@ -84,11 +94,11 @@ export default {
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        background-color: #FAFAFA;
+        transition: all 300ms;
     }
     .UserWrapper {
-        flex: 1;
-        margin-top: 24px;
+        padding-top: 24px;
+        background-color: #FAFAFA;
     }
 }
 </style>

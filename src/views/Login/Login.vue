@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:02:33 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:02:33 
+ * @Description: 登录
+ */
+
 <script>
 import { mapState } from 'vuex';
 import { Button,Field,Icon,Image,Toast,NavBar } from 'vant';
@@ -99,7 +107,7 @@ export default {
         return (
             <transition name="login" appear>
                 <div class="Login" onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
-                    <NavBar title={this.User ? '' : '登陆'} left-arrow={true} left-text="返回" onClick-left={() => {this.$router.back()}}></NavBar>
+                    <NavBar left-arrow={true} left-text="返回" onClick-left={() => {this.$router.back()}}></NavBar>
                     <div class="log">
                         <Image
                             width={100}

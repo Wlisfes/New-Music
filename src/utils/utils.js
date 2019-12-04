@@ -12,6 +12,8 @@ export const playCount = value => {
 }
 
 
+//http资源重新成https
+export const https = http => http.replace(/^http/, "https")
 
 
 

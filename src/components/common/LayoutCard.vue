@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:03:51 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-04 23:04:12
+ * @Description: 首页卡片组件
+ */
+
 <script>
 import { Grid,GridItem } from 'vant';
 export default {

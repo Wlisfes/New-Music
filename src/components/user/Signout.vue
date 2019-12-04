@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:06:05 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:06:05 
+ * @Description: 登录退出组件
+ */
+
 <script>
 import { Dialog } from 'vant';
 export default {

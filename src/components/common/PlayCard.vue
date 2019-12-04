@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:04:21 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-04 23:04:21 
+ * @Description: 首页歌单卡片
+ */
+
 <script>
 import { Row,Col,Icon } from 'vant';
 export default {
@@ -16,7 +24,6 @@ export default {
             default: () => []
         }
     },
-
     render() {
         return (
             <div class="PlayCard">

@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-04 23:05:35 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-04 23:05:56
+ * @Description: user动态组件
+ */
+
 <script>
 import { Cell,CellGroup,Icon } from 'vant';
 export default {

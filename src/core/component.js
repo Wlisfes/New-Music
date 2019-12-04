@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { Image,Lazyload } from 'vant';
-
-import empty from '@assets/icon/empty.svg';
+import { Image,Lazyload,Loading } from 'vant';
 
 Vue.use(Lazyload)
+
+//空状态
 Vue.component('Empty', {
     props: {
         margin: {
@@ -17,6 +17,11 @@ Vue.component('Empty', {
         color: {
             type: String,
             default: '#969799'
+        }
+    },
+    computed: {
+        empty() {
+            return require('@assets/icon/empty.svg');
         }
     },
     render() {
@@ -33,10 +38,45 @@ Vue.component('Empty', {
                     width={64}
                     height={41}
                     fit="cover"
-                    src={empty}
+                    src={this.empty}
                 ></Image>
                 <div class="message" style={{marginTop: '10px', color: this.color}}>{this.message}</div>
             </div>
+        )
+    }
+})
+
+//正在加载
+Vue.component('Loading', {
+    props: {
+        message: {
+            type: String,
+            default: '正在加载'
+        },
+        margin: {
+            type: [Number, String],
+            default: 0
+        },
+        color: {
+            type: String,
+            default: '#ee0a24'
+        },
+        type: {
+            type: String,
+            default: 'spinner'
+        }
+    },
+    render() {
+        const style = {
+            margin: this.margin
+        }
+        return (
+            <Loading
+                style={style}
+                color={this.color}
+                vertical={true}
+                type={this.type}
+            >{this.message}</Loading>
         )
     }
 })

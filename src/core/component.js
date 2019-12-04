@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { Image } from 'vant';
+import { Image,Lazyload } from 'vant';
 
 import empty from '@assets/icon/empty.svg';
 
-
+Vue.use(Lazyload)
 Vue.component('Empty', {
     props: {
         margin: {

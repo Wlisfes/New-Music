@@ -1,10 +1,16 @@
 <script>
-import { Button,Field,Icon,Image,Toast } from 'vant';
+import { mapState } from 'vuex';
+import { Button,Field,Icon,Image,Toast,NavBar } from 'vant';
 import logo from '@assets/image/logo.png';
 import logoUser from '@assets/icon/log-user.png';
 import logoPassword from '@assets/icon/log-password.png';
 export default {
     name: 'Login',
+    computed: {
+        ...mapState({
+            User: state => state.app.User
+        })
+    },
     data () {
         return {
             form: {
@@ -47,7 +53,7 @@ export default {
                         })
                         setTimeout(() => {
                             this.$router.back()
-                        }, 1000)
+                        }, 500)
                     }
                     else {
                         res.message.length > 6 ? Toast(res.message) : Toast.fail({
@@ -93,18 +99,21 @@ export default {
         return (
             <transition name="login" appear>
                 <div class="Login" onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
+                    <NavBar title={this.User ? '' : '登陆'} left-arrow={true} left-text="返回" onClick-left={() => {this.$router.back()}}></NavBar>
                     <div class="log">
                         <Image
                             width={100}
                             height={100}
                             round={true}
-                            src={logo}
+                            src={this.User && this.User.avatarUrl || logo}
                         ></Image>
                     </div>
                     <div class="Container">
                         <div class="Form">
-                            <div class="Form-message">欢迎到来、久违了！</div>
-                            <Field
+                            <div class="Form-message">
+                                {this.User && `欢迎回来、${this.User.nickname}！` || `欢迎到来、久违了！`}
+                            </div>
+                            {!this.User && <Field
                                 class="van-hairline--bottom"
                                 placeholder="手机号"
                                 type="tel"
@@ -120,8 +129,8 @@ export default {
                                     color="#FC87B4"
                                     style={{marginRight: '10px'}}
                                 ></Icon>
-                            </Field>
-                            <Field
+                            </Field>}
+                            {!this.User && <Field
                                 class="van-hairline--bottom"
                                 placeholder="密码"
                                 type="password"
@@ -136,7 +145,7 @@ export default {
                                     color="#FC87B4"
                                     style={{marginRight: '10px'}}
                                 ></Icon>
-                            </Field>
+                            </Field>}
                             <Button
                                 class="Submit"
                                 color="#FC87B4"
@@ -145,8 +154,14 @@ export default {
                                 round={true}
                                 plain={false}
                                 block={true}
-                                onClick={this.handelSubmit}
-                            >登录</Button>
+                                onClick={() => {
+                                    if(this.User) {
+                                        this.$router.back();
+                                        return;
+                                    }
+                                    this.handelSubmit()
+                                }}
+                            >{this.User ? '返回' : '登录'}</Button>
                         </div>
                     </div>
                 </div>
@@ -174,6 +189,23 @@ export default {
     background-position-y: 100%;
     display: flex;
     flex-direction: column;
+    /deep/ .van-nav-bar {
+        background-color: rgba(0,0,0,0);
+        &::after {
+            border: none;
+        }
+        .van-nav-bar__title {
+            font-size: 18px;
+            color: #444444;
+        }
+        .van-nav-bar__text {
+            color: #ffffff;
+            background-color: rgba(0,0,0,0);
+        }
+        .van-icon {
+            color: #ffffff;
+        }
+    }
     .log {
         height: 400px;
         display: flex;

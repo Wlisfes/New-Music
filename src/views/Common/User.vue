@@ -13,6 +13,7 @@ export default {
         return {
             userplay: [],      //我创建的歌单
             starplay: [],      //我收藏的歌单
+            wrappers: []
         }
     },
     created () {
@@ -31,6 +32,7 @@ export default {
                 const starplay = playlist.filter(k => k.userId !== userId);
                 this.userplay = userplay
                 this.starplay = starplay
+                this.wrappers = this.wrappers.concat(playlist)
             }
         }
     },
@@ -51,7 +53,7 @@ export default {
         }
         return (
             <div class="User">
-                <Root.Scroll ref="wrapper" class="wrapper" data={[]} bounce={false}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                     <Root.Container>
                         <Avatar {...{props: this.User}}></Avatar>
                         {this.User && <div class="UserWrapper">

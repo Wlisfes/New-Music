@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             banners: [],
-            recommend: []
+            recommend: [],
+            wrappers: []
         }
     },
     created () {
@@ -24,6 +25,7 @@ export default {
                         name: k.typeTitle
                     }
                 })
+                this.wrappers = this.wrappers.concat(this.banners)
             }
         },
         //推荐歌单
@@ -40,15 +42,16 @@ export default {
                         playCount: k.playCount
                     }
                 })
+                this.wrappers = this.wrappers.concat(this.recommend)
             }
         }
     },
     render() {
         return (
             <div class="Recommend">
-                <Root.Scroll ref="wrapper" class="wrapper" data={[]} bounce={false}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                     <Root.Container>
-                        {true && <Swiper data={this.banners} />}
+                        {this.banners.length && <Swiper data={this.banners} />}
                         <LayoutCard />
                         <PlayCard
                             title="推荐歌单"

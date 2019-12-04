@@ -39,7 +39,7 @@ export default {
     height: 48PX;
     line-height: 46PX;
     background-color: #ffffff;
-    margin: 24px 0 32px;
+    margin: 24px 0 64px;
     font-size: 16PX;
     color: #ee0a24;
     text-align: center;

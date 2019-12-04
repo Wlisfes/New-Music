@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:01:28 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-04 23:22:24
  * @Description: 推荐
  */
 
@@ -52,6 +52,14 @@ export default {
                 })
                 this.wrappers = this.wrappers.concat(this.recommend)
             }
+        },
+        handelplayCard(ops) {
+            this.$router.push({
+                path: `/sonplay`,
+                query: {
+                    id: ops.id
+                }
+            })
         }
     },
     render() {
@@ -68,6 +76,7 @@ export default {
                             title="推荐歌单"
                             subtitle="歌单广场"
                             data={this.recommend}
+                            onPlayCard={this.handelplayCard}
                         />}
 
                         

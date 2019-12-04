@@ -10,14 +10,22 @@ const routes = [
         component: Home,
         children: [
             {
-                path: 'login',
+                path: '/login',
                 name: 'Login',
                 meta: {
                     title: '登录',
                     keepAlive: false
                 },
                 component: () => import('@views/Login/Login')
-            }
+            },
+            {
+                path: '/sonplay',
+                name: 'Sonplay',
+                meta: {
+                    keepAlive: true
+                },
+                component: () => import('@views/Sonplay/Sonplay')
+            },
         ]
     }
 ]

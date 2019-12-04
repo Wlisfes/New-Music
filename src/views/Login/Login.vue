@@ -1,21 +1,92 @@
 <script>
 import { Button,Field,Icon,Image,Toast } from 'vant';
 import logo from '@assets/image/logo.png';
+import logoUser from '@assets/icon/log-user.png';
+import logoPassword from '@assets/icon/log-password.png';
 export default {
     name: 'Login',
     data () {
         return {
-            loading: false
+            form: {
+                user: '',
+                password: '',
+                userMessage: '',
+                passwordMessage: '',
+                loading: false
+            }
         }
     },
     methods: {
         //登录
-        handelSubmit() {
-            this.loading = true
-            setTimeout(() => {
-                this.loading = false
-                Toast.fail('登录失败')
-            }, 3000)
+        async handelSubmit() {
+            const rule = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
+            const { user,password,loading } = this.form
+            if(rule.test(user) && password) {
+                this.form.loading = true
+                const [err, res] = await this.api.login({
+                    phone: user,
+                    password: password
+                })
+                if(!err) {
+                    if(res.code === 200) {
+                        const info = {
+                            userId: res.profile.userId,
+                            nickname: res.profile.nickname,
+                            avatarUrl: res.profile.avatarUrl,
+                            backgroundUrl: res.profile.backgroundUrl,
+                            follows: res.profile.follows,
+                            followeds: res.profile.followeds,
+                            gender: res.profile.gender,
+                            eventCount: res.profile.eventCount
+                        }
+                        this.$ls.set('UserAccessToken', info, (24 * 60 * 60 * 1000))
+                        this.$store.dispatch('app/actionUser', info)
+                        Toast.success({
+                            message: '登陆成功',
+                            duration: 1500
+                        })
+                        setTimeout(() => {
+                            this.$router.back()
+                        }, 1000)
+                    }
+                    else {
+                        res.message.length > 6 ? Toast(res.message) : Toast.fail({
+                            message: res.message,
+                            icon: 'close'
+                        })
+                        setTimeout(() => {
+                            this.form.loading = false
+                        }, 600)
+                    }
+                }
+                else {
+                    res.message.length > 6 ? Toast(res.message) : Toast.fail({
+                        message: res.message,
+                        icon: 'close'
+                    })
+                    setTimeout(() => {
+                        this.form.loading = false
+                    }, 600)
+                }
+            }
+            else {
+                if(!rule.test(user)) {
+                    this.form.userMessage = '手机号格式错误'
+                }
+                if(!password) {
+                    this.form.passwordMessage = '密码格式错误'
+                }
+                this.form.loading = true
+                setTimeout(() => {
+                    this.form.loading = false
+                }, 600)
+            }
+        },
+        handelFormUser(user) {
+            this.form.user = user
+        },
+        handelFormPassword(password) {
+            this.form.password = password
         }
     },
     render() {
@@ -32,43 +103,52 @@ export default {
                     </div>
                     <div class="Container">
                         <div class="Form">
+                            <div class="Form-message">欢迎到来、久违了！</div>
                             <Field
                                 class="van-hairline--bottom"
-                                placeholder="手机号/邮箱"
-                                error-message="手机号/邮箱格式错误"
+                                placeholder="手机号"
+                                type="tel"
+                                maxlength={11}
+                                error-message={this.form.userMessage}
+                                value={this.form.user}
+                                onInput={this.handelFormUser}
                             >
                                 <Icon
                                     slot="left-icon"
-                                    size={28}
-                                    name="contact"
-                                    color="#ee0a24"
+                                    size={24}
+                                    name={logoUser}
+                                    color="#FC87B4"
                                     style={{marginRight: '10px'}}
                                 ></Icon>
                             </Field>
                             <Field
                                 class="van-hairline--bottom"
                                 placeholder="密码"
-                                error-message="密码错误"
+                                type="password"
+                                error-message={this.form.passwordMessage}
+                                value={this.form.password}
+                                onInput={this.handelFormPassword}
                             >
                                 <Icon
                                     slot="left-icon"
-                                    size={28}
-                                    name="setting-o"
-                                    color="#ee0a24"
+                                    size={24}
+                                    name={logoPassword}
+                                    color="#FC87B4"
                                     style={{marginRight: '10px'}}
                                 ></Icon>
                             </Field>
+                            <Button
+                                class="Submit"
+                                color="#FC87B4"
+                                loading={this.form.loading}
+                                disabled={this.form.loading}
+                                round={true}
+                                plain={false}
+                                block={true}
+                                onClick={this.handelSubmit}
+                            >登录</Button>
                         </div>
                     </div>
-                    <Button
-                        class="Submit"
-                        color="#ee0a24"
-                        loading={this.loading}
-                        disabled={this.loading}
-                        round={true}
-                        plain={true}
-                        onClick={this.handelSubmit}
-                    >登录</Button>
                 </div>
             </transition>
         )
@@ -89,12 +169,15 @@ export default {
     height: 100vh;
     position: fixed;
     top: 0;
-    background-color: #ffffff;
+    background-image: url('~@assets/image/login.jpg');
+    background-size: 750px 1666px;
+    background-position-y: 100%;
     display: flex;
     flex-direction: column;
     .log {
-        height: 480px;
+        height: 400px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
@@ -102,10 +185,20 @@ export default {
         flex: 1;
         .Form {
             margin: 0 64px;
+            background-color: #ffffff;
+            overflow: hidden;
+            padding: 0 32px;
+            border-radius: 24px;
+            .Form-message {
+                font-size: 20PX;
+                color: #333333;
+                margin: 48px 0 24px;
+                text-align: center;
+            }
         }
         .van-cell {
             height: 48px;
-            padding: 0 16px;
+            padding: 0 10px;
             margin-top: 24px;
             &:not(:last-child)::after {
                 left: 0;
@@ -114,12 +207,13 @@ export default {
         }
         .van-hairline--bottom {
             &::after {
-                border-color: #ee0a24;
+                border-color: #FC87B4;
             }
         }
     }
     .Submit {
-        margin: 64px 200px;
+        margin: 64px 32px;
+        width: calc(100% - 64px);
     }
 }
 </style>

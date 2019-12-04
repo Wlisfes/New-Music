@@ -9,41 +9,28 @@ export default {
             User: state => state.app.User
         })  
     },
+    data () {
+        return {
+            userplay: [],      //我创建的歌单
+            starplay: [],      //我收藏的歌单
+        }
+    },
     created () {
-        // this.login()
-        console.log(this.$store.state.app.User)
+
     },
     methods: {
-        //登录
-        async login() {
-            const [err, res] = await this.api.login({
-                phone: 18124963029,
-                password: 'lifei7724300'
-            })
-            if(!err && res.code === 200) {
-                const info = {
-                    userId: res.profile.userId,
-                    nickname: res.profile.nickname,
-                    avatarUrl: res.profile.avatarUrl,
-                    backgroundUrl: res.profile.backgroundUrl,
-                    follows: res.profile.follows,
-                    followeds: res.profile.followeds,
-                    gender: res.profile.gender
-                }
-                this.$ls.set('UserAccessToken', info, (24 * 60 * 60 * 1000))
-            }
-        },
         //用户歌单
         async Userplaylist() {
-
-            console.log(1)
-            return
+            const { userId } = this.User
             const [err, res] = await this.api.Userplaylist({
-                uid: this.User.userId
+                uid: userId
             })
-
             if(!err && res.code === 200) {
-                console.log(res)
+                const { playlist } = res
+                const userplay = playlist.filter(k => k.userId === userId);
+                const starplay = playlist.filter(k => k.userId !== userId);
+                this.userplay = userplay
+                this.starplay = starplay
             }
         }
     },
@@ -56,14 +43,20 @@ export default {
         }
     },
     render() {
+        const UserplayProps = {
+            userplay: this.userplay,
+            starplay: this.starplay,
+            playid: 648468371,
+            play: true
+        }
         return (
             <div class="User">
-                <Root.Scroll ref="wrapper" class="wrapper" data={[]}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={[]} bounce={false}>
                     <Root.Container>
                         <Avatar {...{props: this.User}}></Avatar>
                         {this.User && <div class="UserWrapper">
                             <Group></Group>
-                            <Userplay></Userplay>
+                            <Userplay {...{props: UserplayProps}}></Userplay>
                         </div>}
                         {this.User && <Signout></Signout>}
                     </Root.Container>

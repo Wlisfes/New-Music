@@ -46,7 +46,7 @@ export default {
     render() {
         return (
             <div class="Recommend">
-                <Root.Scroll ref="wrapper" class="wrapper" data={[]}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={[]} bounce={false}>
                     <Root.Container>
                         {true && <Swiper data={this.banners} />}
                         <LayoutCard />

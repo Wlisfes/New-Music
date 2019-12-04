@@ -26,7 +26,7 @@ export default {
                     </div>
                 </div>
                 <div class="Status" onClick={() => {this.$emit('player')}}>
-                    <Icon name={play} size={24}></Icon>
+                    <Icon name={play} size={20}></Icon>
                 </div>
             </div>
         )

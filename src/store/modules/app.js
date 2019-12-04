@@ -1,4 +1,3 @@
-import Vue from 'vue';
 
 const state = {
     active: 0,               //默认页码
@@ -20,7 +19,9 @@ const mutations = {
 }
 
 const actions = {
-
+    actionUser: ({ commit }, User) => {
+        commit('setUser', User)
+    }
 }
 
 export default {

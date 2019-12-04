@@ -9,7 +9,8 @@ export default {
         follows: Number,
         gender: Number,
         nickname: String,
-        userId: Number
+        userId: Number,
+        eventCount: Number
     },
     methods: {
         //预览图片
@@ -53,7 +54,7 @@ export default {
                     </div>
                     {this.userId && <Row style={{marginBottom: '14px', height: '44px'}}>
                         <Col span={6} class="van-hairline--right">
-                            <div class="van-tainer">{this.gender || '--'}</div>
+                            <div class="van-tainer">{this.eventCount || '--'}</div>
                             <div class="van-tainer">动态</div>
                         </Col>
                         <Col span={6} class="van-hairline--right">
@@ -66,9 +67,9 @@ export default {
                         </Col>
                         <Col span={6}>
                             <div class="van-tainer">
-                                <Icon name="setting-o" size={20} />
+                                <Icon name="setting-o" size={18} />
                             </div>
-                            <div class="van-tainer">编辑资料</div>
+                            <div class="van-tainer">设置</div>
                         </Col>
                     </Row>}
                     {!this.userId && <Button

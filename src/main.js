@@ -6,6 +6,8 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import "@/core/use";
+import "@/core/mixin";
+import "@/core/component";
 import bootstrap from '@/core/bootstrap';
 import "@assets/style/common.less";
 

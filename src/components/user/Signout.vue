@@ -4,6 +4,7 @@ export default {
     name: 'Signout',
     methods: {
         handelSignout() {
+            const self = this
             Dialog.confirm({
                 title: '情雨随风提醒您',
                 message: '确定退出当前账号吗？',
@@ -15,8 +16,12 @@ export default {
                         done();
                         return;
                     }
-                    this.$ls.remove('UserAccessToken')
-                    setTimeout(done, 1000);
+                    // this.$ls.remove('UserAccessToken')
+                    
+                    setTimeout(() => {
+                        done()
+                        self.$store.dispatch('app/actionUser', null)
+                    }, 1000);
                 }
             }).catch(e => {})
         }  

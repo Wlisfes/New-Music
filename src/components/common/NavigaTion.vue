@@ -3,7 +3,7 @@ import { Icon,Tab,Tabs } from 'vant';
 import play from '@assets/icon/play.gif';
 import stop from '@assets/icon/stop.png';
 export default {
-    name: 'Header',
+    name: 'NavigaTion',
     props: {
         active: {
             type: Number,
@@ -12,7 +12,7 @@ export default {
     },
     render() {
         return (
-            <div class="Header">
+            <div class="NavigaTion">
                 <div class="Search" onClick={() => {this.$emit('search')}}>
                     <Icon name="search" size={24}></Icon>
                 </div>
@@ -35,13 +35,13 @@ export default {
 </script>
 
 <style lang="less">
-.Header {
-    height: 44PX;
+.NavigaTion {
+    height: 46PX;
     display: flex;
     align-items: center;
     .Search,.Status {
-        width: 44PX;
-        height: 44PX;
+        width: 46PX;
+        height: 46PX;
         display: flex;
         align-items: center;
         justify-content: center;

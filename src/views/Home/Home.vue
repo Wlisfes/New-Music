@@ -8,7 +8,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Root,Header } from '@/components/common';
+import { Root,NavigaTion } from '@/components/common';
 import { Recommend,User,Singer } from '@views/Common';
 export default {
     name: 'Home',
@@ -27,7 +27,7 @@ export default {
         const { keepAlive } = this.$route.meta.keepAlive || false
         return (
             <Root class="Home">
-                <Header
+                <NavigaTion
                     active={this.active}
                     onChange={(index) => {
                         this.$store.commit('app/setActive', index)

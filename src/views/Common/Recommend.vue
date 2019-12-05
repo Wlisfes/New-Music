@@ -10,6 +10,12 @@
 import { Root,Swiper,LayoutCard,PlayCard } from '@/components/common';
 export default {
     name: 'Recommend',
+    props: {
+        active: {
+            type: Boolean,
+            default: false
+        }
+    },
     data() {
         return {
             banners: [],
@@ -61,6 +67,11 @@ export default {
                 }
             })
         }
+    },
+    watch: {
+        active(newVal) {
+            newVal && this.$refs.wrapper.refresh()
+        }  
     },
     render() {
         return (

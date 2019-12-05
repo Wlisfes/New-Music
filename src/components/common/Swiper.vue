@@ -19,7 +19,7 @@ export default {
     render() {
         return (
             <div class="Swiper">
-                <Swipe autoplay={5000} indicator-color="white" stop-propagation={false}>
+                <Swipe autoplay={5000} indicator-color="white">
                     {this.data.map((k, index) => {
                         return (
                             <SwipeItem key={index}>

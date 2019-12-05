@@ -17,6 +17,12 @@ export default {
             User: state => state.app.User
         })  
     },
+    props: {
+        active: {
+            type: Boolean,
+            default: false
+        }
+    },
     data () {
         return {
             userplay: [],      //我创建的歌单
@@ -51,6 +57,11 @@ export default {
             },
             immediate: true
         }
+    },
+    watch: {
+        active(newVal) {
+            newVal && this.$refs.wrapper.refresh()
+        }  
     },
     render() {
         const UserplayProps = {

@@ -2,7 +2,7 @@
  * @Date: 2019-12-05 14:24:54
  * @Author: 情雨随风
  * @LastEditors: 情雨随风
- * @LastEditTime: 2019-12-05 15:16:07
+ * @LastEditTime: 2019-12-05 16:03:15
  * @Description: 首页组合分页
  -->
 
@@ -32,21 +32,21 @@ export default {
                     <Tab>
                         <Root.Container>
                             <keep-alive>
-                                <Recommend></Recommend>
+                                <Recommend active={this.active === 0}></Recommend>
                             </keep-alive>
                         </Root.Container>
                     </Tab>
                     <Tab>
                         <Root.Container>
                             <keep-alive>
-                                <User></User>
+                                <User active={this.active === 1}></User>
                             </keep-alive>
                         </Root.Container>
                     </Tab>
                     <Tab>
                         <Root.Container>
                             <keep-alive>
-                                <Singer></Singer>
+                                <Singer active={this.active === 2}></Singer>
                             </keep-alive>
                         </Root.Container>
                     </Tab>
@@ -75,6 +75,7 @@ export default {
     }
     .Container {
         height: 100%;
+        overflow: hidden;
     }
 }
 </style>

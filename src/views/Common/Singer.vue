@@ -12,6 +12,12 @@ import { Image } from 'vant';
 import { Root } from '@/components/common';
 export default {
     name: 'Singer',
+    props: {
+        active: {
+            type: Boolean,
+            default: false
+        }
+    },
     data () {
         return {
             singers: [],       //歌手
@@ -114,6 +120,9 @@ export default {
                     this.currentIndex = i;
                 }
             }
+        },
+        active(newVal) {
+            newVal && this.$refs.wrapper.refresh()
         }
     },
     render() {

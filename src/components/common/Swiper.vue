@@ -38,6 +38,7 @@ export default {
 
 <style lang="less">
 .Swiper {
+    margin-top: 20px;
     .picUrl {
         width: 100%;
         display: block;

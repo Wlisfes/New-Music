@@ -9,7 +9,7 @@
 <script>
 import { mapState } from 'vuex';
 import { Root,NavigaTion } from '@/components/common';
-import { Recommend,User,Singer } from '@views/Common';
+import { Tabs } from '@views/Common';
 export default {
     name: 'Home',
     computed: {
@@ -17,11 +17,6 @@ export default {
             player: state => state.app.player,
             active: state => state.app.active
         })
-    },
-    methods: {
-        handelplayerChange() {
-            this.$store.commit('app/setPlayer', !this.player)
-        }
     },
     render() {
         const { keepAlive } = this.$route.meta.keepAlive || false
@@ -32,13 +27,19 @@ export default {
                     onChange={(index) => {
                         this.$store.commit('app/setActive', index)
                     }}
-                    onPlayer={this.handelplayerChange}
+                    onPlayer={() => {
+                        this.$store.commit('app/setPlayer', !this.player)
+                    }}
+                    onSearch={() => {
+                        console.log('search')
+                    }}
                 />
-                <keep-alive>
-                    {this.active === 0 && <Recommend></Recommend>}
-                    {this.active === 1 && <User></User>}
-                    {this.active === 2 && <Singer></Singer>}
-                </keep-alive>
+                <Tabs
+                    active={this.active}
+                    onChange={(index) => {
+                        this.$store.commit('app/setActive', index)
+                    }}
+                ></Tabs>
                 
                 <keep-alive>
                     {keepAlive && <router-view />}

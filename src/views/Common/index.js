@@ -1,5 +1,3 @@
-import Recommend from './Recommend';
-import User from './User';
-import Singer from './Singer';
+import Tabs from './Tabs';
 
-export { Recommend,User,Singer };
+export { Tabs };

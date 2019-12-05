@@ -27,7 +27,7 @@ export default {
     render() {
         return (
             <div class="PlayCard">
-                <div class="Play-Header van-hairline--bottom">
+                <div class="Play-Header">
                     <div class="Play-title">{this.title}</div>
                     <div class="Play-more van-hairline--surround" onClick={() =>{this.$emit('subtitle')}}>{this.subtitle}</div>
                 </div>
@@ -83,7 +83,7 @@ export default {
         }
     }
     .ListCard {
-        margin: 0 10PX;
+        margin: 10PX 10PX 0;
         .van-col {
             cursor: pointer;
             margin-bottom: 20px;

@@ -1,5 +1,5 @@
 <script>
-import { Icon,Tab,Tabs } from 'vant';
+import { NavBar,Icon,Tab,Tabs } from 'vant';
 import play from '@assets/icon/play.gif';
 import stop from '@assets/icon/stop.png';
 export default {
@@ -12,23 +12,26 @@ export default {
     },
     render() {
         return (
-            <div class="NavigaTion">
-                <div class="Search" onClick={() => {this.$emit('search')}}>
-                    <Icon name="search" size={24}></Icon>
+            <NavBar class="NavigaTion" onClick-left={() => {this.$emit('search')}} onClick-right={() => {this.$emit('player')}}>
+                <Icon
+                    slot="left"
+                    name="search"
+                    color="#ee0a24"
+                    size={20}
+                ></Icon>
+                <div slot="title" class="Center">
+                    <Tabs type="card" active={this.active} onChange={(index) => {this.$emit('change', index)}}>
+                        <Tab title="推荐"></Tab>
+                        <Tab title="我的"></Tab>
+                        <Tab title="歌手"></Tab>
+                    </Tabs>
                 </div>
-                <div class="Center">
-                    <div class="Center-Container">
-                        <Tabs type="card" active={this.active} onChange={(index) => {this.$emit('change', index)}}>
-                            <Tab title="推荐"></Tab>
-                            <Tab title="我的"></Tab>
-                            <Tab title="歌手"></Tab>
-                        </Tabs>
-                    </div>
-                </div>
-                <div class="Status" onClick={() => {this.$emit('player')}}>
-                    <Icon name={play} size={20}></Icon>
-                </div>
-            </div>
+                <Icon
+                    slot="right"
+                    name={play}
+                    size={20}
+                ></Icon>
+            </NavBar>
         )
     }
 }
@@ -36,26 +39,15 @@ export default {
 
 <style lang="less">
 .NavigaTion {
-    height: 46PX;
-    display: flex;
-    align-items: center;
-    .Search,.Status {
-        width: 46PX;
+    .Center {
         height: 46PX;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        cursor: pointer;
-    }
-    .Center  {
-        flex: 1;
-        .Center-Container {
-            width: 230PX;
-            margin: 0 auto;
-        }
         .van-tabs__nav--card {
             margin: 0;
         }
     }
+    
 }
 </style>

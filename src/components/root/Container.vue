@@ -10,3 +10,11 @@ export default {
     }
 }
 </script>
+
+<style lang="less" scoped>
+.Container {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+</style>

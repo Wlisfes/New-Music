@@ -196,6 +196,7 @@ export default {
     background-size: 750px 1666px;
     background-position-y: 100%;
     display: flex;
+    z-index: 99;
     flex-direction: column;
     /deep/ .van-nav-bar {
         background-color: rgba(0,0,0,0);

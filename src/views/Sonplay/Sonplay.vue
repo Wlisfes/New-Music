@@ -17,6 +17,7 @@ export default {
         return (
             <transition name="sonplay" appear>
                 <Root class="Sonplay">
+                    <Root.Header></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                         <Root.Container>
 

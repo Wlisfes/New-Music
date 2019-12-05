@@ -129,7 +129,7 @@ export default {
         return (
             <div class="Singer">
                 <Root.Scroll ref="wrapper" class="wrapper" data={this.singers}
-                    probeType={3} listenScroll={true} bounce={true}
+                    probeType={3} listenScroll={true} bounce={false}
                     onScroll={this.wrapperScroll}
                 >
                     <Root.Container>

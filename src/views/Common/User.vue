@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:04 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:02:04 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-05 22:34:41
  * @Description: 我的
  */
 
@@ -30,9 +30,6 @@ export default {
             wrappers: []
         }
     },
-    created () {
-
-    },
     methods: {
         //用户歌单
         async Userplaylist() {
@@ -51,17 +48,15 @@ export default {
         }
     },
     watch: {
+        active(newVal) {
+            newVal && this.$refs.wrapper.refresh()
+        },
         User: {
             handler() {
                 this.User && this.Userplaylist()
             },
             immediate: true
         }
-    },
-    watch: {
-        active(newVal) {
-            newVal && this.$refs.wrapper.refresh()
-        }  
     },
     render() {
         const UserplayProps = {
@@ -72,7 +67,7 @@ export default {
         }
         return (
             <div class="User">
-                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                     <Root.Container>
                         <Avatar {...{props: this.User}}></Avatar>
                         {this.User && <div style={{flex: 1, overflow: 'hidden'}}>

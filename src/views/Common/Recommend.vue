@@ -2,11 +2,12 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-04 23:22:24
+ * @Last Modified time: 2019-12-05 23:03:14
  * @Description: 推荐
  */
 
 <script>
+import { mapState } from 'vuex';
 import { Root,Swiper,LayoutCard,PlayCard } from '@/components/common';
 export default {
     name: 'Recommend',
@@ -16,10 +17,16 @@ export default {
             default: false
         }
     },
+    computed: {
+        ...mapState({
+            User: state => state.app.User
+        })  
+    },
     data() {
         return {
-            banners: [],
-            recommend: [],
+            banners: [],      //轮播图
+            personas: [],     //推荐歌单
+            recommends: [],   //每日推荐歌单（需登录）
             wrappers: []
         }
     },
@@ -48,7 +55,7 @@ export default {
                 limit: 9
             })
             if(!err && res.code === 200) {
-                this.recommend = res.result.map(k => {
+                this.personas = res.result.map(k => {
                     return {
                         id: k.id,
                         picUrl: k.picUrl,
@@ -56,9 +63,26 @@ export default {
                         playCount: k.playCount
                     }
                 })
-                this.wrappers = this.wrappers.concat(this.recommend)
+                this.wrappers = this.wrappers.concat(this.personas)
             }
         },
+        //每日推荐（需登陆）
+        async recommend() {
+            const [err, res] = await this.api.recommend()
+
+            if(!err && res.code === 200) {
+                this.recommends = res.recommend.filter((v, i) => i < 6).map(k => {
+                    return {
+                        id: k.id,
+                        picUrl: k.picUrl,
+                        name: k.name,
+                        playCount: k.playcount
+                    }
+                })
+                this.wrappers = this.wrappers.concat(this.recommends)
+            }
+        },
+        //歌单列表
         handelplayCard(ops) {
             this.$router.push({
                 path: `/sonplay`,
@@ -66,31 +90,51 @@ export default {
                     id: ops.id
                 }
             })
+        },
+        //四项卡片
+        handelayoutCard(ops) {
+            console.log(ops)
         }
     },
     watch: {
         active(newVal) {
             newVal && this.$refs.wrapper.refresh()
-        }  
+        },
+        User: {
+            handler() {
+                (this.active && this.User) && this.recommend()
+            },
+            immediate: true
+        }
     },
     render() {
         return (
             <div class="Recommend">
-                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                     <Root.Container>
                         {this.banners.length > 0 && <Swiper data={this.banners} />}
                         {
-                            (this.banners.length > 0 || this.recommend.length > 0) ?
-                            <LayoutCard /> : <Loading margin="24px"></Loading>
+                            (
+                                this.banners.length > 0 ||
+                                this.personas.length > 0 ||
+                                this.recommends.length > 0
+                            ) ?  <LayoutCard onLayout={this.handelayoutCard}/> : <Loading margin="24px"></Loading>
                         }
-                        {this.recommend.length > 0 && <PlayCard
-                            title="推荐歌单"
-                            subtitle="歌单广场"
-                            data={this.recommend}
+                        {this.recommends.length > 0 && <PlayCard
+                            title="每日推荐"
+                            subtitle="更多推荐"
+                            data={this.recommends}
                             onPlayCard={this.handelplayCard}
                         />}
+                        {this.personas.length > 0 && <div class="lastPlayCard">
+                            <PlayCard
+                                title="推荐歌单"
+                                subtitle="歌单广场"
+                                data={this.personas}
+                                onPlayCard={this.handelplayCard}
+                            />
+                        </div>}
 
-                        
                     </Root.Container>
                 </Root.Scroll>
             </div>
@@ -109,7 +153,7 @@ export default {
         flex: 1;
         overflow: hidden;
     }
-    /deep/ .ListCard {
+    .lastPlayCard {
         margin-bottom: 40px;
     }
 }

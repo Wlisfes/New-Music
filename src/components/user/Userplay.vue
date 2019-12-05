@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:06:30 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:06:30 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-05 23:01:51
  * @Description: user歌单组件
  */
 
@@ -42,7 +42,7 @@ export default {
         const IconStyle = {marginRight: '10px'}
         return (
             <div class="Userplay">
-                <Collapse value={this.active} onChange={active => {this.active = active}}>
+                <Collapse value={this.userplay.length > 0 ? this.active : []} onChange={active => {this.active = active}}>
                     <CollapseItem title="我创建的歌单" name={1} size="large" value={this.userplay.length}>
                         <Icon slot="icon" color="#ee0a24" size={24} name="contact" style={IconStyle}></Icon>
                         <div class="UserContainer">

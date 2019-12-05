@@ -7,17 +7,42 @@
  */
 
 <script>
-import { Grid,GridItem } from 'vant';
+import { Grid,GridItem,Icon } from 'vant';
 export default {
     name: 'LayoutCard',
+    data () {
+        return {
+            layout: [
+                { text: '每日推荐', icon: 'fire-o', grid: 0 },
+                { text: '歌单', icon: 'music-o', grid: 1 },
+                { text: '排行榜', icon: 'bar-chart-o', grid: 2 },
+                { text: '电台', icon: 'service-o', grid: 3 }
+            ]
+        }
+    },
     render() {
+        const style = {marginBottom: '5px'}
         return (
-            <div class="LayoutCard">
-                <Grid square gutter={10}>
-                    <GridItem icon="gem-o" text="文字"></GridItem>
-                    <GridItem icon="gem-o" text="文字"></GridItem>
-                    <GridItem icon="gem-o" text="文字"></GridItem>
-                    <GridItem icon="gem-o" text="文字"></GridItem>
+            <div class="LayoutCard van-hairline--bottom" style={{margin: '10px 0'}}>
+                <Grid square gutter={10} border={false} icon-size={34} clickable={false}>
+                    {this.layout.map(k => {
+                        return (
+                            <GridItem
+                                text={k.text}
+                                key={k.grid}
+                                style={{cursor: 'pointer'}}
+                                onClick={() => {this.$emit('layout', k.grid)}}
+                            >
+                                <Icon
+                                    slot="icon"
+                                    name={k.icon}
+                                    color="#ee0a24"
+                                    size={34}
+                                    style={style}
+                                ></Icon>
+                            </GridItem>
+                        )
+                    })}
                 </Grid>
             </div>
         )
@@ -26,7 +51,5 @@ export default {
 </script>
 
 <style lang="less">
-.LayoutCard {
-    margin: 10PX 0;
-}
+
 </style>

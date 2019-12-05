@@ -8,6 +8,7 @@
 
 <script>
 import { Image,Row,Col,Button,Icon,ImagePreview } from 'vant';
+import avatar from '@assets/image/avatar.jpg';
 export default {
     name: 'Avatar',
     props: {
@@ -45,7 +46,7 @@ export default {
                             height={80}
                             round={true}
                             fit="cover"
-                            src={this.avatarUrl || 'http://static.hdslb.com/images/akari.jpg'}
+                            src={this.avatarUrl || avatar}
                             onClick={this.handelImage}
                         ></Image>
                         <div class="nickname">

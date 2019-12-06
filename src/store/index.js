@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import app from './modules/app';
+import howler from './modules/howler';
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -11,7 +12,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    app
+    app,howler
   },
   plugins: [
     createPersistedState({

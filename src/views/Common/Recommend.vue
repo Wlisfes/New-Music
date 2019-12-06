@@ -102,7 +102,7 @@ export default {
         },
         User: {
             handler() {
-                (this.active && this.User) && this.recommend()
+                this.User && this.recommend()
             },
             immediate: true
         }
@@ -110,7 +110,7 @@ export default {
     render() {
         return (
             <div class="Recommend">
-                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
+                <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false} refreshDelay={60}>
                     <Root.Container>
                         {this.banners.length > 0 && <Swiper data={this.banners} />}
                         {

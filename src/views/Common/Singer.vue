@@ -225,14 +225,16 @@ export default {
     .singer {
         position: absolute;
         right: 16px;
-        top: 100px;
+        top: 120px;
         .singer-name {
-            width: 44px;
-            height: 44px;
-            font-size: 14PX;
+            width: 40px;
+            height: 40px;
+            font-size: 12PX;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #555555;
+            font-weight: 700;
         }
     }
 }

@@ -8,11 +8,19 @@ export default {
         active: {
             type: Number,
             default: 0
+        },
+        play: {
+            type: Boolean,
+            default: false
         }
     },
     render() {
         return (
-            <NavBar class="NavigaTion" onClick-left={() => {this.$emit('search')}} onClick-right={() => {this.$emit('player')}}>
+            <NavBar
+                class="NavigaTion"
+                onClick-left={() => {this.$emit('search')}}
+                onClick-right={() => {this.$emit('player')}}
+            >
                 <Icon
                     slot="left"
                     name="search"
@@ -28,7 +36,7 @@ export default {
                 </div>
                 <Icon
                     slot="right"
-                    name={play}
+                    name={this.play ? play : stop}
                     size={20}
                 ></Icon>
             </NavBar>

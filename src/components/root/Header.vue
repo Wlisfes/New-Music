@@ -19,7 +19,7 @@ export default {
         },
         title: {
             type: String,
-            default: ""
+            default: "歌单"
         }
     },
     render() {
@@ -32,7 +32,8 @@ export default {
                 class={`Header ${border}`}
                 style={style}
                 title={this.title}
-                onClick-left={() => {console.log(1)}}
+                onClick-left={() => {this.$emit('back')}}
+                onClick-right={() => {this.$emit('play', this.play)}}
             >
                 <Icon
                     slot="left"
@@ -60,5 +61,9 @@ export default {
 .Header {
     display: flex;
     height: 46PX;
+    .van-nav-bar__title {
+        color: #ffffff;
+        font-size: 18px;
+    }
 }
 </style>

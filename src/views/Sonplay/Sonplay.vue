@@ -7,20 +7,46 @@
  */
 
 <script>
-import { Root } from '@/components/common';
+import { Root,SonplayCard } from '@/components/common';
 export default {
     name: 'Sonplay',
+    data () {
+        return {
+            picUrl: '',      //背景图片
+        }
+    },
     created () {
-        console.log(this.$route.query)  
+        setTimeout(() => {
+            this.playlistdetail()
+        }, 1000)
+    },
+    methods: {
+        //详情
+        async playlistdetail() {
+            const [err, res] = await this.api.playlistdetail({
+                id: this.$route.params.id
+            })
+            if(!err && res.code === 200) {
+                const { coverImgUrl } = res.playlist
+
+
+                this.picUrl = coverImgUrl
+            }
+        }
     },
     render() {
         return (
             <transition name="sonplay" appear>
                 <Root class="Sonplay">
-                    <Root.Header></Root.Header>
+                    <Root.Header
+                        title="慈悲放生"
+                        onBack={() => {this.$router.back()}}
+                    ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
                         <Root.Container>
-
+                            <SonplayCard
+                                picUrl={this.picUrl}
+                            ></SonplayCard>
                         </Root.Container>
                     </Root.Scroll>
                 </Root>
@@ -43,11 +69,27 @@ export default {
     height: 100vh;
     position: fixed;
     top: 0;
-    background-color: #ffffff;
     z-index: 99;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    // background-color: #ffffff;
+    background-color: #3D3D3F;
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: 50%;
+    // transform: scale(1.5);
+    // filter: blur(20px);
+    // &::after {
+    //     content: "";
+    //     position: absolute;
+    //     background-color: #3D3D3F;
+    //     left: 0;
+    //     top: 0;
+    //     right: 0;
+    //     bottom: 0;
+    // }
+    
     .wrapper {
         flex: 1;
         overflow: hidden;

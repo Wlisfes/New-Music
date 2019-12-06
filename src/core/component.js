@@ -63,7 +63,7 @@ Vue.component('Loading', {
         },
         type: {
             type: String,
-            default: 'spinner'
+            default: 'circular'
         }
     },
     render() {

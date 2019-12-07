@@ -1,10 +1,21 @@
 <script>
+import { mapState } from 'vuex';
 export default {
     name: 'Player',
+    computed: {
+        ...mapState({
+            player: state => state.app.player
+        })  
+    },
+    methods: {
+        handelplay() {
+            this.$store.commit('app/setPlayer', !this.player)
+        }
+    },
     render() {
         return (
             <transition name="player" appear>
-                <div class="Player">
+                <div class="Player" onClick={this.handelplay}>
                 
                 </div>
             </transition>

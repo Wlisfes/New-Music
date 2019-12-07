@@ -2,23 +2,44 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-04 23:27:15
+ * @Last Modified time: 2019-12-07 15:29:21
  * @Description: 歌单列表
  */
 
 <script>
-import { Root,SonplayCard } from '@/components/common';
+import { mapState } from 'vuex';
+import { Root } from '@/components/common';
+import { SonplayCard,SonplayList } from '@/components/sonplay';
 export default {
     name: 'Sonplay',
+    computed: {
+        ...mapState({
+            playid: state => state.howler.playid,
+            player: state => state.app.player
+        })  
+    },
     data () {
         return {
-            picUrl: '',      //背景图片
+            playCard: {      //卡片配置
+                id: '',              //歌单id
+                picUrl: '',          //封面
+                name: '',            //歌单昵称
+                descr: '',           //歌单描述
+                avatar: '',          //创建者头像
+                nickname: '',        //创建者昵称
+                commentCount: 0,     //评论数
+                shareCount: 0,       //分享数
+                playCount: 0,        //播放数
+            },
+            playlist: [],     //歌曲列表
+            loading: false,
+            wrappers: []
         }
     },
     created () {
         setTimeout(() => {
             this.playlistdetail()
-        }, 1000)
+        }, 500)
     },
     methods: {
         //详情
@@ -27,11 +48,33 @@ export default {
                 id: this.$route.params.id
             })
             if(!err && res.code === 200) {
-                const { coverImgUrl } = res.playlist
+                const {
+                    coverImgUrl,name,description,creator,
+                    commentCount,shareCount,playCount,id
+                } = res.playlist
 
-
-                this.picUrl = coverImgUrl
+                this.playCard = {
+                    id: id,
+                    picUrl: coverImgUrl,
+                    name: name,
+                    descr: description,
+                    avatar: creator.avatarUrl,
+                    nickname: creator.nickname,
+                    commentCount: commentCount,
+                    shareCount: shareCount,
+                    playCount: playCount
+                }
+                this.playlist = res.playlist.tracks
+                this.wrappers = this.wrappers.concat(this.playlist)
             }
+            this.loading = true
+        },
+        //选中歌曲播放
+        handelplay(ops) {
+            console.log(ops)
+            
+            this.$store.commit('howler/setPlayid', ops.playid)
+            this.$store.commit('howler/setSonplayid', ops.sonplayid)
         }
     },
     render() {
@@ -39,14 +82,27 @@ export default {
             <transition name="sonplay" appear>
                 <Root class="Sonplay">
                     <Root.Header
-                        title="慈悲放生"
+                        title={this.playCard.name}
+                        play={this.player}
+                        picUrl={this.playCard.picUrl}
                         onBack={() => {this.$router.back()}}
+                        onPlay={() => {
+                            this.$store.commit('app/setPlayer', !this.player)
+                        }}
                     ></Root.Header>
-                    <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={true}>
+                    <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                         <Root.Container>
                             <SonplayCard
-                                picUrl={this.picUrl}
+                                loading={this.loading}
+                                {...{props: this.playCard}}
                             ></SonplayCard>
+                            <SonplayList
+                                sonplayid={this.playCard.id}
+                                playid={this.playid}
+                                loading={this.loading}
+                                playlist={this.playlist}
+                                onPlay={this.handelplay}
+                            ></SonplayList>
                         </Root.Container>
                     </Root.Scroll>
                 </Root>
@@ -73,26 +129,16 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    // background-color: #ffffff;
-    background-color: #3D3D3F;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-position: 50%;
-    // transform: scale(1.5);
-    // filter: blur(20px);
-    // &::after {
-    //     content: "";
-    //     position: absolute;
-    //     background-color: #3D3D3F;
-    //     left: 0;
-    //     top: 0;
-    //     right: 0;
-    //     bottom: 0;
-    // }
-    
+    background-color: #9E9E9E;
     .wrapper {
         flex: 1;
         overflow: hidden;
+        .Container {
+            min-height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
 </style>

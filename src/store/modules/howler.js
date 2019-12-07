@@ -9,11 +9,25 @@
 
 
 const state = {
-
+    play: false,           //播放状态
+    playid: '',            //播放歌曲id
+    sonplayid: '',         //播放歌单id
+    playlist: [],          //播放中的歌曲列表
 }
 
 const mutations = {
-
+    setPlay: (state, play) => {
+        state.play = play
+    },
+    setPlayid: (state, playid) => {
+        state.playid = playid
+    },
+    setSonplayid: (state, sonplayid) => {
+        state.sonplayid = sonplayid
+    },
+    setPlaylist: (state, playlist) => {
+        state.playlist =  playlist
+    }
 }
 
 const actions = {

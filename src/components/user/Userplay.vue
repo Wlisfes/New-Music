@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:06:30 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-05 23:01:51
+ * @Last Modified time: 2019-12-07 15:15:24
  * @Description: user歌单组件
  */
 
@@ -25,7 +25,7 @@ export default {
             type: Boolean,
             default: false
         },
-        playid: {
+        sonplayid: {
             type: [Number, String],
             default: ''
         }
@@ -50,7 +50,7 @@ export default {
                                 {
                                     this.userplay.map(k => {
                                         return (
-                                            <div class="play-li van-hairline--bottom" key={k.id}>
+                                            <div class="play-li van-hairline--bottom" key={k.id} onClick={() => {this.$emit('playCard', k)}}>
                                                 <Image
                                                     width={50}
                                                     height={50}
@@ -63,7 +63,7 @@ export default {
                                                     <div class="nickname">{`${k.trackCount}首，by ${k.creator.nickname}`}</div>
                                                 </div>
                                                 <div class="play-icon">
-                                                    {this.playid == k.id ?
+                                                    {this.sonplayid == k.id ?
                                                         this.play ?
                                                           <Image width={20} height={20} src={play}></Image>
                                                         : <Image width={20} height={20} src={stop}></Image>
@@ -85,7 +85,7 @@ export default {
                                 {
                                     this.starplay.map(k => {
                                         return (
-                                            <div class="play-li van-hairline--bottom" key={k.id}>
+                                            <div class="play-li van-hairline--bottom" key={k.id} onClick={() => {this.$emit('playCard', k)}}>
                                                 <Image
                                                     width={50}
                                                     height={50}
@@ -98,7 +98,7 @@ export default {
                                                     <div class="nickname">{`${k.trackCount}首，by ${k.creator.nickname}`}</div>
                                                 </div>
                                                 <div class="play-icon">
-                                                    {this.playid == k.id ?
+                                                    {this.sonplayid == k.id ?
                                                         this.play ?
                                                           <Image width={20} height={20} src={play}></Image>
                                                         : <Image width={20} height={20} src={stop}></Image>

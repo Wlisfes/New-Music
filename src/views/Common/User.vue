@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:04 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-05 22:34:41
+ * @Last Modified time: 2019-12-07 15:02:24
  * @Description: 我的
  */
 
@@ -14,7 +14,8 @@ export default {
     name: 'User',
     computed: {
         ...mapState({
-            User: state => state.app.User
+            User: state => state.app.User,
+            sonplayid: state => state.howler.sonplayid
         })  
     },
     props: {
@@ -45,7 +46,11 @@ export default {
                 this.starplay = starplay
                 this.wrappers = this.wrappers.concat(playlist)
             }
-        }
+        },
+        //歌单列表
+        handelplayCard(ops) {
+            this.$router.push(`/sonplay/${ops.id}`)
+        },
     },
     watch: {
         active(newVal) {
@@ -62,7 +67,7 @@ export default {
         const UserplayProps = {
             userplay: this.userplay,
             starplay: this.starplay,
-            playid: 648468371,
+            sonplayid: this.sonplayid,
             play: false
         }
         return (
@@ -73,7 +78,10 @@ export default {
                         {this.User && <div style={{flex: 1, overflow: 'hidden'}}>
                             <div class="UserWrapper">
                                 <Group></Group>
-                                <Userplay {...{props: UserplayProps}}></Userplay>
+                                <Userplay
+                                    {...{props: UserplayProps}}
+                                    onPlayCard={this.handelplayCard}
+                                ></Userplay>
                             </div>
                         </div>}
                         {this.User && <Signout></Signout>}

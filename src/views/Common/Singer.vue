@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:48 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:01:48 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-07 15:38:39
  * @Description: 歌手
  */
 
@@ -27,13 +27,15 @@ export default {
         }
     },
     created () {
-        this.playsinger()
+        setTimeout(() => {
+            this.playsinger()
+        }, 500)
     },
     mounted () {
         this.$nextTick(() => {
             setTimeout(() => {
                 this.calcSingerHeight()
-            }, 500)
+            }, 1000)
         })  
     },
     methods: {

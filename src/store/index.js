@@ -19,7 +19,8 @@ export default new Vuex.Store({
       storage: window.sessionStorage,
       reducer(val) {
         return {
-          app: val.app
+          app: val.app,
+          howler: val.howler
         }
       }
     })

@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-07 15:29:21
+ * @Last Modified time: 2019-12-07 16:06:49
  * @Description: 歌单列表
  */
 
@@ -15,7 +15,8 @@ export default {
     computed: {
         ...mapState({
             playid: state => state.howler.playid,
-            player: state => state.app.player
+            play: state => state.howler.play,
+            player: state => state.howler.player
         })  
     },
     data () {
@@ -83,11 +84,11 @@ export default {
                 <Root class="Sonplay">
                     <Root.Header
                         title={this.playCard.name}
-                        play={this.player}
+                        play={this.play}
                         picUrl={this.playCard.picUrl}
                         onBack={() => {this.$router.back()}}
                         onPlay={() => {
-                            this.$store.commit('app/setPlayer', !this.player)
+                            this.$store.commit('howler/setPlayer', !this.player)
                         }}
                     ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>

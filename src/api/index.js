@@ -70,3 +70,22 @@ export const Userplaylist = params => {
     })
 }
 
+
+//查询音乐是否可用
+export const musicCheck = params => {
+    return http({
+        url: `/check/music`,
+        method: 'GET',
+        params
+    })
+}
+
+
+//获取音乐 url
+export const musicUrl = params => {
+    return http({
+        url: `/song/url`,
+        method: 'GET',
+        params
+    })
+}

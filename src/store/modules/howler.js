@@ -9,13 +9,23 @@
 
 
 const state = {
+    audio: null,           //音频对象
+    player: false,         //播放器默认关闭
     play: false,           //播放状态
     playid: '',            //播放歌曲id
     sonplayid: '',         //播放歌单id
     playlist: [],          //播放中的歌曲列表
+    picUrl: '',            //歌曲封面
+    playUrl: '',           //音乐url
 }
 
 const mutations = {
+    setAudio: (state, audio) => {
+        state.audio = audio
+    },
+    setPlayer: (state, player) => {
+        state.player = player
+    },
     setPlay: (state, play) => {
         state.play = play
     },
@@ -27,11 +37,19 @@ const mutations = {
     },
     setPlaylist: (state, playlist) => {
         state.playlist =  playlist
+    },
+    setPicUrl: (state, picUrl) => {
+        state.picUrl = picUrl
+    },
+    setPlayUrl: (state, playUrl) => {
+        state.playUrl = playUrl
     }
 }
 
 const actions = {
-
+    actionPlayUrl: ({ commit }, playUrl) =>{
+        commit('setPlayUrl', playUrl)
+    }
 }
 
 

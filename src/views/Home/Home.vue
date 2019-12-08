@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:20 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:02:20 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-07 16:06:26
  * @Description: 首页
  */
 
@@ -14,7 +14,8 @@ export default {
     name: 'Home',
     computed: {
         ...mapState({
-            player: state => state.app.player,
+            player: state => state.howler.player,
+            play: state => state.howler.play,
             active: state => state.app.active
         })
     },
@@ -24,11 +25,12 @@ export default {
             <Root class="Home">
                 <NavigaTion
                     active={this.active}
+                    play={this.play}
                     onChange={(index) => {
                         this.$store.commit('app/setActive', index)
                     }}
                     onPlayer={() => {
-                        this.$store.commit('app/setPlayer', !this.player)
+                        this.$store.commit('howler/setPlayer', !this.player)
                     }}
                     onSearch={() => {
                         console.log('search')

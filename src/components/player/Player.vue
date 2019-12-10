@@ -1,6 +1,5 @@
 <script>
 import { mapState } from 'vuex';
-import { Howl,Howler } from 'howler';
 import { NavBar,Icon,Toast } from 'vant';
 import play from '@assets/icon/play.gif';
 import stop from '@assets/icon/stop.png';
@@ -21,24 +20,17 @@ export default {
             Audio: null
         }
     },
+    mounted () {
+        this.initAudio()
+    },
     methods: {
-        handelplay() {
-            // setTimeout(()=> {
-                this.$store.commit('howler/setPlayer', !this.player)
-            // }, 1500)
+        initAudio() {
+            this.$nextTick(() => {
+                this.$store.commit('howler/setAudio', this.$refs.Audio)
+            }) 
         },
-        //创建音频播放器
-        NewHowler(musicUrl) {
-            const Audio = new Howl({
-                src: [musicUrl],
-                autoplay: false,
-                loop: false,
-                volume: 0.5,
-                onend: function() {
-                    console.log('Finished!');
-                }
-            })
-            this.Audio = Audio;
+        handelplay() {
+            this.$store.commit('howler/setPlayer', !this.player)
         },
         //查询音乐是否可用
         async musicCheck(id) {
@@ -69,14 +61,9 @@ export default {
         playUrl: {
             handler(newVal) {
                 if(newVal) {
-                    if(!this.Audio) {
-                        this.NewHowler(newVal)
-                    }
-                    else {
-                        // this.Audio.urls([newVal])
-                        // this.play()
-                        this.Audio._src(newVal)
-                    }
+                    this.audio.src = newVal
+                    this.audio.load()
+                    this.audio.play()
                 }
             },
             immediate: true
@@ -107,6 +94,8 @@ export default {
                         </div>
                     </div>
                 </transition>}
+
+                <audio ref="Audio"></audio>
             </div>
         )
     }

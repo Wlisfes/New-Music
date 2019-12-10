@@ -20,7 +20,7 @@ export default new Vuex.Store({
       reducer(val) {
         return {
           app: val.app,
-          howler: val.howler
+          // howler: val.howler
         }
       }
     })

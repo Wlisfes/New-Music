@@ -2,7 +2,7 @@
  * @Date: 2019-12-06 14:25:35
  * @Author: 情雨随风
  * @LastEditors: 情雨随风
- * @LastEditTime: 2019-12-06 14:26:42
+ * @LastEditTime: 2019-12-10 17:32:56
  * @Description: 音频播放器store
  */
 
@@ -15,6 +15,7 @@ const state = {
     playid: '',            //播放歌曲id
     sonplayid: '',         //播放歌单id
     playlist: [],          //播放中的歌曲列表
+    playIndex: -1,         //播放第几首
     picUrl: '',            //歌曲封面
     playUrl: '',           //音乐url
 }
@@ -38,12 +39,15 @@ const mutations = {
     setPlaylist: (state, playlist) => {
         state.playlist =  playlist
     },
+    setPlayIndex: (state, playIndex) => {
+        state.playIndex = playIndex
+    },
     setPicUrl: (state, picUrl) => {
         state.picUrl = picUrl
     },
     setPlayUrl: (state, playUrl) => {
         state.playUrl = playUrl
-    }
+    },
 }
 
 const actions = {

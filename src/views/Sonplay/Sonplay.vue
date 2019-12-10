@@ -15,6 +15,7 @@ export default {
     computed: {
         ...mapState({
             playid: state => state.howler.playid,
+            sonplayid: state => state.howler.sonplayid,
             play: state => state.howler.play,
             player: state => state.howler.player
         })  
@@ -71,11 +72,14 @@ export default {
             this.loading = true
         },
         //选中歌曲播放
-        handelplay(ops) {
-            console.log(ops)
-            
-            this.$store.commit('howler/setPlayid', ops.playid)
-            this.$store.commit('howler/setSonplayid', ops.sonplayid)
+        handelplay({ playid,sonplayid,index,playlist }) {
+            if(this.sonplayid === sonplayid && this.playid === playid) {
+                return;
+            }
+            this.$store.commit('howler/setPlayid', playid)
+            this.$store.commit('howler/setSonplayid', sonplayid)
+            this.$store.commit('howler/setPlayIndex', index)
+            this.$store.commit('howler/setPlaylist', playlist)
         }
     },
     render() {

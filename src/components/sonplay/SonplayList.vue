@@ -25,12 +25,12 @@ export default {
         }
     },
     methods: {
-        handelplay({ id }, index) {
+        handelplay(k, index) {
             this.$emit('play', {
-                playid: id,
                 sonplayid: this.sonplayid,
                 playlist:this.playlist,
-                index: index
+                index: index,
+                info: k
             })
         }  
     },

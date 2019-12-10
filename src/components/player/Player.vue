@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'vuex';
 import { NavBar,Icon,Toast } from 'vant';
+import { Playoper,PalyCall,PlaySlider,playLayout } from './index';
 import play from '@assets/icon/play.gif';
 import stop from '@assets/icon/stop.png';
 export default {
@@ -12,8 +13,14 @@ export default {
             play: state => state.howler.play,
             playid: state => state.howler.playid,
             picUrl: state => state.howler.picUrl,
-            playUrl: state => state.howler.playUrl
-        })  
+            playUrl: state => state.howler.playUrl,
+            playIndex: state => state.howler.playIndex,
+            playlist: state => state.howler.playlist
+        }),
+        //播放中的歌曲 信息
+        playCheck() {
+            return this.playlist[this.playIndex]
+        }
     },
     data () {
         return {
@@ -63,7 +70,7 @@ export default {
                 if(newVal) {
                     this.audio.src = newVal
                     this.audio.load()
-                    this.audio.play()
+                    // this.audio.play()
                 }
             },
             immediate: true
@@ -72,13 +79,18 @@ export default {
     render() {
         return (
             <div>
+                {this.player && <transition name="visible" appear>
+                    <div class="picUrl" style={{backgroundImage: `url(${this.picUrl})`}}></div>
+                </transition>}
                 {this.player && <transition name="player" appear>
                     <div class="Player" onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
                         <div class="Player-Container">
-                            {this.picUrl && <transition name="visible" appear>
-                                <div class="picUrl" style={{backgroundImage: `url(${this.picUrl})`}}></div>
-                            </transition>}
-                            <NavBar onClick-right={this.handelplay}>
+                            
+                            <NavBar
+                                title={this.playCheck && this.playCheck.name || '欢迎收听Music'}
+                                onClick-right={this.handelplay}
+                                onClick-left={this.handelplay}
+                            >
                                 <Icon
                                     slot="left"
                                     name="arrow-left"
@@ -91,6 +103,11 @@ export default {
                                     size={20}
                                 ></Icon>
                             </NavBar>
+
+                            <PalyCall></PalyCall>
+                            <playLayout></playLayout>
+                            <PlaySlider></PlaySlider>
+                            <Playoper></Playoper>
                         </div>
                     </div>
                 </transition>}
@@ -121,6 +138,20 @@ export default {
     &::after {
         border: none;
     }
+    .van-nav-bar__title {
+        color: #ffffff;
+    }
+}
+.picUrl {
+    width: 750px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    filter: blur(40px);
+    z-index: 101;
 }
 .Player {
     position: fixed;
@@ -130,21 +161,14 @@ export default {
     z-index: 100;
     overflow: hidden;
     background-color: #b7b7b7;
-    .picUrl {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;top: 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: 50%;
-        filter: blur(40px);
-    }
     .Player-Container {
         position: relative;
         width: 100%;
         height: 100%;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        z-index: 102;
     }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-07 16:06:49
+ * @Last Modified time: 2019-12-10 23:13:31
  * @Description: 歌单列表
  */
 
@@ -72,11 +72,12 @@ export default {
             this.loading = true
         },
         //选中歌曲播放
-        handelplay({ playid,sonplayid,index,playlist }) {
-            if(this.sonplayid === sonplayid && this.playid === playid) {
+        handelplay({ info,sonplayid,index,playlist }) {
+            if(this.sonplayid === sonplayid && this.playid === info.id) {
                 return;
             }
-            this.$store.commit('howler/setPlayid', playid)
+            this.$store.commit('howler/setPlayid', info.id)
+            this.$store.commit('howler/setPicUrl', info.al.picUrl)
             this.$store.commit('howler/setSonplayid', sonplayid)
             this.$store.commit('howler/setPlayIndex', index)
             this.$store.commit('howler/setPlaylist', playlist)

@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:06:30 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-07 15:15:24
+ * @Last Modified time: 2019-12-23 15:39:14
  * @Description: user歌单组件
  */
 
@@ -138,6 +138,7 @@ export default {
         .play-li {
             display: flex;
             padding: 14px 0;
+            cursor: pointer;
         }
         .play-name {
             flex: 1;

@@ -53,10 +53,11 @@ export default {
                         </div>
                     </div>
                     {!this.loading && <Loading style={{marginTop: '24px'}}></Loading>}
-                    {this.playlist.filter((v, i) => i < 500).map((k, index) => {
+
+                    {true && this.playlist.filter((v, i) => i < 500).map((k, index) => {
                         const playStatus = this.playid === k.id
                         return (
-                            <div class="playList-Item" onClick={(e) => {
+                            <div class="playList-Item-Content" onClick={(e) => {
                                 /**/e.preventDefault()/**/
                                 this.handelplay(k, index)
                             }}>
@@ -73,6 +74,7 @@ export default {
                             </div>
                         )
                     })}
+
                     { this.playlist.length > 500 ? this.loading && <Divider
                         dashed={true}
                         style={{color: '#ee0a24', borderColor: '#ee0a24', padding: '0 16px'}}>
@@ -91,15 +93,12 @@ export default {
 
 <style lang="less" scoped>
 .SonplayList {
-    flex: 1;
-    background-color: #ffffff;
+    height: 100%;
     position: relative;
     overflow: hidden;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    transform: translate3d(0,0,0,);
 }
 .playList {
+    min-height: 100%;
     overflow: hidden;
     .paly-Header {
         height: 40PX;
@@ -119,11 +118,12 @@ export default {
             color: #757575;
         }
     }
-    .playList-Item {
+    .playList-Item-Content {
         display: flex;
         height: 44PX;
         margin: 24px 0;
         overflow: hidden;
+        cursor: pointer;
         .Item-index,.Item-icon {
             font-size: 14PX;
             color: #757575;

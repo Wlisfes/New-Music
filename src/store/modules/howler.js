@@ -7,6 +7,8 @@
  */
 
 
+import { Toast } from 'vant';
+
 
 const state = {
     audio: null,           //音频对象
@@ -18,6 +20,7 @@ const state = {
     playIndex: -1,         //播放第几首
     picUrl: '',            //歌曲封面
     playUrl: '',           //音乐url
+    status: 1,             //播放状态  1-列表循环  2-单曲循环  3-随机  4-心动
 }
 
 const mutations = {
@@ -48,6 +51,70 @@ const mutations = {
     setPlayUrl: (state, playUrl) => {
         state.playUrl = playUrl
     },
+    //切换播放状态
+    switch: (state) => {
+        if(state.status < 3) {
+            state.status++
+        }
+        else {
+            state.status = 1
+        }
+        switch (state.status) {
+            case 1:
+                Toast('列表循环');
+                break;
+            case 2:
+                Toast('单曲循环');
+                break;
+            case 3:
+                Toast('随机播放');
+                break;
+        }
+    },
+    //上一首
+    prev: (state) => {
+        const playlist = state.playlist
+        const playIndex = state.playIndex
+
+        if(playlist.length === 0 || playIndex === -1) {
+            Toast('歌单暂无歌曲');
+            return
+        }
+        else {
+            if(playIndex < playlist.length - 1) {
+                state.playIndex ++
+                state.playid = playlist[state.playIndex].id
+                state.picUrl = playlist[state.playIndex].al.picUrl
+            }
+            else {
+                state.playIndex = 1
+                state.playid = playlist[state.playIndex].id
+                state.picUrl = playlist[state.playIndex].al.picUrl
+            }
+        }
+    },
+    //下一首
+    next: (state) => {
+        const playlist = state.playlist
+        const playIndex = state.playIndex
+
+        if(playlist.length === 0 || playIndex === -1) {
+            Toast('歌单暂无歌曲');
+            return
+        }
+        else {
+            if(playIndex < playlist.length - 1) {
+                state.playIndex ++
+                state.playid = playlist[state.playIndex].id
+                state.picUrl = playlist[state.playIndex].al.picUrl
+            }
+            else {
+                state.playIndex = 1
+                state.playid = playlist[state.playIndex].id
+                state.picUrl = playlist[state.playIndex].al.picUrl
+            }
+        }
+    }
 }
 
 const actions = {

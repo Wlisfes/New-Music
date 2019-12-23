@@ -26,6 +26,7 @@ export default {
                     name="search"
                     color="#ee0a24"
                     size={20}
+                    style={{cursor: 'pointer'}}
                 ></Icon>
                 <div slot="title" class="Center">
                     <Tabs type="card" active={this.active} onChange={(index) => {this.$emit('change', index)}}>
@@ -38,6 +39,7 @@ export default {
                     slot="right"
                     name={this.play ? play : stop}
                     size={20}
+                    style={{cursor: 'pointer'}}
                 ></Icon>
             </NavBar>
         )

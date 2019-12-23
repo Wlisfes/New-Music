@@ -31,7 +31,7 @@ export default {
             <div class="SonplayCard">
                 {this.picUrl && <transition name="visible" appear>
                     <div class="picUrl-opacity">
-                        <img class="picUrl" style={{top: '-146px'}} src={this.picUrl} />
+                        <img class="picUrl" style={{top: '-146px'}} src={this.utils.https(this.picUrl)} />
                     </div>
                 </transition>}
 

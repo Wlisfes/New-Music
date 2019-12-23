@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-10 23:13:31
+ * @Last Modified time: 2019-12-23 18:01:27
  * @Description: 歌单列表
  */
 
@@ -73,6 +73,7 @@ export default {
         },
         //选中歌曲播放
         handelplay({ info,sonplayid,index,playlist }) {
+            this.$store.commit('howler/setPlayer', true)
             if(this.sonplayid === sonplayid && this.playid === info.id) {
                 return;
             }
@@ -91,6 +92,7 @@ export default {
                         title={this.playCard.name}
                         play={this.play}
                         picUrl={this.playCard.picUrl}
+                        style={{cursor: 'pointer'}}
                         onBack={() => {this.$router.back()}}
                         onPlay={() => {
                             this.$store.commit('howler/setPlayer', !this.player)
@@ -102,13 +104,15 @@ export default {
                                 loading={this.loading}
                                 {...{props: this.playCard}}
                             ></SonplayCard>
-                            <SonplayList
-                                sonplayid={this.playCard.id}
-                                playid={this.playid}
-                                loading={this.loading}
-                                playlist={this.playlist}
-                                onPlay={this.handelplay}
-                            ></SonplayList>
+                            <div class="flexWrapper">
+                                {true && <SonplayList
+                                    sonplayid={this.playCard.id}
+                                    playid={this.playid}
+                                    loading={this.loading}
+                                    playlist={this.playlist}
+                                    onPlay={this.handelplay}
+                                ></SonplayList>}
+                            </div>
                         </Root.Container>
                     </Root.Scroll>
                 </Root>
@@ -144,6 +148,14 @@ export default {
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+        .flexWrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background-color: #ffffff;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
         }
     }
 }

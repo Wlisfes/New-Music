@@ -82,6 +82,7 @@ export default {
             this.$store.commit('howler/setSonplayid', sonplayid)
             this.$store.commit('howler/setPlayIndex', index)
             this.$store.commit('howler/setPlaylist', playlist)
+            this.$store.commit('howler/setDuraTion', Math.ceil(info.dt / 1000))
         }
     },
     render() {

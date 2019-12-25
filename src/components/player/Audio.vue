@@ -9,6 +9,9 @@ export default {
             play: state => state.howler.play,
             playid: state => state.howler.playid,
             playUrl: state => state.howler.playUrl,
+            status: state => state.howler.status,
+            playIndex: state => state.howler.playIndex,
+            playlist: state => state.howler.playlist,
         })  
     },
     mounted () {
@@ -22,9 +25,23 @@ export default {
             this.$nextTick(() => {
                 this.$store.commit('howler/setAudio', this.$refs.Audio)
 
-                //播放完毕
+                //监听播放完毕
                 this.audio.onended = (e) => {
-                    this.$store.commit('howler/next')
+                    switch (this.status) {
+                        case 1: //列表循环
+                        case 3: //随机
+                            this.$store.commit('howler/next')
+                            break;
+                        case 2: //单曲循环
+                            this.audio.load()
+                            this.audio.play()
+                            break;
+                    }
+                }
+
+                //监听播放
+                this.audio.ontimeupdate = (e) => {
+                    this.$store.commit('howler/setCurrentTime',e.target.currentTime)
                 }
             }) 
         },
@@ -61,6 +78,7 @@ export default {
             handler(newVal) {
                 if(newVal) {
                     this.audio.src = this.utils.https(newVal)
+                    this.audio.currentTime = 0
                     this.audio.load()
                     this.audio.play()
                     !this.play && this.$store.commit('howler/setPlay', true)

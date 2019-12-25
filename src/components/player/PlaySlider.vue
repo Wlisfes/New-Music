@@ -1,90 +1,91 @@
 <template>
     <div class="PlaySlider">
-        <div class="van-time">{{ activeValue }}</div>
+        <Cutover :curre="currentTime"></Cutover>
         <div style="flex: 1;">
             <Slider
                 v-model="value"
-                :max="max"
-                :min="min"
+                :max="duraTion"
+                :min="0"
                 active-color="#ee0a24"
                 inactive-color="rgba(255,255,255,.5)"
                 @drag-start="handelstart"
                 @drag-end="handelend"
+                @change="handelchange"
             >
-                <div slot="button" class="van-custom"></div>
+                <div slot="button" class="van-custom-container">
+                    <div class="van-custom"></div>    
+                </div> 
             </Slider>
         </div>
-        <div class="van-time">04:32</div>
+        <Cutover :curre="duraTion"></Cutover>
     </div>
 </template>
  
 <script>
+import { mapState } from 'vuex';
 import { Slider } from 'vant';
-export default {
-    name: 'PlaySlider',
-    components: {
-        Slider
+
+const Cutover = {
+    name: 'Cutover',
+    props: {
+        curre: Number
     },
-    computed: {
-        activeValue() {
-            const value = this.value
-            if(value < 1) {
+    methods: {
+        cutover(curre) {
+            if(curre < 1) {
                 return '00:00'
             }
-            if (Math.floor(value/60) >= 10) {
-                return Math.floor(value/60)+":"+(value%60/100).toFixed(2).slice(-2)
-            } else {
-                return '0' + Math.floor(value/60)+":"+(value%60/100).toFixed(2).slice(-2)
+            if(Math.floor(curre / 60) >= 10) {
+                return Math.floor(curre / 60) + ":" + (curre % 60 / 100).toFixed(2).slice(-2)
             }
-        },
-        // maxValue() {
-        //     var val = parseInt(this.max.toString().slice(0,3))
-        //     if (Math.floor(val/60) >= 10) {
-        //         return Math.floor(val/60)+":"+(val%60/100).toFixed(2).slice(-2)
-        //     } else {
-        //         return '0' + Math.floor(val/60)+":"+(val%60/100).toFixed(2).slice(-2)
-        //     }
-        // }
+            else {
+                return '0' + Math.floor(curre / 60) + ":" + (curre % 60 / 100).toFixed(2).slice(-2)
+            }
+        }
+    },
+    render() {
+        return <div class="van-time">{this.cutover(this.curre)}</div>
+    }
+}
+export default {
+    name: 'PlaySlider',
+    components: { Slider,Cutover },
+    computed: {
+        ...mapState({
+            audio: state => state.howler.audio,
+            duraTion: state => state.howler.duraTion,
+            currentTime: state => state.howler.currentTime,
+            drag: state => state.howler.drag
+        }),
     },
     data () {
         return {
-            drag: false,
-            value: 50,
-            max: 240,
-            min: 0
+            value: this.currentTime
         }
     },
     methods: {
         //拖动开始
         handelstart() {
-            this.drag = true
+            this.$store.commit('howler/setDrag', true)
         },
         //拖动结束
-        handelend() {
-            this.drag = false
+        handelend(e) {
+            this.$store.commit('howler/setDrag', false)
+        },
+        //设置拖动的进度
+        handelchange(e) {
+            this.audio.currentTime = e
         }
     },
-    // render() {
-    //     return (
-    //         <div class="PlaySlider">
-    //             <div class="van-time">00:00</div>
-    //             <div style={{flex: 1}}>
-    //                 <Slider
-    //                     value={this.value}
-    //                     active-color="#ee0a24"
-    //                     bar-height={this.drag ? '4px' : '2px'}
-    //                     inactive-color="rgba(255,255,255,.5)"
-    //                     onDrag-start={this.handelstart}
-    //                     onDrag-end={this.handelend}
-    //                     onChange={value => {this.value = value}}
-    //                 >
-    //                     <div slot="button" class="van-custom"></div>
-    //                 </Slider>
-    //             </div>
-    //             <div class="van-time">04:32</div>
-    //         </div>
-    //     )
-    // }
+    watch: {
+        currentTime: {
+            handler(newVal) {
+                if(!this.drag) {
+                    this.value = newVal
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -93,17 +94,23 @@ export default {
     margin: 0 0 40px;
     display: flex;
     align-items: center;
+    z-index: 159;
     .van-time {
+        width: 32px;
+        text-align: center;
         font-size: 10px;
         color: #ffffff;
         margin: 0 10px;
     }
-    .van-custom {
-        width: 16px;
-        height: 16px;
-        background-color: #fff;
-        border-radius: 50%;
-        box-shadow: 0 1px 2px rgba(0,0,0,.5);
+    .van-custom-container {
+        padding: 10px;
+        .van-custom {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,.5);
+        }
     }
     .van-active {
         width: 24px;

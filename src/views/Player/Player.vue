@@ -21,7 +21,9 @@ export default {
     render() {
         return (
             <transition name="player-fade" appear>
-                <div class="player" onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
+                <div class="player"
+                    onTouchmove={(e) => {e.preventDefault()}}
+                >
                     <div class="player-header">
                         <NavBar
                             title={this.playCheck && this.playCheck.name || '欢迎收听Music'}

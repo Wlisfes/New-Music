@@ -2,7 +2,7 @@
  * @Date: 2019-12-06 14:25:35
  * @Author: 情雨随风
  * @LastEditors  : 情雨随风
- * @LastEditTime : 2019-12-25 11:59:52
+ * @LastEditTime : 2019-12-25 17:17:58
  * @Description: 音频播放器store
  */
 
@@ -20,6 +20,12 @@ const state = {
     picUrl: '',            //歌曲封面
     playUrl: '',           //音乐url
     status: 1,             //播放状态  1-列表循环  2-单曲循环  3-随机  4-心动
+
+
+    duraTion: 0,           //最大时长
+    currentTime: 0,        //当前时长
+    drag: false,           //进度条是否拖拽中
+
 }
 
 const mutations = {
@@ -46,6 +52,15 @@ const mutations = {
     },
     setPlayUrl: (state, playUrl) => {
         state.playUrl = playUrl
+    },
+    setDuraTion: (state, duraTion) => {
+        state.duraTion = duraTion
+    },
+    setCurrentTime: (state, currentTime) => {
+        state.currentTime = currentTime
+    },
+    setDrag: (state, drag) => {
+        state.drag = drag
     },
     //切换播放状态
     switch: (state) => {
@@ -77,13 +92,13 @@ const mutations = {
             return
         }
         else {
-            if(playIndex < playlist.length - 1) {
-                state.playIndex ++
+            if(playIndex === 0) {
+                state.playIndex = playlist.length - 1
                 state.playid = playlist[state.playIndex].id
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }
             else {
-                state.playIndex = 0
+                state.playIndex--
                 state.playid = playlist[state.playIndex].id
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }
@@ -99,13 +114,20 @@ const mutations = {
             return
         }
         else {
-            if(playIndex < playlist.length - 1) {
-                state.playIndex ++
-                state.playid = playlist[state.playIndex].id
-                state.picUrl = playlist[state.playIndex].al.picUrl
+            if(state.status === 1) {
+                if(playIndex < playlist.length - 1) {
+                    state.playIndex ++
+                    state.playid = playlist[state.playIndex].id
+                    state.picUrl = playlist[state.playIndex].al.picUrl
+                }
+                else {
+                    state.playIndex = 0
+                    state.playid = playlist[state.playIndex].id
+                    state.picUrl = playlist[state.playIndex].al.picUrl
+                }
             }
-            else {
-                state.playIndex = 0
+            else if(state.status === 3) {
+                state.playIndex = Math.floor(Math.random() * playlist.length)
                 state.playid = playlist[state.playIndex].id
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }

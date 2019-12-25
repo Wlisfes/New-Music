@@ -40,7 +40,7 @@ const routes = [
                         path: '/sonplay/player',
                         name: 'Player',
                         meta: {
-                            keepAlive: true,
+                            // keepAlive: true,
                             title: '播放器'
                         },
                         component: () => import('@views/Player/Player')

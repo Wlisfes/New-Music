@@ -50,12 +50,7 @@ export default {
         },
         //歌单列表
         handelplayCard(ops) {
-            this.$router.push({
-                path: '/sonplay',
-                query: {
-                    id: ops.id
-                }
-            })
+            this.$router.push(`/sonplay/${ops.id}`)
         },
     },
     watch: {

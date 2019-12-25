@@ -19,15 +19,6 @@ export default {
         },
         title: {
             type: String
-        },
-        picUrl: {
-            type: String,
-            default: ""
-        }
-    },
-    methods: {
-        handelplay() {
-            this.$store.commit('app/setPlayer', !this.player)
         }
     },
     render() {
@@ -37,21 +28,12 @@ export default {
         }
         return (
             <div class="Header">
-                {this.picUrl && <transition name="visible" appear>
-                    <div class="picUrl-opacity">
-                        <img class="picUrl" style={{top: '-100px'}} src={this.utils.https(this.picUrl)} />
-                    </div>
-                </transition>}
-            
-
                 <NavBar
                     class={border}
                     style={style}
                     title={this.title || '歌单'}
                     onClick-left={() => {this.$emit('back')}}
-                    onClick-right={() => {
-                        this.$emit('play', this.play)
-                    }}
+                    onClick-right={() => {this.$emit('play')}}
                 >
                     <Icon
                         slot="left"
@@ -72,31 +54,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.visible-enter-active, .visible-leave-active {
-    transition: all 1s;
-}
-.visible-enter, .visible-leave-to {
-    opacity: 0;
-}
-
-.picUrl-opacity {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,.6);
-    .picUrl {
-        position: absolute;
-        width: 1024px;
-        height: 1024px;
-        left: -137px;
-        filter: blur(40px);
-        opacity: .6;
-        transform: translate3d(0,0,0);
-    }
-}
-
 .Header {
     position: relative;
     overflow: hidden;

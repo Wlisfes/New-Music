@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:48 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-07 15:38:39
+ * @Last Modified time: 2019-12-25 22:17:30
  * @Description: 歌手
  */
 
@@ -106,6 +106,10 @@ export default {
         //移动到对应栏目
         handelmobile(index) {
             this.$refs.wrapper.scrollTo(0, -this.singerHeight[index] - 1, 500)
+        },
+        //歌手详情
+        handelSingerCard(ops) {
+            this.$router.push(`/singer/${ops.id}`)
         }
     },
     watch: {
@@ -142,11 +146,7 @@ export default {
                                         <div class="singer-title">{k.title}</div>
                                         {k.item.map(v => {
                                             return (
-                                                <div class="singer-item van-hairline--bottom" key={v.id} onClick={() => {
-                                                    this.$router.push({
-                                                        path: '/player'
-                                                    })
-                                                }}>
+                                                <div class="singer-item van-hairline--bottom" key={v.id} onClick={() => {this.handelSingerCard(v)}}>
                                                     <Image
                                                         lazy-load={false}
                                                         radius={5}
@@ -220,6 +220,7 @@ export default {
             margin: 0 12px;
             padding: 12px 0;
             align-items: center;
+            cursor: pointer;
         }
         .singer-name {
             flex: 1;

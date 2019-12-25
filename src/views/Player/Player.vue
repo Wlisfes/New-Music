@@ -1,3 +1,11 @@
+/*
+ * @Author: 情雨随风 
+ * @Date: 2019-12-25 22:07:28 
+ * @Last Modified by:  情雨随风 
+ * @Last Modified time: 2019-12-25 22:07:28 
+ * @Description: 播放器界面
+ */
+
 <script>
 import { mapState } from 'vuex';
 import { NavBar,Icon,Toast } from 'vant';

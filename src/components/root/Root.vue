@@ -17,5 +17,6 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
 }
 </style>

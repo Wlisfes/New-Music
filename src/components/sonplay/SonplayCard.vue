@@ -29,13 +29,6 @@ export default {
     render() {
         return (
             <div class="SonplayCard">
-                {this.picUrl && <transition name="visible" appear>
-                    <div class="picUrl-opacity">
-                        <img class="picUrl" style={{top: '-146px'}} src={this.utils.https(this.picUrl)} />
-                    </div>
-                </transition>}
-
-
                 <div class="Container">
                     <div style={{width: '140px', height: '140px', position: 'relative'}}>
                         <Image
@@ -44,7 +37,7 @@ export default {
                             width={140}
                             height={140}
                             onClick={() => {alert(1)}}
-                            src={this.utils.https(this.picUrl)}
+                            src={this.utils.https(`${this.picUrl}?param=200y200`)}
                         >
                             <Icon slot="loading" name="contact" color="#ee0a24" size={28} />
                             <Icon slot="error" name="contact" color="#ee0a24" size={28} />
@@ -59,7 +52,7 @@ export default {
                             {this.loading ? this.name : <Skeleton row={2} row-width={['100%','100%']}></Skeleton>}
                         </div>
                         <div class="Context-avatar">
-                            <Image round fit="cover" width={28} height={28} src={this.utils.https(this.avatar)}>
+                            <Image round fit="cover" width={28} height={28} src={this.utils.https(`${this.avatar}?param=200y200`)}>
                                 <Icon slot="loading" name="contact" color="#0e0e0e" size={20} />
                                 <Icon slot="error" name="contact" color="#0e0e0e" size={20} />
                             </Image>
@@ -95,31 +88,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.visible-enter-active, .visible-leave-active {
-    transition: all 1s;
-}
-.visible-enter, .visible-leave-to {
-    opacity: 0;
-}
-.picUrl-opacity {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,.6);
-    .picUrl {
-        position: absolute;
-        width: 1024px;
-        height: 1024px;
-        left: -137px;
-        transform: translate3d(0,0,0);
-        filter: blur(40px);
-        opacity: .6;
-    }
-}
-
-
 .SonplayCard {
     position: relative;
     padding: 24px;

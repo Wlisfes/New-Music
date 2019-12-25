@@ -61,6 +61,16 @@ export const playsinger = params => {
 }
 
 
+//歌手详情
+export const playsingerdetail = params => {
+    return http({
+        url: `/artists`,
+        method: 'GET',
+        params
+    })
+}
+
+
 //用户歌单
 export const Userplaylist = params => {
     return http({

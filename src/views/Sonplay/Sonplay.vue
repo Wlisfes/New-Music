@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-23 18:01:27
+ * @Last Modified time: 2019-12-25 23:12:21
  * @Description: 歌单列表
  */
 
@@ -44,7 +44,7 @@ export default {
         }, 500)
     },
     methods: {
-        //详情
+        //歌单详情数据
         async playlistdetail() {
             const [err, res] = await this.api.playlistdetail({
                 id: this.$route.params.id
@@ -137,8 +137,9 @@ export default {
 .Sonplay {
     width: 10rem;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
+    left: 0;
     z-index: 99;
     display: flex;
     flex-direction: column;

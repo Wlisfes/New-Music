@@ -11,7 +11,7 @@ const routes = [
         children: [
             {
                 path: '/player',
-                name: 'Player',
+                name: 'HomePlayer',
                 meta: {
                     keepAlive: true,
                     title: '播放器'
@@ -31,22 +31,38 @@ const routes = [
                 path: '/sonplay/:id',
                 name: 'Sonplay',
                 meta: {
-                    keepAlive: true,
                     title: '歌单详情'
                 },
                 component: () => import('@views/Sonplay/Sonplay'),
                 children: [
                     {
                         path: '/sonplay/:id/player',
-                        name: 'Player',
+                        name: 'SonplayPlayer',
                         meta: {
-                            // keepAlive: true,
                             title: '播放器'
                         },
                         component: () => import('@views/Player/Player')
                     }
                 ]
             },
+            {
+                path: '/singer/:id',
+                name: 'Singer',
+                meta: {
+                    title: '歌手详情'
+                },
+                component: () => import('@views/Singer/Singer'),
+                children: [
+                    {
+                        path: '/singer/:id/player',
+                        name: 'SingerPlayer',
+                        meta: {
+                            title: '播放器'
+                        },
+                        component: () => import('@views/Player/Player')
+                    }
+                ]
+            }
         ]
     }
 ]

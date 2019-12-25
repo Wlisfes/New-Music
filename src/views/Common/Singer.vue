@@ -152,7 +152,7 @@ export default {
                                                         radius={5}
                                                         width={62}
                                                         height={62}
-                                                        src={`${v.img1v1Url}?param=200y200`}
+                                                        src={`${this.utils.https(v.img1v1Url)}?param=200y200`}
                                                     ></Image>
                                                     <div class="singer-name">{v.name}{v.alias.join('、')}</div>
                                                 </div>

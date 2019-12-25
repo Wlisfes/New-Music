@@ -27,26 +27,8 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "postcss-pxtorem": "^4.0.1",
+    "vconsole": "^3.3.4",
     "vue-template-compiler": "^2.6.10"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {
-        "browsers": [
-          "Android >= 4.0",
-          "iOS >= 7"
-        ]
-      },
-      "postcss-pxtorem": {
-        "rootValue": 75,
-        "propList": [
-          "*"
-        ],
-        "selectorBlackList": [
-          "van"
-        ]
-      }
-    }
   },
   "browserslist": [
     "> 1%",

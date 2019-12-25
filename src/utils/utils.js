@@ -13,7 +13,12 @@ export const playCount = value => {
 
 
 //http资源重新成https
-export const https = http => http.replace(/^http/, "https")
+export const https = url => {
+    if(/(https):\/\/([\w.]+\/?)\S*/.test(url)) {
+        return url
+    }
+    return url.replace(/^http/, "https")
+}
 
 
 

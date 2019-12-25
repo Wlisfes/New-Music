@@ -28,7 +28,7 @@ const routes = [
                 component: () => import('@views/Login/Login')
             },
             {
-                path: '/sonplay/:id',
+                path: '/sonplay',
                 name: 'Sonplay',
                 meta: {
                     keepAlive: true,

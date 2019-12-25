@@ -14,7 +14,6 @@ export default {
     name: 'Home',
     computed: {
         ...mapState({
-            player: state => state.howler.player,
             play: state => state.howler.play,
             active: state => state.app.active
         })
@@ -30,7 +29,6 @@ export default {
                         this.$store.commit('app/setActive', index)
                     }}
                     onPlayer={() => {
-                        // this.$store.commit('howler/setPlayer', !this.player)
                         this.$router.push('/player')
                     }}
                     onSearch={() => {

@@ -47,7 +47,7 @@ export default {
         //详情
         async playlistdetail() {
             const [err, res] = await this.api.playlistdetail({
-                id: this.$route.params.id
+                id: this.$route.query.id
             })
             if(!err && res.code === 200) {
                 const {

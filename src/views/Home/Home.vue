@@ -30,7 +30,8 @@ export default {
                         this.$store.commit('app/setActive', index)
                     }}
                     onPlayer={() => {
-                        this.$store.commit('howler/setPlayer', !this.player)
+                        // this.$store.commit('howler/setPlayer', !this.player)
+                        this.$router.push('/player')
                     }}
                     onSearch={() => {
                         console.log('search')

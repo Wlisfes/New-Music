@@ -1,8 +1,8 @@
 /*
  * @Date: 2019-12-06 14:25:35
  * @Author: 情雨随风
- * @LastEditors: 情雨随风
- * @LastEditTime: 2019-12-10 17:32:56
+ * @LastEditors  : 情雨随风
+ * @LastEditTime : 2019-12-25 11:59:52
  * @Description: 音频播放器store
  */
 
@@ -12,7 +12,6 @@ import { Toast } from 'vant';
 
 const state = {
     audio: null,           //音频对象
-    player: false,         //播放器默认关闭
     play: false,           //播放状态
     playid: '',            //播放歌曲id
     sonplayid: '',         //播放歌单id
@@ -26,9 +25,6 @@ const state = {
 const mutations = {
     setAudio: (state, audio) => {
         state.audio = audio
-    },
-    setPlayer: (state, player) => {
-        state.player = player
     },
     setPlay: (state, play) => {
         state.play = play
@@ -87,7 +83,7 @@ const mutations = {
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }
             else {
-                state.playIndex = 1
+                state.playIndex = 0
                 state.playid = playlist[state.playIndex].id
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }
@@ -109,7 +105,7 @@ const mutations = {
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }
             else {
-                state.playIndex = 1
+                state.playIndex = 0
                 state.playid = playlist[state.playIndex].id
                 state.picUrl = playlist[state.playIndex].al.picUrl
             }

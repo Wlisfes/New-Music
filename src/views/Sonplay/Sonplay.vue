@@ -73,7 +73,7 @@ export default {
         },
         //选中歌曲播放
         handelplay({ info,sonplayid,index,playlist }) {
-            this.$store.commit('howler/setPlayer', true)
+            this.$router.push('/sonplay/player')
             if(this.sonplayid === sonplayid && this.playid === info.id) {
                 return;
             }
@@ -95,7 +95,7 @@ export default {
                         style={{cursor: 'pointer'}}
                         onBack={() => {this.$router.back()}}
                         onPlay={() => {
-                            this.$store.commit('howler/setPlayer', !this.player)
+                            this.$router.push('/sonplay/player')
                         }}
                     ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
@@ -115,6 +115,7 @@ export default {
                             </div>
                         </Root.Container>
                     </Root.Scroll>
+                    <router-view></router-view>
                 </Root>
             </transition>
         )

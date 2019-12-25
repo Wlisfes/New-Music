@@ -142,7 +142,11 @@ export default {
                                         <div class="singer-title">{k.title}</div>
                                         {k.item.map(v => {
                                             return (
-                                                <div class="singer-item van-hairline--bottom" key={v.id}>
+                                                <div class="singer-item van-hairline--bottom" key={v.id} onClick={() => {
+                                                    this.$router.push({
+                                                        path: '/player'
+                                                    })
+                                                }}>
                                                     <Image
                                                         lazy-load={false}
                                                         radius={5}

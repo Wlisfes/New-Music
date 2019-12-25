@@ -15,7 +15,8 @@ export default {
     computed: {
         ...mapState({
             User: state => state.app.User,
-            sonplayid: state => state.howler.sonplayid
+            sonplayid: state => state.howler.sonplayid,
+            play: state => state.howler.play
         })  
     },
     props: {
@@ -68,7 +69,7 @@ export default {
             userplay: this.userplay,
             starplay: this.starplay,
             sonplayid: this.sonplayid,
-            play: false
+            play: this.play
         }
         return (
             <div class="User">

@@ -28,7 +28,7 @@ const routes = [
                 component: () => import('@views/Login/Login')
             },
             {
-                path: '/sonplay',
+                path: '/sonplay/:id',
                 name: 'Sonplay',
                 meta: {
                     keepAlive: true,
@@ -37,7 +37,7 @@ const routes = [
                 component: () => import('@views/Sonplay/Sonplay'),
                 children: [
                     {
-                        path: '/sonplay/player',
+                        path: '/sonplay/:id/player',
                         name: 'Player',
                         meta: {
                             // keepAlive: true,

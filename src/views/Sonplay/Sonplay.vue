@@ -47,7 +47,7 @@ export default {
         //详情
         async playlistdetail() {
             const [err, res] = await this.api.playlistdetail({
-                id: this.$route.query.id
+                id: this.$route.params.id
             })
             if(!err && res.code === 200) {
                 const {
@@ -73,7 +73,7 @@ export default {
         },
         //选中歌曲播放
         handelplay({ info,sonplayid,index,playlist }) {
-            this.$router.push('/sonplay/player')
+            this.handelOpenplayer()
             if(this.sonplayid === sonplayid && this.playid === info.id) {
                 return;
             }
@@ -83,6 +83,10 @@ export default {
             this.$store.commit('howler/setPlayIndex', index)
             this.$store.commit('howler/setPlaylist', playlist)
             this.$store.commit('howler/setDuraTion', Math.ceil(info.dt / 1000))
+        },
+        handelOpenplayer() {
+            const id = this.$route.params.id
+            this.$router.push(`/sonplay/${id}/player`)
         }
     },
     render() {
@@ -95,9 +99,7 @@ export default {
                         picUrl={this.playCard.picUrl}
                         style={{cursor: 'pointer'}}
                         onBack={() => {this.$router.back()}}
-                        onPlay={() => {
-                            this.$router.push('/sonplay/player')
-                        }}
+                        onPlay={this.handelOpenplayer}
                     ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                         <Root.Container>

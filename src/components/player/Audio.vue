@@ -43,6 +43,11 @@ export default {
                 this.audio.ontimeupdate = (e) => {
                     this.$store.commit('howler/setCurrentTime',e.target.currentTime)
                 }
+
+                //
+                // this.audio.onprogress = (e) => {
+                //     console.log(this.audio.buffered.TimeRanges )
+                // }
             }) 
         },
         //查询音乐是否可用

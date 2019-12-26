@@ -1,7 +1,8 @@
 <template>
     <div class="PlaySlider">
         <Cutover :curre="currentTime"></Cutover>
-        <div style="flex: 1;">
+        <div class="slider-container">
+            <div class="van-buffer" :style="bufferWidth"></div>
             <Slider
                 v-model="value"
                 :max="duraTion"
@@ -57,6 +58,11 @@ export default {
             currentTime: state => state.howler.currentTime,
             drag: state => state.howler.drag
         }),
+        bufferWidth() {
+            return {
+
+            }
+        }
     },
     data () {
         return {
@@ -102,8 +108,20 @@ export default {
         color: #ffffff;
         margin: 0 10px;
     }
+    .slider-container {
+        flex: 1;
+        position: relative;
+        .van-buffer {
+            height: 2px;
+            background-color: #9dafd2;
+            position: absolute;
+            left: 0;top: 0;
+            border-radius: 1px;
+        }
+    }
     .van-custom-container {
         padding: 10px;
+        cursor: pointer;
         .van-custom {
             width: 10px;
             height: 10px;

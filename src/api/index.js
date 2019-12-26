@@ -99,3 +99,13 @@ export const musicUrl = params => {
         params
     })
 }
+
+
+//排行榜
+export const RanKinglist = params => {
+    return http({
+        url: `/toplist/detail`,
+        method: 'GET',
+        params
+    })
+}

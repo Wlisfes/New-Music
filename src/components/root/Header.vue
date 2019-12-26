@@ -18,10 +18,13 @@ export default {
             default: ""
         },
         title: String,
-        picUrl: String
+        picUrl: String,
+        iconColor: {
+            type: String,
+            default: "#ffffff"
+        }
     },
     render() {
-        const border = this.border ? "" : "van-border"
         const style = {
             backgroundColor: this.color || 'transparent'
         }
@@ -34,8 +37,8 @@ export default {
                     ></div>}
                 </transition>
                 <NavBar
-                    class={border}
                     style={style}
+                    border={this.border}
                     title={this.title || '歌单'}
                     onClick-left={() => {this.$emit('back')}}
                     onClick-right={() => {this.$emit('play')}}
@@ -43,8 +46,8 @@ export default {
                     <Icon
                         slot="left"
                         name="arrow-left"
-                        color="#ffffff"
-                        size={24}
+                        color={this.iconColor}
+                        size={22}
                     ></Icon>
                     <Icon
                         slot="right"
@@ -64,12 +67,6 @@ export default {
     overflow: hidden;
     .van-nav-bar__title {
         color: #ffffff;
-        font-size: 18px;
-    }
-    .van-border {
-        &::after {
-            border: none;
-        }
     }
     .picUrl {
         position: absolute;

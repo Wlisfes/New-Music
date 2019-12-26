@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-05 23:03:14
+ * @Last Modified time: 2019-12-26 22:02:45
  * @Description: 推荐
  */
 
@@ -87,8 +87,13 @@ export default {
             this.$router.push(`/sonplay/${ops.id}`)
         },
         //四项卡片
-        handelayoutCard(ops) {
-            console.log(ops)
+        handelayoutCard(key) {
+            console.log(key)
+            switch (key) {
+                case 3: //排行榜
+                    this.$router.push(`/ranking`)
+                    break;
+            }
         }
     },
     watch: {

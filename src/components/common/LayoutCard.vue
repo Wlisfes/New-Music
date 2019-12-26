@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:51 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-04 23:04:12
+ * @Last Modified time: 2019-12-26 22:02:14
  * @Description: 首页卡片组件
  */
 
@@ -13,10 +13,10 @@ export default {
     data () {
         return {
             layout: [
-                { text: '每日推荐', icon: 'fire-o', grid: 0 },
-                { text: '歌单', icon: 'music-o', grid: 1 },
-                { text: '排行榜', icon: 'bar-chart-o', grid: 2 },
-                { text: '电台', icon: 'service-o', grid: 3 }
+                { text: '每日推荐', icon: 'fire-o', grid: 1 },
+                { text: '歌单', icon: 'music-o', grid: 2 },
+                { text: '排行榜', icon: 'bar-chart-o', grid: 3 },
+                { text: '电台', icon: 'service-o', grid: 4 }
             ]
         }
     },

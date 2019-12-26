@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:33 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:02:33 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-26 21:55:57
  * @Description: 登录
  */
 
@@ -190,7 +190,7 @@ export default {
 .Login {
     width: 10rem;
     height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
     background-image: url('~@assets/image/login.jpg');
     background-size: 750px 1666px;

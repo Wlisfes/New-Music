@@ -62,6 +62,24 @@ const routes = [
                         component: () => import('@views/Player/Player')
                     }
                 ]
+            },
+            {
+                path: '/ranking',
+                name: 'Ranking',
+                meta: {
+                    title: '排行榜'
+                },
+                component: () => import('@views/Ranking/Ranking'),
+                children: [
+                    {
+                        path: '/ranking/player',
+                        name: 'RankingPlayer',
+                        meta: {
+                            title: '播放器'
+                        },
+                        component: () => import('@views/Player/Player')
+                    }
+                ]
             }
         ]
     }

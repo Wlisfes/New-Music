@@ -29,6 +29,12 @@ export default {
     render() {
         return (
             <div class="SonplayCard">
+                <transition name="van-fade" appear>
+                    {this.picUrl && <div
+                        class="picUrl"
+                        style={{backgroundImage: `url('${this.utils.https(`${this.picUrl}?param=500y500`)}')`}}
+                    ></div>}
+                </transition>
                 <div class="Container">
                     <div style={{width: '140px', height: '140px', position: 'relative'}}>
                         <Image
@@ -93,12 +99,33 @@ export default {
     padding: 24px;
     box-sizing: border-box;
     overflow: hidden;
-    height: 540px;
-    transform: translate3d(0,0,0);
-    margin-bottom: -100px;
+    height: 270PX;
+    // margin-bottom: -100px;
+    .picUrl {
+        position: absolute;
+        left: -50px;
+        top: -40PX;
+        right: -50px;
+        bottom: -40PX;
+        background-repeat: no-repeat;
+        background-size: 850px 850px;
+        background-position-x: 50%;
+        background-position-y: -86PX;
+        filter: blur(40px);
+        transform: translate3d(0,0,0,);
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;top: 0;
+            background-color: rgba(0,0,0,.3);
+        }
+    }
     .Container {
-        transform: translate3d(0,0,0);
         display: flex;
+        position: relative;
+        z-index: 110;
         .playCount {
             position: absolute;
             top: 5px;

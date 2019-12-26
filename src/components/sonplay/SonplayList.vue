@@ -93,18 +93,24 @@ export default {
 
 <style lang="less" scoped>
 .SonplayList {
-    height: 100%;
+    flex: 1;
     position: relative;
-    overflow: hidden;
+    // margin-top: -40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
 }
 .playList {
-    min-height: 100%;
+    flex: 1;
     overflow: hidden;
     .paly-Header {
         height: 40PX;
         display: flex;
         align-items: center;
-        margin: 12px 24px 0;
+        padding: 12px 24px 0;
+        background-color: #ffffff;
+        // border-top-left-radius: 40px;
+        // border-top-right-radius: 40px;
         .play-whole {
             font-size: 16PX;
             color: #333333;

@@ -107,15 +107,13 @@ export default {
                                 loading={this.loading}
                                 {...{props: this.playCard}}
                             ></SonplayCard>
-                            <div class="flexWrapper">
-                                {true && <SonplayList
-                                    sonplayid={this.playCard.id}
-                                    playid={this.playid}
-                                    loading={this.loading}
-                                    playlist={this.playlist}
-                                    onPlay={this.handelplay}
-                                ></SonplayList>}
-                            </div>
+                            <SonplayList
+                                sonplayid={this.playCard.id}
+                                playid={this.playid}
+                                loading={this.loading}
+                                playlist={this.playlist}
+                                onPlay={this.handelplay}
+                            ></SonplayList>
                         </Root.Container>
                     </Root.Scroll>
                     <router-view></router-view>
@@ -153,14 +151,6 @@ export default {
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-        .flexWrapper {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            background-color: #ffffff;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
         }
     }
 }

@@ -95,10 +95,14 @@ export default {
 .SonplayList {
     flex: 1;
     position: relative;
-    // margin-top: -40px;
+    margin-top: -40px;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    z-index: 120;
+    transform: translate3d(0,0,0,);
 }
 .playList {
     flex: 1;
@@ -109,8 +113,8 @@ export default {
         align-items: center;
         padding: 12px 24px 0;
         background-color: #ffffff;
-        // border-top-left-radius: 40px;
-        // border-top-right-radius: 40px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
         .play-whole {
             font-size: 16PX;
             color: #333333;

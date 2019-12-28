@@ -88,7 +88,6 @@ export default {
         },
         //四项卡片
         handelayoutCard(key) {
-            console.log(key)
             switch (key) {
                 case 3: //排行榜
                     this.$router.push(`/ranking`)

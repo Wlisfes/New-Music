@@ -28,14 +28,14 @@ export default {
                 {
                     this.icialist.map(k => {
                         return (
-                            <div class="Offout">
+                            <div class="Offout" onClick={() => {this.$emit('playCard', k)}}>
                                 <div class="van-picUrl">
                                     <Image
                                         fit="cover"
                                         radius={5}
                                         width={120}
                                         height={120}
-                                        src={this.utils.https(`${k.coverImgUrl}?param=400y400`)}
+                                        src={this.utils.https(`${k.coverImgUrl}?param=200y200`)}
                                     ></Image>
                                     <span class="update">{k.updateFrequency}</span>
                                 </div>
@@ -57,10 +57,12 @@ export default {
 <style lang="less">
 .Official {
     overflow: hidden;
+    padding-bottom: 20PX;
     .Offout {
         display: flex;
         margin: 16px 24px;
         overflow: hidden;
+        cursor: pointer;
     }
     .title {
         font-size: 16PX;

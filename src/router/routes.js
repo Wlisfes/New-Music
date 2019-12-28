@@ -11,7 +11,7 @@ const routes = [
         children: [
             {
                 path: '/player',
-                name: 'HomePlayer',
+                name: 'Player',
                 meta: {
                     keepAlive: true,
                     title: '播放器'
@@ -37,7 +37,7 @@ const routes = [
                 children: [
                     {
                         path: '/sonplay/:id/player',
-                        name: 'SonplayPlayer',
+                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
@@ -55,7 +55,7 @@ const routes = [
                 children: [
                     {
                         path: '/singer/:id/player',
-                        name: 'SingerPlayer',
+                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
@@ -73,12 +73,30 @@ const routes = [
                 children: [
                     {
                         path: '/ranking/player',
-                        name: 'RankingPlayer',
+                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
                         component: () => import('@views/Player/Player')
-                    }
+                    },
+                    {
+                        path: '/ranking/sonplay/:id',
+                        name: 'Sonplay',
+                        meta: {
+                            title: '排行榜'
+                        },
+                        component: () => import('@views/Ranking/Sonplay'),
+                        children: [
+                            {
+                                path: '/ranking/sonplay/:id/player',
+                                name: 'Player',
+                                meta: {
+                                    title: '播放器'
+                                },
+                                component: () => import('@views/Player/Player')
+                            }
+                        ]
+                    },
                 ]
             }
         ]

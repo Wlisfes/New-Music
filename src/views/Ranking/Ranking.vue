@@ -10,7 +10,7 @@
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
-import { Official } from '@/components/ranking';
+import { Official,Gridcard } from '@/components/ranking';
 export default {
     name: 'Ranking',
     computed: {
@@ -21,19 +21,38 @@ export default {
     data () {
         return {
             icialist: [],       //官方榜
+            gridlist: [],       //推荐榜
+
+            morelist: [],       //更多榜单
         }
     },
     created () {
-        this.RanKinglist()  
+        setTimeout(() => {
+            this.RanKinglist()
+        }, 500)
     },
     methods: {
         //排行榜
         async RanKinglist() {
             const [err, res] = await this.api.RanKinglist()
             if(!err && res.code === 200) {
-                this.icialist = res.list.filter((k,i) => i < 4)
+                res.list.forEach((element,index) => {
+                    if(index < 4) {
+                        this.icialist.push(element)
+                    }
+                    else if(index < 10) {
+                        this.gridlist.push(element)
+                    }
+                    else {
+                        this.morelist.push(element)
+                    }
+                });
             }
-        }  
+        },
+        //榜单详情列表
+        handelplayCard(ops) {
+            this.$router.push(`/ranking/sonplay/${ops.id}`)
+        }
     },
     render() {
         return (
@@ -50,7 +69,31 @@ export default {
                     ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                         <Root.Container>
-                            <Official icialist={this.icialist}></Official>
+                            {
+                                (
+                                    this.icialist.length > 0 ||
+                                    this.gridlist.length > 0 ||
+                                    this.morelist.length > 0
+                                ) ? null :  <Loading margin="24px"></Loading>
+                            }
+
+                            {this.icialist.length > 0 && <Official
+                                icialist={this.icialist}
+                                onPlayCard={this.handelplayCard}
+                            ></Official>}
+
+                            {this.gridlist.length > 0 && <Gridcard
+                                title='推荐榜'
+                                gridlist={this.gridlist}
+                                onPlayCard={this.handelplayCard}
+                            ></Gridcard>}
+
+                            {this.morelist.length > 0 && <Gridcard
+                                style={{marginBottom: '20px'}}
+                                title='更多榜单'
+                                gridlist={this.morelist}
+                                onPlayCard={this.handelplayCard}
+                            ></Gridcard>}
                         </Root.Container>
                     </Root.Scroll>
                     <router-view></router-view>

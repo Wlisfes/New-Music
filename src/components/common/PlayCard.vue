@@ -38,9 +38,8 @@ export default {
                                 <Col span={8} onClick={() => {this.$emit('playCard', k)}}>
                                     <div class="picUrl">
                                         <div class="picUrl-icon">
-                                            <img class="picUrl-image-icon" src={`${k.picUrl}?param=500y500`} />
+                                            <img class="picUrl-image-icon" src={`${k.picUrl}?param=400y400`} />
                                         </div>
-                                        
                                         <div class="playCount">
                                             <Icon name="play" size={14} color="#ffffff" />
                                             <div class="Count">{this.utils.playCount(k.playCount)}</div>

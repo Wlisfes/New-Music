@@ -15,7 +15,7 @@ export default {
             <div class="PalyCall">
                 <div class="cd-wrapper">
                     <div class={`cd ${className}`}>
-                        <img class="cdUrl" src={this.picUrl ? this.utils.https(this.picUrl) : logo} />
+                        <img class="cdUrl" src={this.picUrl ? this.utils.https(`${this.picUrl}?param=400y400`) : logo} />
                     </div>
                 </div>
             </div>

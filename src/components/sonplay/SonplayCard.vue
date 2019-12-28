@@ -46,8 +46,8 @@ export default {
                                 onClick={() => {alert(1)}}
                                 src={this.utils.https(`${this.picUrl}?param=200y200`)}
                             >
-                                <Icon slot="loading" name="contact" color="#ee0a24" size={28} />
-                                <Icon slot="error" name="contact" color="#ee0a24" size={28} />
+                                <Icon slot="loading" name="photo-o" color="#cccccc" size={40} />
+                                <Icon slot="error" name="photo-o" color="#cccccc" size={40} />
                             </Image>
                             <div class="playCount">
                                 <Icon name="play" size={14} color="#ffffff" />
@@ -60,8 +60,8 @@ export default {
                             </div>
                             <div class="Context-avatar">
                                 <Image round fit="cover" width={28} height={28} src={this.utils.https(`${this.avatar}?param=200y200`)}>
-                                    <Icon slot="loading" name="contact" color="#0e0e0e" size={20} />
-                                    <Icon slot="error" name="contact" color="#0e0e0e" size={20} />
+                                    <Icon slot="loading" name="contact" color="#cccccc" size={20} />
+                                    <Icon slot="error" name="contact" color="#cccccc" size={20} />
                                 </Image>
                                 <div class="Context-nickname van-ellipsis">{this.nickname}</div>
                             </div>
@@ -128,6 +128,7 @@ export default {
         box-sizing: border-box;
         overflow: hidden;
         z-index: 110;
+        transform: translate3d(0,0,0);
     }
     .Container {
         display: flex;

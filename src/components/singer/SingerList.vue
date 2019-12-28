@@ -1,7 +1,7 @@
 <script>
-import { Icon,Divider } from  'vant';
+import { Icon,Divider } from 'vant';
 export default {
-    name: 'SonplayList',
+    name: 'SingerList',
     props: {
         playlist: {
             type:  Array,
@@ -24,13 +24,13 @@ export default {
         handelplay(k, index) {
             this.$emit('play', {
                 sonplayid: this.sonplayid,
-                playlist:this.playlist,
+                playlist: this.playlist,
                 index: index,
                 info: k
             })
         }  
     },
-    render(){
+    render() {
         const flexBox = {
             flex: 1,
             display: 'flex',
@@ -39,7 +39,7 @@ export default {
             overflow: 'hidden'
         }
         return (
-            <div class="SonplayList">
+            <div class="SingerList">
                 <div class="playList">
                     <div class="paly-Header">
                         <Icon name="play-circle-o" size={20} color="#333333"></Icon>
@@ -50,7 +50,7 @@ export default {
                     </div>
                     {!this.loading && <Loading style={{marginTop: '24px'}}></Loading>}
 
-                    {this.playlist.filter((v, i) => i < 500).map((k, index) => {
+                    {this.playlist.filter((v, i) => i < 500).map((k, index) =>{
                         const playStatus = this.playid === k.id
                         return (
                             <div class="playList-Item-Content" onClick={(e) => {
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.SonplayList {
+.SingerList {
     flex: 1;
     position: relative;
     margin-top: -40px;
@@ -99,54 +99,53 @@ export default {
     border-top-right-radius: 40px;
     z-index: 120;
     transform: translate3d(0,0,0,);
-}
-.playList {
-    flex: 1;
-    overflow: hidden;
-    .paly-Header {
-        height: 40PX;
-        display: flex;
-        align-items: center;
-        padding: 12px 24px 0;
-        background-color: #ffffff;
-        border-top-left-radius: 40px;
-        border-top-right-radius: 40px;
-        .play-whole {
-            font-size: 16PX;
-            color: #333333;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        .play-whole-all {
-            font-size: 12PX;
-            font-weight: normal;
-            margin-left: 5px;
-            color: #757575;
-        }
-    }
-    .playList-Item-Content {
-        display: flex;
-        height: 44PX;
-        margin: 24px 0;
+    .playList {
+        flex: 1;
         overflow: hidden;
-        cursor: pointer;
-        .Item-index,.Item-icon {
-            font-size: 14PX;
-            color: #757575;
-            width: 44PX;
+        .paly-Header {
+            height: 40PX;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding: 12px 24px 0;
+            background-color: #ffffff;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            .play-whole {
+                font-size: 16PX;
+                color: #333333;
+                font-weight: 600;
+                margin-left: 10px;
+            }
+            .play-whole-all {
+                font-size: 12PX;
+                font-weight: normal;
+                margin-left: 5px;
+                color: #757575;
+            }
         }
-        .name {
-            font-size: 16PX;
-        }
-        .singer-name {
-            font-size: 12PX;
-            color: #757575;
+        .playList-Item-Content {
+            display: flex;
+            height: 44PX;
+            margin: 24px 0;
+            overflow: hidden;
+            cursor: pointer;
+            .Item-index,.Item-icon {
+                font-size: 14PX;
+                color: #757575;
+                width: 44PX;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .name {
+                font-size: 16PX;
+            }
+            .singer-name {
+                font-size: 12PX;
+                color: #757575;
+            }
         }
     }
-    
 }
 </style>

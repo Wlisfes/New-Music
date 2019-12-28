@@ -61,7 +61,7 @@ export default {
                         <PlaySlider></PlaySlider>
                         <Playoper></Playoper>
                     </div>
-                    <div class="picUrl" style={{backgroundImage: `url('${this.utils.https(this.picUrl)}?param=500y500')`}}></div>
+                    <div class="picUrl" style={{backgroundImage: `url('${this.utils.https(this.picUrl)}?param=400y400')`}}></div>
                 </div>
             </transition>
         )

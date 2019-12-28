@@ -10,12 +10,15 @@
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
-import { SingerCard } from '@/components/singer';
+import { SingerCard,SingerList } from '@/components/singer';
 export default {
     name: 'Singer',
     computed: {
         ...mapState({
-            play: state => state.howler.play
+            playid: state => state.howler.playid,
+            sonplayid: state => state.howler.sonplayid,
+            play: state => state.howler.play,
+            player: state => state.howler.player
         })  
     },
     data () {
@@ -24,6 +27,7 @@ export default {
                 id: '',         //歌手id
                 name: '',       //歌手昵称
                 picUrl: '',     //歌手封面
+                briefDesc: '',  //歌手描述
             },
             singerlist: [],     //歌手详情数据列表
             loading: false,
@@ -31,7 +35,9 @@ export default {
         }
     },
     created () {
-        this.playsingerdetail()  
+        setTimeout(() => {
+            this.playsingerdetail() 
+        }, 500)
     },
     methods: {
         //歌手详情数据
@@ -39,20 +45,33 @@ export default {
             const [err, res] = await this.api.playsingerdetail({
                 id: this.$route.params.id
             })
-
             if(!err && res.code === 200) {
-                console.log(res)
-                const { id,name,picUrl } = res.artist
+                const { id,name,picUrl,briefDesc } = res.artist
 
                 this.singerCard.id = id
                 this.singerCard.name = name
                 this.singerCard.picUrl = picUrl
+                this.singerCard.briefDesc = briefDesc
+                this.singerlist = res.hotSongs
             }
             this.loading = true
         },
         handelOpenplayer() {
             const id = this.$route.params.id
             this.$router.push(`/singer/${id}/player`)
+        },
+        //选中歌曲播放
+        handelplay({ info,sonplayid,index,playlist }) {
+            this.handelOpenplayer()
+            if(this.sonplayid === sonplayid && this.playid === info.id) {
+                return;
+            }
+            this.$store.commit('howler/setPlayid', info.id)
+            this.$store.commit('howler/setPicUrl', info.al.picUrl)
+            this.$store.commit('howler/setSonplayid', sonplayid)
+            this.$store.commit('howler/setPlayIndex', index)
+            this.$store.commit('howler/setPlaylist', playlist)
+            this.$store.commit('howler/setDuraTion', Math.ceil(info.dt / 1000))
         }
     },
     render() {
@@ -69,10 +88,17 @@ export default {
                     ></Root.Header>
                     <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                         <Root.Container>
-                            <SingerCard {...{props: this.singerCard}}></SingerCard>
-
-
-
+                            <SingerCard
+                                loading={this.loading}
+                                {...{props: this.singerCard}}
+                            ></SingerCard>
+                            <SingerList
+                                sonplayid={this.$route.params.id}
+                                playid={this.playid}
+                                loading={this.loading}
+                                playlist={this.singerlist}
+                                onPlay={this.handelplay}
+                            ></SingerList>
                         </Root.Container>
                     </Root.Scroll>
                     <router-view></router-view>

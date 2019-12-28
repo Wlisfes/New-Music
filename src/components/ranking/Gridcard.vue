@@ -20,7 +20,7 @@ export default {
                     <Row gutter={10}>
                         {this.gridlist.map(k => {
                             return (
-                                <Col span={8} onClick={() => {this.$emit('playCard', k)}}>
+                                <Col span={8} key={k.id} onClick={() => {this.$emit('playCard', k)}}>
                                     <div class="picUrl">
                                         <div class="picUrl-icon">
                                             <img class="picUrl-image-icon" src={`${k.coverImgUrl}?param=400y400`} />

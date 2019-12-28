@@ -9,36 +9,15 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Root } from '@/components/common';
-import { Swiper } from '@/components/square';
+import { Tabs,Tab } from 'vant';
+import { Root,PlayCard } from '@/components/common';
+import { QuRoot } from '@/components/square';
 export default {
     name: 'Square',
     computed: {
         ...mapState({
             play: state => state.howler.play
         })  
-    },
-    data () {
-        return {
-            banner: [],         //推荐轮播歌单
-            wrappers: []
-        }
-    },
-    created () {
-        this.SquarePalylist()  
-    },
-    methods: {
-        async SquarePalylist() {
-            const [err, res] = await this.api.SquarePalylist()
-            if(!err && res.code === 200) {
-                res.playlists.forEach((element,index) => {
-                    if(index < 3) {
-                        this.banner.push(element)
-                    }
-                    
-                })
-            }
-        }  
     },
     render() {
         return (
@@ -53,12 +32,24 @@ export default {
                         onBack={() => {this.$router.back()}}
                         onPlay={() => {this.$router.push(`/ranking/player`)}}
                     ></Root.Header>
-                    <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
-                        <Root.Container>
-
-                            <Swiper banner={this.banner}></Swiper>
-                        </Root.Container>
-                    </Root.Scroll>
+                    <Root>
+                        <Tabs animated={true} swipe-threshold={5} swipeable={true}>
+                            <Tab title="推荐">
+                                <Root>
+                                    <QuRoot banner={true}></QuRoot>
+                                </Root>
+                            </Tab>
+                            <Tab title="官方">
+                                <Root></Root>
+                            </Tab>
+                            <Tab title="精品"></Tab>
+                            <Tab title="华语"></Tab>
+                            <Tab title="古风"></Tab>
+                            <Tab title="流行"></Tab>
+                            <Tab title="轻音乐"></Tab>
+                            <Tab title="电子"></Tab>
+                        </Tabs>
+                    </Root>
                 </Root>
             </transition>
         )
@@ -98,6 +89,24 @@ export default {
             overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+    }
+    .van-tabs {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        /deep/ .van-hairline--top-bottom::after {
+            border-top-width: 0px;
+        }
+        /deep/ .van-tabs__content {
+            flex: 1;
+            .van-tab__pane {
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 }

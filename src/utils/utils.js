@@ -1,3 +1,12 @@
+/*
+ * @Date: 2019-12-25 10:43:15
+ * @Author: 情雨随风
+ * @LastEditors  : 情雨随风
+ * @LastEditTime : 2019-12-28 10:59:12
+ * @Description: 公共函数
+ */
+
+import CryptoJS from 'crypto-js';
 
 
 //播放次数转换
@@ -21,4 +30,18 @@ export const https = url => {
 }
 
 
+//加密
+export const encrypt = data => {
+    return CryptoJS.AES.encrypt(JSON.stringify(data), 'lisfes').toString()
+}
 
+
+//解密
+export const decrypt = data => {
+    const value = CryptoJS.AES.decrypt(data, 'lisfes').toString(CryptoJS.enc.Utf8)
+    try {
+        return JSON.parse(value)
+    } catch (error) {
+        return value
+    }
+}

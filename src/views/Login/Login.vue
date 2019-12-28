@@ -26,11 +26,25 @@ export default {
                 password: '',
                 userMessage: '',
                 passwordMessage: '',
-                loading: false
+                loading: false,
+                avatar: ''
             }
         }
     },
+    created () {
+        this.handelReadUser()  
+    },
     methods: {
+        //读取本地用户信息填充
+        handelReadUser() {
+            const value = this.$ls.get('UserSave')
+            if(value) {
+                const { user,password,avatar } = this.utils.decrypt(value)
+                this.form.user = user
+                this.form.password = password
+                this.form.avatar = avatar
+            }
+        },
         //登录
         async handelSubmit() {
             const rule = /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-7|9])|(?:5[0-3|5-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1|8|9]))\d{8}$/
@@ -54,6 +68,10 @@ export default {
                             eventCount: res.profile.eventCount
                         }
                         this.$ls.set('UserAccessToken', info, (24 * 60 * 60 * 1000))
+                        this.$ls.set('UserSave', this.utils.encrypt({
+                            user,password,
+                            avatar: res.profile.avatarUrl
+                        }))
                         this.$store.dispatch('app/actionUser', info)
                         Toast.success({
                             message: '登陆成功',
@@ -113,7 +131,7 @@ export default {
                             width={100}
                             height={100}
                             round={true}
-                            src={this.User && this.User.avatarUrl || logo}
+                            src={this.User && this.User.avatarUrl || this.form.avatar || logo}
                         ></Image>
                     </div>
                     <div class="Container">

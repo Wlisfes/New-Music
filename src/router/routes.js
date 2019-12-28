@@ -9,27 +9,27 @@ const routes = [
         },
         component: Home,
         children: [
+/***************************************************************************************************/
             {
                 path: '/player',
-                name: 'Player',
                 meta: {
                     keepAlive: true,
                     title: '播放器'
                 },
                 component: () => import('@views/Player/Player')
             },
+/***************************************************************************************************/
             {
                 path: '/login',
-                name: 'Login',
                 meta: {
                     title: '登录',
                     keepAlive: false
                 },
                 component: () => import('@views/Login/Login')
             },
+/***************************************************************************************************/
             {
                 path: '/sonplay/:id',
-                name: 'Sonplay',
                 meta: {
                     title: '歌单详情'
                 },
@@ -37,7 +37,6 @@ const routes = [
                 children: [
                     {
                         path: '/sonplay/:id/player',
-                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
@@ -45,9 +44,9 @@ const routes = [
                     }
                 ]
             },
+/***************************************************************************************************/
             {
                 path: '/singer/:id',
-                name: 'Singer',
                 meta: {
                     title: '歌手详情'
                 },
@@ -55,7 +54,6 @@ const routes = [
                 children: [
                     {
                         path: '/singer/:id/player',
-                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
@@ -63,9 +61,9 @@ const routes = [
                     }
                 ]
             },
+/***************************************************************************************************/
             {
                 path: '/ranking',
-                name: 'Ranking',
                 meta: {
                     title: '排行榜'
                 },
@@ -73,7 +71,6 @@ const routes = [
                 children: [
                     {
                         path: '/ranking/player',
-                        name: 'Player',
                         meta: {
                             title: '播放器'
                         },
@@ -81,7 +78,6 @@ const routes = [
                     },
                     {
                         path: '/ranking/sonplay/:id',
-                        name: 'Sonplay',
                         meta: {
                             title: '排行榜'
                         },
@@ -89,7 +85,6 @@ const routes = [
                         children: [
                             {
                                 path: '/ranking/sonplay/:id/player',
-                                name: 'Player',
                                 meta: {
                                     title: '播放器'
                                 },
@@ -98,6 +93,14 @@ const routes = [
                         ]
                     },
                 ]
+            },
+/***************************************************************************************************/
+            {
+                path: '/square',
+                meta: {
+                    title: '歌单广场'
+                },
+                component: () => import('@views/Square/Square'),
             }
         ]
     }

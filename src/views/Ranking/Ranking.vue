@@ -22,8 +22,8 @@ export default {
         return {
             icialist: [],       //官方榜
             gridlist: [],       //推荐榜
-
             morelist: [],       //更多榜单
+            wrappers: []
         }
     },
     created () {
@@ -47,6 +47,7 @@ export default {
                         this.morelist.push(element)
                     }
                 });
+                this.wrappers = res.list
             }
         },
         //榜单详情列表

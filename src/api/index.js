@@ -109,3 +109,13 @@ export const RanKinglist = params => {
         params
     })
 }
+
+
+//歌单广场 默认为推荐
+export const SquarePalylist = params => {
+    return http({
+        url: `/top/playlist`,
+        method: 'GET',
+        params
+    })
+}

@@ -89,6 +89,9 @@ export default {
         //四项卡片
         handelayoutCard(key) {
             switch (key) {
+                case 2: //歌单广场
+                    this.$router.push(`/square`)
+                    break;
                 case 3: //排行榜
                     this.$router.push(`/ranking`)
                     break;

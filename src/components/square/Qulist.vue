@@ -10,7 +10,8 @@ export default {
         more: {
             type: Boolean,
             default: false
-        }
+        },
+        cat: String
     },
     render() {
         return (
@@ -27,6 +28,14 @@ export default {
                                         <Icon name="play" size={14} color="#ffffff" />
                                         <div class="Count">{this.utils.playCount(k.playCount)}</div>
                                     </div>
+                                    {(this.cat === '精品') && <div class="van-tique">
+                                        <Icon
+                                            name="fire-o"
+                                            size={13}
+                                            color="#ffffff"
+                                            style={{transform: 'rotateZ(-45deg)',margin: '2px'}}
+                                         />
+                                    </div>}
                                 </div>
                                 <div class="Qulist-Context van-multi-ellipsis--l2">{k.name}</div>
                             </Col>
@@ -59,16 +68,26 @@ export default {
     .picUrl {
         overflow: hidden;
         position: relative;
+        border-radius: 8px;
         .playCount {
             position: absolute;
             top: 5px;
             right: 10px;
             display: flex;
             align-items: center;
+            .Count {
+                font-size: 12PX;
+                color: #ffffff;
+            }
         }
-        .Count {
-            font-size: 12PX;
-            color: #ffffff;
+        .van-tique {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 0;
+            top: 0;
+            background: #efb000;
+            border-bottom-right-radius: 22px;
         }
     }
     .picUrl-icon {
@@ -81,8 +100,6 @@ export default {
             height: 100%;
             position: absolute;
             object-fit: cover;
-            border-radius: 8px;
-            transform: translate3d(0,0,0);
         }
     }
     &-Context {

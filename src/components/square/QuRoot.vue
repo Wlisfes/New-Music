@@ -139,6 +139,7 @@ export default {
                         }
                         {(this.banner && this.banners.length > 0) && <Swiper banner={this.banners}></Swiper>}
                         {this.inlist.length > 0 &&<Qulist
+                            cat={this.cat}
                             inlist={this.inlist}
                             more={this.more}
                             onPlayCard={this.handelplayCard}

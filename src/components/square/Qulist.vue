@@ -51,7 +51,7 @@ export default {
 
 <style lang="less">
 .Qulist {
-    margin: 0 24px;
+    margin: 24px;
     .van-col {
         margin-bottom: 20px;
         cursor: pointer;
@@ -59,7 +59,6 @@ export default {
     .picUrl {
         overflow: hidden;
         position: relative;
-        border-radius: 8px;
         .playCount {
             position: absolute;
             top: 5px;
@@ -82,6 +81,8 @@ export default {
             height: 100%;
             position: absolute;
             object-fit: cover;
+            border-radius: 8px;
+            transform: translate3d(0,0,0);
         }
     }
     &-Context {

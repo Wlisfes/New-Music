@@ -111,7 +111,7 @@ export const RanKinglist = params => {
 }
 
 
-//歌单广场 默认为推荐
+//歌单广场 其他歌单
 export const SquarePalylist = params => {
     return http({
         url: `/top/playlist`,
@@ -121,8 +121,8 @@ export const SquarePalylist = params => {
 }
 
 
-//歌单广场 分页加载
-export const MoreSquarePalylist = params => {
+//歌单广场 精品歌单
+export const BoutiqueSquarePalylist = params => {
     return http({
         url: `/top/playlist/highquality`,
         method: 'GET',

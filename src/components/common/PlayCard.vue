@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:04:21 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:04:21 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-29 14:34:41
  * @Description: 首页歌单卡片
  */
 
@@ -17,7 +17,7 @@ export default {
         },
         subtitle: {
             type: String,
-            default: '推荐歌单'
+            default: ''
         },
         data: {
             type: Array,
@@ -29,7 +29,7 @@ export default {
             <div class="PlayCard">
                 <div class="Play-Header">
                     <div class="Play-title">{this.title}</div>
-                    <div class="Play-more van-hairline--surround" onClick={() =>{this.$emit('subtitle')}}>{this.subtitle}</div>
+                    {this.subtitle && <div class="Play-more van-hairline--surround" onClick={() =>{this.$emit('subtitle')}}>{this.subtitle}</div>}
                 </div>
                 <div class="ListCard">
                     <Row gutter={10}>

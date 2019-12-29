@@ -58,7 +58,7 @@ export default {
 
 <style lang="less" scoped>
 .Square-Swiper {
-    margin: 38px 24px 24px;
+    margin: 38px 24px 0;
     .swiper-container {
         width: 100%;
         height: 100%;

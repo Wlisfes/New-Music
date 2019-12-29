@@ -11,6 +11,10 @@ export default {
         cat: {
             type: String,
             default: '全部'
+        },
+        order: {
+            type: String,
+            default: 'hot'
         }
     },
     data () {
@@ -26,19 +30,26 @@ export default {
     },
     created () {
         setTimeout(() => {
-            this.firstPalylist() 
-        }, 500) 
+            if(this.cat === '精品') {
+                this.BoutiqueSquarePalylist()
+            }
+            else {
+                this.firstPalylist()
+            }
+        }, 500)
     },
     methods: {
         //数据接口默认加载
         async firstPalylist() {
             const [err, res] = await this.api.SquarePalylist({
-                tag: this.cat,
-                limit: this.limit
+                cat: this.cat,
+                order: this.order,
+                limit: this.limit,
+                offset: this.wrappers.length,
             })
             if(!err && res.code === 200) {
                 res.playlists.forEach((element,index) => {
-                    if(index < 3) {
+                    if(index < 3 && this.banner) {
                         this.banners.push(element)
                     }
                     else {
@@ -52,8 +63,38 @@ export default {
                 if(this.banner) {
                     setTimeout(() => {
                         this.banner && this.$refs.wrapper.refresh()
-                    }, 1000)
+                    }, 500)
                 }
+            }
+            this.loading =  true
+        },
+        //更多歌单
+        async MorefirstPalylist() {
+            const [err, res] = await this.api.SquarePalylist({
+                cat: this.cat,
+                order: this.order,
+                limit: this.limit,
+                offset: this.wrappers.length
+            })
+
+            if(!err && res.code === 200) {
+                //数据合并
+                this.inlist = this.inlist.concat(res.playlists)
+                this.wrappers = this.wrappers.concat(res.playlists)
+                this.more = res.more
+            }
+            this.loading =  true
+        },
+        //精品歌单
+        async BoutiqueSquarePalylist() {
+            const [err, res] = await this.api.BoutiqueSquarePalylist({
+                limit: this.limit,
+                before: this.wrappers.length > 0 ? this.wrappers[this.wrappers.length - 1].updateTime : 0
+            })
+            if(!err && res.code === 200) {
+                this.inlist = this.inlist.concat(res.playlists)
+                this.wrappers = this.wrappers.concat(res.playlists)
+                this.more = res.more
             }
             this.loading =  true
         },
@@ -62,25 +103,17 @@ export default {
             if(this.loading && this.more){
                 //上一次加载完毕并且还有数据加载 否则不做任何处理
                 this.loading = false
-                const [err, res] = await this.api.MoreSquarePalylist({
-                    tag: this.cat,
-                    limit: this.limit,
-                    before: this.wrappers[this.wrappers.length - 1].updateTime
-                })
-
-                if(!err && res.code === 200) {
-                    //数据合并
-                    this.inlist = this.inlist.concat(res.playlists)
-                    this.wrappers = this.wrappers.concat(res.playlists)
-                    this.more = res.more
+                if(this.cat === '精品') {
+                    this.BoutiqueSquarePalylist()
                 }
-                this.loading =  true
+                else {
+                    this.MorefirstPalylist()
+                }
             }
         },
         //歌单列表
         handelplayCard(ops) {
             this.$router.push(`/square/sonplay/${ops.id}`)
-            console.log(ops)
         }
     },
     render() {

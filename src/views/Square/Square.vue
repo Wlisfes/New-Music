@@ -17,7 +17,22 @@ export default {
     computed: {
         ...mapState({
             play: state => state.howler.play
-        })  
+        })
+    },
+    data () {
+        return {
+            active: 0,
+            tabsOption: [
+                { title: '推荐', banner: true },
+                { title: '官方', banner: false },
+                { title: '精品', banner: false },
+                { title: '华语', banner: false },
+                { title: '古风', banner: false },
+                { title: '流行', banner: false },
+                { title: '轻音乐', banner: false },
+                { title: '电子', banner: false },
+            ]
+        }
     },
     render() {
         return (
@@ -33,21 +48,31 @@ export default {
                         onPlay={() => {this.$router.push(`/square/player`)}}
                     ></Root.Header>
                     <Root>
-                        <Tabs animated={true} swipe-threshold={5} swipeable={true}>
-                            <Tab title="推荐">
-                                <Root>
-                                    <QuRoot banner={true}></QuRoot>
-                                </Root>
-                            </Tab>
-                            <Tab title="官方">
-                                <Root></Root>
-                            </Tab>
-                            <Tab title="精品"></Tab>
-                            <Tab title="华语"></Tab>
-                            <Tab title="古风"></Tab>
-                            <Tab title="流行"></Tab>
-                            <Tab title="轻音乐"></Tab>
-                            <Tab title="电子"></Tab>
+                        <Tabs
+                            animated={true}
+                            swipe-threshold={5}
+                            swipeable={true}
+                            lazy-render={false}
+                            onChange={(active) => {this.active = active}}
+                        >
+                            {
+                                this.tabsOption.map((k, active) => {
+                                    return (
+                                        <Tab title={k.title} key={active}>
+                                            <Root>
+                                                <keep-alive>
+                                                    {
+                                                        (this.active  === active) &&
+                                                        <QuRoot
+                                                            banner={k.banner}
+                                                            cat={k.title === '推荐' ? '全部' : k.title}
+                                                        ></QuRoot>}
+                                                </keep-alive>
+                                            </Root>
+                                        </Tab>
+                                    )
+                                })
+                            }
                         </Tabs>
                     </Root>
                     <router-view></router-view>

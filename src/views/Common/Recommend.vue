@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-26 22:02:45
+ * @Last Modified time: 2019-12-29 14:35:45
  * @Description: 推荐
  */
 
@@ -124,7 +124,7 @@ export default {
                         }
                         {this.recommends.length > 0 && <PlayCard
                             title="每日推荐"
-                            subtitle="更多推荐"
+                            subtitle=""
                             data={this.recommends}
                             onPlayCard={this.handelplayCard}
                         />}
@@ -134,6 +134,7 @@ export default {
                                 subtitle="歌单广场"
                                 data={this.personas}
                                 onPlayCard={this.handelplayCard}
+                                onSubtitle={() => {this.handelayoutCard(2)}}
                             />
                         </div>}
 

@@ -2,13 +2,12 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:20 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 19:03:34
+ * @Last Modified time: 2019-12-29 20:59:21
  * @Description: 首页
  */
 
 <script>
 import { mapState } from 'vuex';
-import { Toast } from 'vant';
 import { Root,NavigaTion } from '@/components/common';
 import { Tabs } from '@views/Common';
 export default {
@@ -33,7 +32,7 @@ export default {
                         this.$router.push('/player')
                     }}
                     onSearch={() => {
-                        Toast('敬请期待')
+                        this.$router.push('/search')
                     }}
                 />
                 <Tabs

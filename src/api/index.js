@@ -139,3 +139,13 @@ export const BoutiqueSquarePalylist = params => {
         params
     })
 }
+
+
+//搜索建议
+export const searchSuggest = params => {
+    return http({
+        url: `/search/suggest`,
+        method: 'GET',
+        params
+    })
+}

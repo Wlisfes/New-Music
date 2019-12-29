@@ -2,14 +2,14 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-29 17:15:36 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 18:39:30
+ * @Last Modified time: 2019-12-29 18:56:40
  * @Description: 每日推荐歌曲
  */
 
 
 <script>
 import { mapState } from 'vuex';
-import { Icon,Image } from 'vant';
+import { Icon,Image,Divider } from 'vant';
 import { Root } from '@/components/common';
 export default {
     name: 'Dayplay',
@@ -81,9 +81,8 @@ export default {
                             {
                                 (this.loading && this.inplay.length === 0) && <Divider
                                     dashed={true}
-                                    style={{color: '#ee0a24', borderColor: '#ee0a24', padding: '0'}}>
-                                        暂无歌曲
-                                </Divider>
+                                    style={{color: '#ee0a24', borderColor: '#ee0a24', padding: '0 16px'}}
+                                >暂无歌曲</Divider>
                             }
                             {(this.inplay.length > 0) && <div class="inplay">
                                 {false && <div class="inplay-Header">

@@ -2,12 +2,13 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 17:19:22
+ * @Last Modified time: 2019-12-29 18:59:38
  * @Description: 推荐
  */
 
 <script>
 import { mapState } from 'vuex';
+import { Toast } from 'vant';
 import { Root,Swiper,LayoutCard,PlayCard } from '@/components/common';
 export default {
     name: 'Recommend',
@@ -97,6 +98,9 @@ export default {
                     break;
                 case 3: //排行榜
                     this.$router.push(`/ranking`)
+                    break;
+                case 4: //电台
+                    Toast('敬请期待')
                     break;
             }
         }

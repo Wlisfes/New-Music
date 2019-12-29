@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:05:10 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:05:10 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-29 18:41:05
  * @Description: 头像信息组件
  */
 
@@ -89,6 +89,7 @@ export default {
                         color="#ee0a24"
                         plain={true}
                         size="normal"
+                        style={{cursor: 'pointer'}}
                         onClick={this.handelLogin}
                     >登录</Button>}
                 </div>

@@ -31,10 +31,20 @@ export const personalized = params => {
 }
 
 
-//每日推荐（需登陆）
+//每日推荐歌单（需登陆）
 export const recommend = params => {
     return http({
         url: `/recommend/resource`,
+        method: 'GET',
+        params
+    })
+}
+
+
+//每日推荐歌曲（需登录）
+export const recommendSongs = params => {
+    return http({
+        url: `/recommend/songs`,
         method: 'GET',
         params
     })

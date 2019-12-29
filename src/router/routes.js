@@ -128,7 +128,22 @@ const routes = [
                 ]
             },
 /***************************************************************************************************/
-
+            {
+                path: '/dayplay',
+                meta: {
+                    title: '每日推荐'
+                },
+                component: () => import('@views/Dayplay/Dayplay'),
+                children: [
+                    {
+                        path: '/dayplay/player',
+                        meta: {
+                            title: '播放器'
+                        },
+                        component: () => import('@views/Player/Player')
+                    }
+                ]
+            }
 
 
 

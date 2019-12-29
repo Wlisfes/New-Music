@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:06:05 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-04 23:06:05 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-29 18:40:20
  * @Description: 登录退出组件
  */
 
@@ -51,6 +51,7 @@ export default {
     font-size: 16PX;
     color: #ee0a24;
     text-align: center;
+    cursor: pointer;
 }
 .SignoutConfirm {
     .van-dialog__message--has-title {

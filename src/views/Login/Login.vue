@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:33 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 12:11:35
+ * @Last Modified time: 2019-12-29 18:42:06
  * @Description: 登录
  */
 
@@ -125,7 +125,12 @@ export default {
         return (
             <transition name="login" appear>
                 <div class="Login" onTouchmove={(e) => {/**/e.preventDefault()/**/}}>
-                    <NavBar left-arrow={true} left-text="返回" onClick-left={() => {this.$router.back()}}></NavBar>
+                    <NavBar
+                        style={{cursor: 'pointer'}}
+                        left-arrow={true}
+                        left-text="返回"
+                        onClick-left={() => {this.$router.back()}}
+                    ></NavBar>
                     <div class="log">
                         <Image
                             width={100}
@@ -273,6 +278,7 @@ export default {
         }
     }
     .Submit {
+        cursor: pointer;
         margin: 64px 32px;
         width: calc(100% - 64px);
     }

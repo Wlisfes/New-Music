@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:01:28 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 14:35:45
+ * @Last Modified time: 2019-12-29 17:19:22
  * @Description: 推荐
  */
 
@@ -89,6 +89,9 @@ export default {
         //四项卡片
         handelayoutCard(key) {
             switch (key) {
+                case 1: //每日推荐
+                    this.$router.push(`/dayplay`)
+                    break;
                 case 2: //歌单广场
                     this.$router.push(`/square`)
                     break;

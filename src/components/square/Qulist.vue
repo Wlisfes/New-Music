@@ -1,23 +1,27 @@
 <script>
-import { Row,Col,Icon } from 'vant';
+import { Row,Col,Icon,Divider } from 'vant';
 export default {
     name: 'Qulist',
     props: {
         inlist: {
             type: Array,
             default: () => []
+        },
+        more: {
+            type: Boolean,
+            default: false
         }
     },
     render() {
         return (
             <div class="Qulist">
                 <Row gutter={10}>
-                    {this.inlist.map(k => {
+                    {this.inlist.map((k, index) => {
                         return (
-                            <Col span={8} key={k.id}>
+                            <Col span={8} key={`${k.id}-${index}`} onClick={() => {this.$emit('playCard', k)}}>
                                 <div class="picUrl">
                                     <div class="picUrl-icon">
-                                        <img class="picUrl-image-icon" src={`${k.coverImgUrl}?param=400y400`} />
+                                        <img class="picUrl-image-icon" src={this.utils.https(`${k.coverImgUrl}?param=400y400`)} />
                                     </div>
                                     <div class="playCount">
                                         <Icon name="play" size={14} color="#ffffff" />
@@ -29,6 +33,16 @@ export default {
                         )
                     })}
                 </Row>
+                {
+                    (this.inlist.length > 0 && this.more) && <Loading margin="0 24px 24px"></Loading>
+                }
+                {
+                    (this.inlist.length > 0 && !this.more) && <Divider
+                        dashed={true}
+                        style={{color: '#ee0a24', borderColor: '#ee0a24', paddingBottom: '16px', marginTop: 0}}>
+                            没有更多了
+                    </Divider>
+                }
             </div>
         )
     }
@@ -40,6 +54,7 @@ export default {
     margin: 0 24px;
     .van-col {
         margin-bottom: 20px;
+        cursor: pointer;
     }
     .picUrl {
         overflow: hidden;

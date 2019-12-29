@@ -119,3 +119,13 @@ export const SquarePalylist = params => {
         params
     })
 }
+
+
+//歌单广场 分页加载
+export const MoreSquarePalylist = params => {
+    return http({
+        url: `/top/playlist/highquality`,
+        method: 'GET',
+        params
+    })
+}

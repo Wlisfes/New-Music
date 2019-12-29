@@ -1,8 +1,8 @@
 /*
  * @Author: 情雨随风 
  * @Date: 2019-12-25 22:07:28 
- * @Last Modified by:  情雨随风 
- * @Last Modified time: 2019-12-25 22:07:28 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2019-12-29 12:11:14
  * @Description: 播放器界面
  */
 
@@ -72,9 +72,11 @@ export default {
 <style lang="less" scoped>
 .player {
     width: 750px;
-    height: 100vh;
-    position: fixed;
+    position: absolute;
     top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     z-index: 150;
     overflow: hidden;
     background-color: #b7b7b7;

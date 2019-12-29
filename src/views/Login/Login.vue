@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:33 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-26 21:55:57
+ * @Last Modified time: 2019-12-29 12:11:35
  * @Description: 登录
  */
 
@@ -207,9 +207,11 @@ export default {
 }
 .Login {
     width: 10rem;
-    height: 100vh;
     position: absolute;
     top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-image: url('~@assets/image/login.jpg');
     background-size: 750px 1666px;
     background-position-y: 100%;

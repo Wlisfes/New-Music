@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:03:06 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-26 22:40:52
+ * @Last Modified time: 2019-12-29 12:10:29
  * @Description: 排行榜详情列表
  */
 
@@ -134,10 +134,11 @@ export default {
 }
 .Sonplay {
     width: 10rem;
-    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     z-index: 99;
     display: flex;
     flex-direction: column;

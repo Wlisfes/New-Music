@@ -101,7 +101,37 @@ const routes = [
                     title: '歌单广场'
                 },
                 component: () => import('@views/Square/Square'),
-            }
+                children: [
+                    {
+                        path: '/square/player',
+                        meta: {
+                            title: '播放器'
+                        },
+                        component: () => import('@views/Player/Player')
+                    },
+                    {
+                        path: '/square/sonplay/:id',
+                        meta: {
+                            title: '歌单详情'
+                        },
+                        component: () => import('@views/Square/Sonplay'),
+                        children: [
+                            {
+                                path: '/square/sonplay/:id/player',
+                                meta: {
+                                    title: '播放器'
+                                },
+                                component: () => import('@views/Player/Player')
+                            }
+                        ]
+                    }
+                ]
+            },
+/***************************************************************************************************/
+
+
+
+
         ]
     }
 ]

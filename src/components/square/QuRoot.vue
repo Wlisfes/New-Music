@@ -18,20 +18,23 @@ export default {
             banners: [],     //轮播数据
             inlist: [],      //列表数据
             wrappers: [],
-            loading: false
+            loading: false,
+            more: false,     //是否能加载更多
+
+            limit: 45,       //一次加载数量
         }
     },
     created () {
         setTimeout(() => {
-            this.SquarePalylist() 
+            this.firstPalylist() 
         }, 500) 
     },
     methods: {
-        //数据接口
-        async SquarePalylist() {
+        //数据接口默认加载
+        async firstPalylist() {
             const [err, res] = await this.api.SquarePalylist({
                 tag: this.cat,
-                limit: 50
+                limit: this.limit
             })
             if(!err && res.code === 200) {
                 res.playlists.forEach((element,index) => {
@@ -43,21 +46,70 @@ export default {
                     }
                 })
                 this.wrappers = res.playlists
-                this.loading =  true
-                setTimeout(() => {
-                    this.banner && this.$refs.wrapper.refresh()
-                }, 1000)
+                this.more = res.more
+
+                //开启轮播需要延时计算
+                if(this.banner) {
+                    setTimeout(() => {
+                        this.banner && this.$refs.wrapper.refresh()
+                    }, 1000)
+                }
             }
-        }   
+            this.loading =  true
+        },
+        //滚动到底事件 上拉加载
+        async handelScrollToEnd(e) {
+            if(this.loading && this.more){
+                //上一次加载完毕并且还有数据加载 否则不做任何处理
+                this.loading = false
+                const [err, res] = await this.api.MoreSquarePalylist({
+                    tag: this.cat,
+                    limit: this.limit,
+                    before: this.wrappers[this.wrappers.length - 1].updateTime
+                })
+
+                if(!err && res.code === 200) {
+                    //数据合并
+                    this.inlist = this.inlist.concat(res.playlists)
+                    this.wrappers = this.wrappers.concat(res.playlists)
+                    this.more = res.more
+                }
+                this.loading =  true
+            }
+        },
+        //歌单列表
+        handelplayCard(ops) {
+            this.$router.push(`/square/sonplay/${ops.id}`)
+            console.log(ops)
+        }
     },
     render() {
         return (
             <Root class="QuRoot">
-                <Root.Scroll ref="wrapper" class="QuRoot-wrapper" data={this.wrappers} bounce={false}>
+                <Root.Scroll
+                    ref="wrapper"
+                    class="QuRoot-wrapper"
+                    data={this.wrappers}
+                    bounce={false}
+                    pullup={true}
+                    listenScroll={true}
+                    probeType={2}
+                    onScrollToEnd={this.handelScrollToEnd}
+                >
                     <Root.Container>
-                        {!this.loading && <Loading margin="24px"></Loading>}
+                        {
+                            (
+                                !this.loading &&
+                                (this.banners.length === 0 && this.inlist.length === 0)
+                            )
+                            && <Loading margin="24px"></Loading>
+                        }
                         {(this.banner && this.banners.length > 0) && <Swiper banner={this.banners}></Swiper>}
-                        {this.inlist.length > 0 &&<Qulist inlist={this.inlist}></Qulist>}
+                        {this.inlist.length > 0 &&<Qulist
+                            inlist={this.inlist}
+                            more={this.more}
+                            onPlayCard={this.handelplayCard}
+                        ></Qulist>}
                     </Root.Container>
                 </Root.Scroll>
             </Root>

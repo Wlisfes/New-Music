@@ -30,7 +30,7 @@ export default {
                         play={this.play}
                         style={{cursor: 'pointer'}}
                         onBack={() => {this.$router.back()}}
-                        onPlay={() => {this.$router.push(`/ranking/player`)}}
+                        onPlay={() => {this.$router.push(`/square/player`)}}
                     ></Root.Header>
                     <Root>
                         <Tabs animated={true} swipe-threshold={5} swipeable={true}>
@@ -50,6 +50,7 @@ export default {
                             <Tab title="电子"></Tab>
                         </Tabs>
                     </Root>
+                    <router-view></router-view>
                 </Root>
             </transition>
         )

@@ -14,7 +14,7 @@ export default {
         handelSignout() {
             const self = this
             Dialog.confirm({
-                title: '情雨随风提醒您',
+                title: '温馨提示',
                 message: '确定退出当前账号吗？',
                 className: 'SignoutConfirm',
                 cancelButtonColor: '#444444',

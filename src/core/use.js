@@ -12,3 +12,4 @@ Vue.use(Storage, {
 });
 Vue.prototype.api = api;
 Vue.prototype.utils = utils;
+Vue.prototype.vm = new Vue();

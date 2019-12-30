@@ -1,6 +1,8 @@
 import Header from './Header';
 import Hot from './Hot';
+import History from './History';
+import Suggest from './Suggest';
 
 export {
-    Header,Hot
+    Header,Hot,History,Suggest
 }

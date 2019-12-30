@@ -10,38 +10,70 @@
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
-import { Header,Hot } from '@/components/search';
+import { Header,Hot,Suggest } from '@/components/search';
 export default {
     name: 'Search',
     data () {
         return {
-            wrappers: []
+            wrappers: [],
+
+            value: '',     //搜索关键字
         }
     },
-    created () {
-        setTimeout(() => {
-            // this.searchSuggest()
-        }, 500)
-    },
     methods: {
-        async searchSuggest() {
-            const [err, res] = await this.api.searchSuggest({
-                type: 'mobile',
-                keywords: '刀剑'
-            })
-            if(!err && res.code === 200) {
-                console.log(res)
+        //搜索框input事件
+        hanldeinput(value) {
+            this.value = value
+        },
+        //搜索事件
+        handelsearch(keywords) {
+            //此次需要清空value
+            if(this.value) {
+                this.value = ''
             }
-        }  
+            this.handelDeposit(keywords)
+        },
+        //搜索记录存入
+        handelDeposit(keywords) {
+            const inlist = this.$ls.get('searchHistory')
+            if(inlist) {
+                const newlist = inlist.filter(k => keywords !== k.keywords)
+                    newlist.unshift({
+                        new: new Date().getTime(),
+                        keywords: keywords
+                    })
+                this.$ls.set('searchHistory', newlist)
+            }
+            else {
+                this.$ls.set('searchHistory', [{
+                    new: new Date().getTime(),
+                    keywords: keywords
+                }])
+            }
+            this.vm.$emit('searchHistory')
+        }
     },
     render() {
         return (
             <transition name="search" appear>
                 <Root class="Search">
                     <Header
+                        value={this.value}
                         onClick-left={() => {this.$router.back()}}
+                        onInput={this.hanldeinput}
                     ></Header>
-                    <Hot></Hot>
+                    <keep-alive>
+                        {
+                            this.value ? (
+                                <Suggest
+                                    value={this.value}
+                                    onSearch={this.handelsearch}
+                                ></Suggest>
+                            ) : (
+                                <Hot onSearch={this.handelsearch}></Hot>
+                            )
+                        }
+                    </keep-alive>
                 </Root>
             </transition>
         )

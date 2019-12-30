@@ -2,7 +2,7 @@
  * @Date: 2019-12-30 11:15:48
  * @Author: 情雨随风
  * @LastEditors  : 情雨随风
- * @LastEditTime : 2019-12-30 13:51:08
+ * @LastEditTime : 2019-12-30 17:52:55
  * @Description: 热搜榜
  -->
 
@@ -10,17 +10,25 @@
 <script>
 import { Image } from 'vant';
 import { Root } from '@/components/common';
+import { History } from '@/components/search';
 export default {
     name: 'Hot',
     data () {
         return {
             hots: [],      //列表数据
+            historys: [],  //本地搜索记录
             wrappers: [],
             loading: false
         }
     },
     created () {
+        this.handelReadHistory()
         this.searchHot()  
+    },
+    mounted () {
+        this.$nextTick(() => {
+            this.vm.$on('searchHistory', this.handelReadHistory)
+        })  
     },
     methods: {
         //热搜榜
@@ -31,6 +39,18 @@ export default {
                 this.wrappers = this.wrappers.concat(res.data)
             }
             this.loading = true
+        },
+        //读取本地搜索记录
+        handelReadHistory() {
+            const historys = this.$ls.get('searchHistory')
+            if(historys) {
+                this.historys = historys
+            }
+        },
+        //删除本地搜索记录
+        handelDeleteHistory() {
+            this.historys = []
+            this.$ls.remove('searchHistory')
         }
     },
     render() {
@@ -38,13 +58,18 @@ export default {
             <Root class="Hot">
                 <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                     <Root.Container>
-                        <div class="Hot-van-title">热搜榜</div>
+                        {(this.historys.length > 0) && <History
+                            wrapper={this.historys}
+                            onDelete={this.handelDeleteHistory}
+                            onSearch={(keywords) => {this.$emit('search', keywords)}}
+                        ></History>}
                         <div class="Hot-list">
+                            <div class="Hot-van-title">热搜榜</div>
                             {
                                 this.hots.map((k, index) => {
                                     const top = index < 3
                                     return (
-                                        <div class="item-Content">
+                                        <div class="item-Content" key={index} onClick={() => {this.$emit('search', k.searchWord)}}>
                                             <div class="van-item-index" style={{color: top ? '#ee0a24' : '#a9a9a9'}}>{index + 1}</div>
                                             <div class="Content">
                                                 <div class="van-searchWord">
@@ -96,6 +121,7 @@ export default {
         font-size: 14px;
         color: #000000;
         margin-top: 12px;
+        font-weight: 500;
     }
     &-list {
         margin-bottom: 40px;
@@ -125,7 +151,7 @@ export default {
                 font-size: 15px;
             }
             .van-searcContent {
-                font-size: 13px;
+                font-size: 12px;
                 color: #a9a9a9;
             }
         }

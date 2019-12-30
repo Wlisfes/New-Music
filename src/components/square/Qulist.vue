@@ -22,7 +22,7 @@ export default {
                             <Col span={8} key={`${k.id}-${index}`} onClick={() => {this.$emit('playCard', k)}}>
                                 <div class="picUrl">
                                     <div class="picUrl-icon">
-                                        <img class="picUrl-image-icon" src={this.utils.https(`${k.coverImgUrl}?param=400y400`)} />
+                                        <img class="picUrl-image-icon" src={this.utils.https(`${k.coverImgUrl}?param=200y200`)} />
                                     </div>
                                     <div class="playCount">
                                         <Icon name="play" size={14} color="#ffffff" />

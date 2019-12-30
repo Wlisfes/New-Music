@@ -10,7 +10,7 @@
 <script>
 import { mapState } from 'vuex';
 import { Root } from '@/components/common';
-import { Header } from '@/components/search';
+import { Header,Hot } from '@/components/search';
 export default {
     name: 'Search',
     data () {
@@ -20,7 +20,7 @@ export default {
     },
     created () {
         setTimeout(() => {
-            this.searchSuggest()
+            // this.searchSuggest()
         }, 500)
     },
     methods: {
@@ -41,11 +41,7 @@ export default {
                     <Header
                         onClick-left={() => {this.$router.back()}}
                     ></Header>
-                    <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
-                        <Root.Container>
-
-                        </Root.Container>
-                    </Root.Scroll>
+                    <Hot></Hot>
                 </Root>
             </transition>
         )
@@ -76,16 +72,6 @@ export default {
     /deep/ .van-nav-bar__title {
         color: #323233;
         font-size: 16px;
-    }
-    .wrapper {
-        flex: 1;
-        overflow: hidden;
-        .Container {
-            min-height: 100%;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
     }
 }
 </style>

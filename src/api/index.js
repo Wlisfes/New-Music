@@ -141,6 +141,16 @@ export const BoutiqueSquarePalylist = params => {
 }
 
 
+//热搜榜
+export const searchHot = params => {
+    return http({
+        url: `/search/hot/detail`,
+        method: 'GET',
+        params
+    })
+}
+
+
 //搜索建议
 export const searchSuggest = params => {
     return http({

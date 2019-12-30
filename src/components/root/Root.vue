@@ -13,7 +13,7 @@ export default {
 
 <style lang="less">
 .Root {
-    height: 100vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;

@@ -9,7 +9,7 @@
 
 <script>
 import BScroll from "better-scroll";
-import { Icon,Button,Dialog } from 'vant';
+import { Icon,Dialog } from 'vant';
 export default {
     name: 'History',
     props: {
@@ -39,6 +39,7 @@ export default {
             //初始化BScroll插件
             if(!this.scroll) {
                 this.scroll = new BScroll(this.$refs.wrapper ,{
+                    probeType: 1,
                     scrollX: true,
                     scrollY: false,
                     momentum: true,
@@ -75,7 +76,7 @@ export default {
         wrapper: {
             handler() {
                 setTimeout(() => {
-                    this.scroll && this.scroll.refresh()
+                    this.scroll && this.initBscroll()
                 }, 60)
             },
             deep: true
@@ -99,13 +100,14 @@ export default {
                         {
                             this.wrapper.map((k, index) => {
                                 return (
-                                    <Button
-                                        size="small"
-                                        color="#F7F8FA"
-                                        round={true}
-                                        style={{marginRight: '10px', color: '#444444', cursor: 'pointer'}}
-                                        onClick={() => {this.$emit('search', k.keywords)}}
-                                    >{k.keywords}</Button>
+                                    <div
+                                        class="van-wrapper-button"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            console.log(k.keywords)
+                                            // this.$emit('story', k.keywords)
+                                        }}
+                                    >{k.keywords}</div>
                                 )
                             })
                         }
@@ -138,6 +140,18 @@ export default {
             display: flex;
             width: 100%;
             height: 30px;
+        }
+        &-button{
+            color: '#444444';
+            background-color: #f7f8fa;
+            font-size: 14px;
+            white-space: nowrap;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            border-radius: 15px;
+            cursor: pointer;
         }
     }
 }

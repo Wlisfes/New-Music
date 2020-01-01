@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-29 20:53:58 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 22:41:01
+ * @Last Modified time: 2020-01-01 16:14:37
  * @Description: 搜索
  */
 
@@ -38,11 +38,12 @@ export default {
             const inlist = this.$ls.get('searchHistory')
             if(inlist) {
                 const newlist = inlist.filter(k => keywords !== k.keywords)
-                    newlist.unshift({
-                        new: new Date().getTime(),
-                        keywords: keywords
-                    })
-                this.$ls.set('searchHistory', newlist)
+                console.log(newlist)
+                //     newlist.unshift({
+                //         new: new Date().getTime(),
+                //         keywords: keywords
+                //     })
+                // this.$ls.set('searchHistory', newlist)
             }
             else {
                 this.$ls.set('searchHistory', [{

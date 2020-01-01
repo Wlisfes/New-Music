@@ -61,7 +61,10 @@ export default {
                         {(this.historys.length > 0) && <History
                             wrapper={this.historys}
                             onDelete={this.handelDeleteHistory}
-                            onSearch={(keywords) => {this.$emit('search', keywords)}}
+                            onStory={(keywords) => {
+                                // console.log(keywords)
+                                // this.$emit('search', keywords)
+                            }}
                         ></History>}
                         <div class="Hot-list">
                             <div class="Hot-van-title">热搜榜</div>

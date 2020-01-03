@@ -2,7 +2,7 @@
  * @Date: 2019-12-30 11:15:48
  * @Author: 情雨随风
  * @LastEditors  : 情雨随风
- * @LastEditTime : 2019-12-30 17:52:55
+ * @LastEditTime : 2020-01-03 14:32:11
  * @Description: 热搜榜
  -->
 
@@ -62,8 +62,7 @@ export default {
                             wrapper={this.historys}
                             onDelete={this.handelDeleteHistory}
                             onStory={(keywords) => {
-                                // console.log(keywords)
-                                // this.$emit('search', keywords)
+                                this.$emit('search', keywords)
                             }}
                         ></History>}
                         <div class="Hot-list">

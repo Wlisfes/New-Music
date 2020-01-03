@@ -2,7 +2,7 @@
  * @Date: 2019-12-30 14:18:13
  * @Author: 情雨随风
  * @LastEditors  : 情雨随风
- * @LastEditTime : 2019-12-30 17:40:38
+ * @LastEditTime : 2020-01-03 14:33:50
  * @Description: 搜索历史
  -->
 
@@ -10,6 +10,10 @@
 <script>
 import BScroll from "better-scroll";
 import { Icon,Dialog } from 'vant';
+
+let timer, lastTime;
+let now = +new Date();
+
 export default {
     name: 'History',
     props: {
@@ -70,6 +74,23 @@ export default {
                     }, 500);
                 }
             }).catch(e => {})
+        },
+        //选择某个历史记录 此处启用节流操作
+        handelStory(keywords) {
+            if (lastTime && now - lastTime < 200) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    this.$emit('story', keywords)
+                    lastTime = +new Date();
+                }, 20);
+            }
+            else {
+                lastTime = now;
+                timer = setTimeout(() => {
+                    this.$emit('story', keywords)
+                    lastTime = +new Date();
+                }, 20);
+            }
         }
     },
     watch: {
@@ -101,12 +122,9 @@ export default {
                             this.wrapper.map((k, index) => {
                                 return (
                                     <div
+                                        key={k.new}
                                         class="van-wrapper-button"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            console.log(k.keywords)
-                                            // this.$emit('story', k.keywords)
-                                        }}
+                                        onClick={(e) => {this.handelStory(k.keywords)}}
                                     >{k.keywords}</div>
                                 )
                             })

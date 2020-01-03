@@ -38,12 +38,12 @@ export default {
             const inlist = this.$ls.get('searchHistory')
             if(inlist) {
                 const newlist = inlist.filter(k => keywords !== k.keywords)
-                console.log(newlist)
-                //     newlist.unshift({
-                //         new: new Date().getTime(),
-                //         keywords: keywords
-                //     })
-                // this.$ls.set('searchHistory', newlist)
+                // console.log(newlist)
+                    newlist.unshift({
+                        new: new Date().getTime(),
+                        keywords: keywords
+                    })
+                this.$ls.set('searchHistory', newlist)
             }
             else {
                 this.$ls.set('searchHistory', [{

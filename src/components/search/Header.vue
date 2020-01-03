@@ -22,6 +22,9 @@ export default {
         },
         handelinput(value) {
             this.$emit('input', value)
+        },
+        search() {
+            return this.$refs.search.getElementsByTagName('input')
         }
     },
     render() {
@@ -30,6 +33,7 @@ export default {
                 <div class="van-Search-Header-center">
                     <form action="/">
                         <Search
+                            ref="search"
                             shape="round"
                             placeholder="请输入搜索关键词"
                             style={{padding: '0'}}

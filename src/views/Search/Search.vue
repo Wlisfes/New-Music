@@ -28,17 +28,17 @@ export default {
         //搜索事件
         handelsearch(keywords) {
             //此次需要清空value
-            if(this.value) {
-                this.value = ''
-            }
-            this.handelDeposit(keywords)
+            // this.value = ''
+            // this.$router.push(`/search/${keywords}`)
+            // this.handelDeposit(keywords)
+
+            this.$refs.header.search().blur()
         },
         //搜索记录存入
         handelDeposit(keywords) {
             const inlist = this.$ls.get('searchHistory')
             if(inlist) {
                 const newlist = inlist.filter(k => keywords !== k.keywords)
-                // console.log(newlist)
                     newlist.unshift({
                         new: new Date().getTime(),
                         keywords: keywords
@@ -59,6 +59,7 @@ export default {
             <transition name="search" appear>
                 <Root class="Search">
                     <Header
+                        ref="header"
                         value={this.value}
                         onClick-left={() => {this.$router.back()}}
                         onInput={this.hanldeinput}
@@ -75,6 +76,8 @@ export default {
                             )
                         }
                     </keep-alive>
+
+                    <router-view></router-view>
                 </Root>
             </transition>
         )
@@ -102,9 +105,5 @@ export default {
     flex-direction: column;
     overflow: hidden;
     background-color: #ffffff;
-    /deep/ .van-nav-bar__title {
-        color: #323233;
-        font-size: 16px;
-    }
 }
 </style>

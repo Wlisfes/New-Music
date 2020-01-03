@@ -34,7 +34,16 @@ const routes = [
                     title: '搜索',
                     keepAlive: false
                 },
-                component: () => import('@views/Search/Search')
+                component: () => import('@views/Search/Search'),
+                children: [
+                    {
+                        path: '/search/:keywords',
+                        meta: {
+                            title: '搜索详情'
+                        },
+                        component: () => import('@views/Search/Result')
+                    }
+                ]
             },
 /***************************************************************************************************/
             {

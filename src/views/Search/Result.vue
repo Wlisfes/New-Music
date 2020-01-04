@@ -8,60 +8,36 @@
 
 
 <script>
-import { Search,Icon } from 'vant';
+import { Tabs,Tab } from 'vant';
 import { Root } from '@/components/common';
-
-const Header = {
-    name: 'Result-Header',
-    props: {
-        value: {
-            type: [Number, String]
-        }
-    },
-    methods: {
-        //搜索框修改
-        handelrevise() {
-            this.vm.$emit('revise', this.$route.params.keywords)
-        }  
-    },
-    render() {
-        return (
-            <div class="van-Result-Header">
-                <div class="van-Result-Header-left" onClick={() => {this.$router.back()}}>
-                    <Icon
-                        color="#323233"
-                        size={22}
-                        name="arrow-left"
-                        style={{padding: '10px'}}
-                    />
-                </div>
-                <div class="van-Result-Header-center">
-                    <form action="/">
-                        <Search
-                            shape="round"
-                            placeholder="请输入搜索关键词"
-                            style={{padding: '0'}}
-                            value={this.$route.params.keywords}
-                            readonly={false}
-                            clearable={true}
-                            onClick={this.handelrevise}
-                        ></Search>
-                    </form>
-                </div>
-            </div>
-        )
-    }
-}
+import { ResultHeader,Single } from '@/components/search';
 export default {
     name: 'Result',
-    created () {
-        console.log(this.$route.params.keywords)  
-    },
     render() {
+        const { keywords } = this.$route.params
         return (
             <transition name="result" appear>
                 <Root class="Result">
-                    <Header></Header>
+                    <ResultHeader value={keywords}></ResultHeader>
+                    <Root class="Tabs-Common">
+                        <Tabs
+                            animated={true}
+                            swipeable={true}
+                            onChange={(index) => {console.log(index)}}
+                        >
+                            <Tab title="单曲">
+                                <Root.Container>
+                                    <keep-alive>
+                                        <Single keywords={keywords}></Single>
+                                    </keep-alive>
+                                </Root.Container>
+                            </Tab>
+                            <Tab title="歌单"></Tab>
+                            <Tab title="歌手"></Tab>
+                            <Tab title="专辑"></Tab>
+                        </Tabs>
+                    </Root>
+                    <router-view></router-view>
                 </Root>
             </transition>
         )
@@ -90,31 +66,31 @@ export default {
     overflow: hidden;
     background-color: #ffffff;
 }
-
-
-
-
-
-.van-Result-Header {
-    height: 46px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    margin: 0 10px;
-    /deep/ &-left {
-        width: 46px;
-        height: 46px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
+.Tabs-Common {
+    /deep/ .van-tabs__wrap {
+        &::after {
+            border-top-width: 0;
+        }
     }
-    /deep/ &-center {
-        flex: 1;
+    /deep/ .van-tabs {
+        height: 100%;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+    }
+    /deep/ .van-tabs__content {
+        flex: 1;
+        overflow: hidden;
+    }
+    /deep/ .van-tab__pane {
+        height: 100%;
+        overflow: hidden;
+    }
+    .Container {
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 }
 </style>

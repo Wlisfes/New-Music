@@ -16,23 +16,24 @@ export default {
     data () {
         return {
             wrappers: [],
-
             value: '',     //搜索关键字
         }
     },
+    mounted () {
+        this.vm.$on('revise', this.handelrevise)  
+    },
     methods: {
-        //搜索框input事件
-        hanldeinput(value) {
+        handelrevise(value) {
             this.value = value
+            this.$refs.headers.search().focus()
         },
         //搜索事件
         handelsearch(keywords) {
-            //此次需要清空value
-            // this.value = ''
-            // this.$router.push(`/search/${keywords}`)
-            // this.handelDeposit(keywords)
+            this.value = ''
+            this.$router.push(`/search/${keywords}`)
+            this.handelDeposit(keywords)
 
-            this.$refs.header.search().blur()
+            this.$refs.headers.search().blur()
         },
         //搜索记录存入
         handelDeposit(keywords) {
@@ -59,10 +60,11 @@ export default {
             <transition name="search" appear>
                 <Root class="Search">
                     <Header
-                        ref="header"
+                        ref="headers"
                         value={this.value}
                         onClick-left={() => {this.$router.back()}}
-                        onInput={this.hanldeinput}
+                        onInput={(value) => {this.value = value}}
+                        onSearch={(value) => {this.handelsearch(value)}}
                     ></Header>
                     <keep-alive>
                         {

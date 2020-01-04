@@ -107,8 +107,8 @@ export default {
                                                     {playStatus ? <Icon name="volume-o" color="#ee0a24" size={20}></Icon> : index +1}
                                                 </div>
                                                 <div style={{flex: 1,display: 'flex',flexDirection: 'column',justifyContent: 'center',overflow: 'hidden'}}>
-                                                    <div class="name van-ellipsis" style={{color: playStatus ? '#ee0a24' : '#333333'}}>{k.name}</div>
-                                                    <div class="singer-name van-ellipsis">{k.artists.map(v => v.name).join('/')} - {k.album.name}</div>
+                                                    <div class="van-name van-ellipsis" style={{color: playStatus ? '#ee0a24' : '#333333'}}>{k.name}</div>
+                                                    <div class="van-singer-name van-ellipsis">{k.artists.map(v => v.name).join('/')} - {k.album.name}</div>
                                                 </div>
                                                 <div class="van-inplay-icon">
                                                     <Icon name="ellipsis" size={20}></Icon>
@@ -196,6 +196,13 @@ export default {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+            }
+            .van-name {
+                font-size: 15px;
+            }
+            .van-singer-name {
+                font-size: 12px;
+                color: #757575;
             }
         }
     }

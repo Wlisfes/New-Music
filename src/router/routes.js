@@ -41,7 +41,16 @@ const routes = [
                         meta: {
                             title: '搜索详情'
                         },
-                        component: () => import('@views/Search/Result')
+                        component: () => import('@views/Search/Result'),
+                        children: [
+                            {
+                                path: '/search/:keywords/player',
+                                meta: {
+                                    title: '播放器'
+                                },
+                                component: () => import('@views/Player/Player')
+                            }
+                        ]
                     }
                 ]
             },

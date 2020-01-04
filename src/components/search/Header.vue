@@ -17,14 +17,9 @@ export default {
         }
     },
     methods: {
-        handelsearch() {
-
-        },
-        handelinput(value) {
-            this.$emit('input', value)
-        },
         search() {
-            return this.$refs.search.getElementsByTagName('input')
+            // console.log(this.$refs.search.getElementsByTagName('input')[0])
+            return this.$refs.search.querySelector("[type='search']")
         }
     },
     render() {
@@ -41,8 +36,9 @@ export default {
                             value={this.value}
                             autofocus={true}
                             clearable={true}
-                            onInput={this.handelinput}
-                            onSearch={this.handelsearch}
+                            onInput={(value) => {this.$emit('input', value)}}
+                            onSearch={(value) => {this.$emit('search', value)}}
+                            onClear={() => this.$emit('input', '')}
                             onCancel={() => {this.$emit('click-left')}}
                         ></Search>
                     </form>

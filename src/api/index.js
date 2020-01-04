@@ -159,3 +159,23 @@ export const searchSuggest = params => {
         params
     })
 }
+
+
+//分类搜索
+export const search = params => {
+    return http({
+        url: `/search`,
+        method: 'GET',
+        params
+    })
+}
+
+
+//搜索数据详情
+export const searchDetail = params => {
+    return http({
+        url: `/song/detail`,
+        method: 'GET',
+        params
+    })
+}

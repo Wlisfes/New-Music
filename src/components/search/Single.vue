@@ -123,13 +123,16 @@ export default {
                                     this.single.map((k, index) => {
                                         const playStatus = this.playid === k.id
                                         return (
-                                            <div class="single-Context-item van-hairline--bottom" onClick={() => {this.handelplay(k, index)}}>
+                                            <div class="single-Context-item van-hairline--bottom" key={k.id} onClick={() => {this.handelplay(k, index)}}>
                                                 <div class="van-single-index">
                                                     {playStatus ? <Icon name="volume-o" color="#ee0a24" size={20}></Icon> : index +1}
                                                 </div>
                                                 <div class="van-single-context">
                                                     <div class="van-name van-ellipsis" style={{color: playStatus ? '#ee0a24' : '#333333'}}>{k.songs.name}</div>
-                                                    <div class="van-single-name van-ellipsis">{k.songs.artists.map(v => v.name).join('/')} - {k.songs.album.name} - {k.songs.alias.join('/')}</div>
+                                                    <div class="van-single-name van-ellipsis">
+                                                    {k.songs.artists.map(v => v.name).join('/')}
+                                                    {k.songs.album.name && ` - ${k.songs.album.name}`}
+                                                    {(k.songs.alias.length > 0 ) && ` - ${k.songs.alias.join('/')}`}</div>
                                                 </div>
                                                 <div class="van-single-icon">
                                                     <Icon name="ellipsis" size={20}></Icon>

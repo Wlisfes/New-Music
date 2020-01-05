@@ -10,9 +10,14 @@
 <script>
 import { Tabs,Tab } from 'vant';
 import { Root } from '@/components/common';
-import { ResultHeader,Single } from '@/components/search';
+import { ResultHeader,Single,Songlist,Singer,Album } from '@/components/search';
 export default {
     name: 'Result',
+    data () {
+        return {
+            active: 0
+        }
+    },
     render() {
         const { keywords } = this.$route.params
         return (
@@ -21,20 +26,39 @@ export default {
                     <ResultHeader value={keywords}></ResultHeader>
                     <Root class="Tabs-Common">
                         <Tabs
+                            active={this.active}
                             animated={true}
                             swipeable={true}
-                            onChange={(index) => {console.log(index)}}
+                            onChange={(active) => {this.active = active}}
                         >
                             <Tab title="单曲">
                                 <Root.Container>
                                     <keep-alive>
-                                        <Single keywords={keywords}></Single>
+                                        {(this.active === 0) && (<Single keywords={keywords}></Single>)}
                                     </keep-alive>
                                 </Root.Container>
                             </Tab>
-                            <Tab title="歌单"></Tab>
-                            <Tab title="歌手"></Tab>
-                            <Tab title="专辑"></Tab>
+                            <Tab title="歌单">
+                                <Root.Container>
+                                    <keep-alive>
+                                        {(this.active === 1) && (<Songlist keywords={keywords}></Songlist>)}
+                                    </keep-alive>
+                                </Root.Container>
+                            </Tab>
+                            <Tab title="歌手">
+                                <Root.Container>
+                                    <keep-alive>
+                                        {(this.active === 2) && (<Singer keywords={keywords}></Singer>)}
+                                    </keep-alive>
+                                </Root.Container>
+                            </Tab>
+                            <Tab title="专辑">
+                                <Root.Container>
+                                    <keep-alive>
+                                        {(this.active === 3) && (<Album keywords={keywords}></Album>)}
+                                    </keep-alive>
+                                </Root.Container>
+                            </Tab>
                         </Tabs>
                     </Root>
                     <router-view></router-view>

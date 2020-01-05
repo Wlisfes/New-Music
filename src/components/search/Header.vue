@@ -38,7 +38,7 @@ export default {
                             clearable={true}
                             onInput={(value) => {this.$emit('input', value)}}
                             onSearch={(value) => {this.$emit('search', value)}}
-                            onClear={() => this.$emit('input', '')}
+                            onClear={() => {this.$emit('input', '')}}
                             onCancel={() => {this.$emit('click-left')}}
                         ></Search>
                     </form>
@@ -61,6 +61,9 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        .van-search__action {
+            cursor: pointer;
+        }
     }
 }
 </style>

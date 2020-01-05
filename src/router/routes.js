@@ -49,6 +49,54 @@ const routes = [
                                     title: '播放器'
                                 },
                                 component: () => import('@views/Player/Player')
+                            },
+                            {
+                                path: '/search/:keywords/:id',
+                                meta: {
+                                    title: '歌单详情'
+                                },
+                                component: () => import('@views/Search/Sonplay'),
+                                children: [
+                                    {
+                                        path: '/search/:keywords/:id/player',
+                                        meta: {
+                                            title: '播放器'
+                                        },
+                                        component: () => import('@views/Player/Player')
+                                    }
+                                ]
+                            },
+                            {
+                                path: '/search/:keywords/singer/:id',
+                                meta: {
+                                    title: '歌手详情'
+                                },
+                                component: () => import('@views/Search/Singer'),
+                                children: [
+                                    {
+                                        path: '/search/:keywords/singer/:id/player',
+                                        meta: {
+                                            title: '播放器'
+                                        },
+                                        component: () => import('@views/Player/Player')
+                                    }
+                                ]
+                            },
+                            {
+                                path: '/search/:keywords/albplay/:id',
+                                meta: {
+                                    title: '专辑详情'
+                                },
+                                component: () => import('@views/Search/Albplay'),
+                                children: [
+                                    {
+                                        path: '/search/:keywords/albplay/:id/player',
+                                        meta: {
+                                            title: '播放器'
+                                        },
+                                        component: () => import('@views/Player/Player')
+                                    }
+                                ]
                             }
                         ]
                     }

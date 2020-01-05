@@ -179,3 +179,13 @@ export const searchDetail = params => {
         params
     })
 }
+
+
+//专辑详情
+export const albumDetail = params => {
+    return http({
+        url: `/album`,
+        method: 'GET',
+        params
+    })
+}

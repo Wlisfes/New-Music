@@ -41,9 +41,9 @@ const Header = {
                             placeholder="请输入搜索关键词"
                             style={{padding: '0'}}
                             value={this.value}
-                            readonly={true}
+                            readonly={false}
                             clearable={true}
-                            onClick={this.handelrevise}
+                            onFocus={this.handelrevise}
                         ></Search>
                     </form>
                 </div>

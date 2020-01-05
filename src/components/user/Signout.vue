@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:06:05 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 18:40:20
+ * @Last Modified time: 2020-01-05 21:37:35
  * @Description: 登录退出组件
  */
 
@@ -19,16 +19,18 @@ export default {
                 className: 'SignoutConfirm',
                 cancelButtonColor: '#444444',
                 confirmButtonColor: '#ee0a24',
-                async beforeClose(action, done) {
+                beforeClose(action, done) {
                     if (action !== 'confirm') {
                         done();
                         return;
                     }
-                    // this.$ls.remove('UserAccessToken')
-                    
-                    setTimeout(() => {
+                    setTimeout(async () => {
+                        const [err, res] = await self.api.logout()
+                        if(!err && res.code === 200) {
+                            this.$ls.remove('UserAccessToken')
+                            self.$store.dispatch('app/actionUser', null)
+                        }
                         done()
-                        self.$store.dispatch('app/actionUser', null)
                     }, 1000);
                 }
             }).catch(e => {})

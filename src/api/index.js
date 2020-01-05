@@ -11,6 +11,16 @@ export const login = params => {
 }
 
 
+//登出
+export const logout = params => {
+    return http({
+        url: `/logout`,
+        method: 'GET',
+        params
+    })
+}
+
+
 //轮播图
 export const banner = params => {
     return http({

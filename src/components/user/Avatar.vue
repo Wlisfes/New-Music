@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:05:10 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-29 18:41:05
+ * @Last Modified time: 2020-01-20 19:40:52
  * @Description: 头像信息组件
  */
 
@@ -63,22 +63,30 @@ export default {
                     </div>
                     {this.userId && <Row style={{marginBottom: '14px', height: '44px'}}>
                         <Col span={6} class="van-hairline--right">
-                            <div class="van-tainer">{this.eventCount || '--'}</div>
-                            <div class="van-tainer">动态</div>
+                            <div class="van-tainer-box" onClick={() => {this.$emit('dynamic', this.userId)}}>
+                                <div class="van-tainer">{this.eventCount || '--'}</div>
+                                <div class="van-tainer">动态</div>
+                            </div>
                         </Col>
                         <Col span={6} class="van-hairline--right">
-                            <div class="van-tainer">{this.follows || '--'}</div>
-                            <div class="van-tainer">关注</div>
+                            <div class="van-tainer-box" onClick={() => {this.$emit('followers', this.userId)}}>
+                                <div class="van-tainer">{this.follows || '--'}</div>
+                                <div class="van-tainer">关注</div>
+                            </div>
                         </Col>
                         <Col span={6} class="van-hairline--right">
-                            <div class="van-tainer">{this.followeds || '--'}</div>
-                            <div class="van-tainer">粉丝</div>
+                            <div class="van-tainer-box" onClick={() => {this.$emit('following', this.userId)}}>
+                                <div class="van-tainer">{this.followeds || '--'}</div>
+                                <div class="van-tainer">粉丝</div>
+                            </div>
                         </Col>
                         <Col span={6}>
-                            <div class="van-tainer">
-                                <Icon name="setting-o" size={18} />
+                            <div class="van-tainer-box" onClick={() => {this.$emit('setting', this.userId)}}>
+                                <div class="van-tainer">
+                                    <Icon name="setting-o" size={18} />
+                                </div>
+                                <div class="van-tainer">设置</div>
                             </div>
-                            <div class="van-tainer">设置</div>
                         </Col>
                     </Row>}
                     {!this.userId && <Button
@@ -135,6 +143,12 @@ export default {
             align-items: center;
             font-size: 14px;
             color: #333333;
+        }
+        .van-tainer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 5px;
         }
     }
     .van-button--normal {

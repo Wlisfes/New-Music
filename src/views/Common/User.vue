@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-12-04 23:02:04 
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-12-07 15:02:24
+ * @Last Modified time: 2020-01-20 19:44:54
  * @Description: 我的
  */
 
@@ -52,6 +52,10 @@ export default {
         handelplayCard(ops) {
             this.$router.push(`/sonplay/${ops.id}`)
         },
+        //动态
+        handelDynamic(userId) {
+            this.$router.push(`/dynamic/${userId}`)
+        }
     },
     watch: {
         active(newVal) {
@@ -75,7 +79,10 @@ export default {
             <div class="User">
                 <Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false}>
                     <Root.Container>
-                        <Avatar {...{props: this.User}}></Avatar>
+                        <Avatar
+                            {...{props: this.User}}
+                            onDynamic={this.handelDynamic}
+                        ></Avatar>
                         {this.User && <div style={{flex: 1, overflow: 'hidden'}}>
                             <div class="UserWrapper">
                                 <Group></Group>

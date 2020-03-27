@@ -33,8 +33,24 @@
     "vconsole": "^3.3.4",
     "vue-template-compiler": "^2.6.10"
   },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-pxtorem": {
+        "rootValue": 75,
+        "propList": [
+          "*"
+        ],
+        "selectorBlackList": [
+          "van"
+        ]
+      }
+    }
+  },
   "browserslist": [
     "> 1%",
-    "last 2 versions"
+    "last 2 versions",
+    "Android >= 4.0",
+    "iOS >= 7"
   ]
 }

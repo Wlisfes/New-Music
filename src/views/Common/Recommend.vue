@@ -5,6 +5,8 @@ Modified time: 2019-12-29 18:59:38 * @Description: 推荐 */
 import { mapState } from 'vuex'
 import { Toast } from 'vant'
 import { Root, Swiper, LayoutCard, PlayCard } from '@/components/common'
+import { ready } from '@/utils/utils'
+
 export default {
 	name: 'Recommend',
 	props: {
@@ -97,14 +99,18 @@ export default {
 					this.$router.push(`/ranking`)
 					break
 				case 4: //电台
-					// Toast('敬请期待')
-					wx.miniProgram.getEnv(function(res) {
-						console.log(res.miniprogram) // true
-						Toast(res.miniprogram)
-						// wx.miniProgram.postMessage({ data: { foo: 'bar' } })
+					if (ready()) {
 						wx.miniProgram.navigateTo({ url: '/pages/login/login' })
-						// wx.miniProgram.navigateBack()
-					})
+						return
+					}
+					Toast('敬请期待')
+					// wx.miniProgram.getEnv(function (res) {
+					// 	console.log(res.miniprogram) // true
+					// 	Toast(res.miniprogram)
+					// 	// wx.miniProgram.postMessage({ data: { foo: 'bar' } })
+					// 	wx.miniProgram.navigateTo({ url: '/pages/login/login' })
+					// 	// wx.miniProgram.navigateBack()
+					// })
 					break
 			}
 		}
@@ -123,18 +129,10 @@ export default {
 	render() {
 		return (
 			<div class="Recommend">
-				<Root.Scroll
-					ref="wrapper"
-					class="wrapper"
-					data={this.wrappers}
-					bounce={false}
-					refreshDelay={60}
-				>
+				<Root.Scroll ref="wrapper" class="wrapper" data={this.wrappers} bounce={false} refreshDelay={60}>
 					<Root.Container>
 						{this.banners.length > 0 && <Swiper data={this.banners} />}
-						{this.banners.length > 0 ||
-						this.personas.length > 0 ||
-						this.recommends.length > 0 ? (
+						{this.banners.length > 0 || this.personas.length > 0 || this.recommends.length > 0 ? (
 							<LayoutCard onLayout={this.handelayoutCard} />
 						) : (
 							<Loading margin="24px"></Loading>
